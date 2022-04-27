@@ -1,0 +1,148 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/tabbar/home",
+			"style": {
+				"navigationBarTitleText": "兴得通",
+				"navigationStyle":"custom",
+				"backgroundColorTop": "#F25542",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/tabbar/work",
+			"style": {
+				"navigationBarTitleText": "线上办事"
+			}
+		},
+		{
+			"path": "pages/tabbar/news",
+			"style": {
+				"navigationBarTitleText": "兴安资讯"
+			}
+		},
+		{
+			"path": "pages/tabbar/mine",
+			"style": {
+				"navigationBarTitleText": "兴得通"
+			}
+		},
+		{
+			"path": "pages/public/login",
+			"style": {
+				"navigationBarTitleText": "登录",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/public/regist",
+			"style": {
+				"navigationBarTitleText": "注册",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/public/reset",
+			"style": {
+				"navigationBarTitleText": "找回密码",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/location/select",
+			"style": {
+				"navigationBarTitleText": "选择站点",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/travel/culture",
+			"style": {
+				"navigationBarTitleText": "旅游文化",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/travel/smart",
+			"style": {
+				"navigationBarTitleText": "智游兴安",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/menu/edit",
+			"style": {
+				"navigationBarTitleText": "服务中心",
+				"enablePullDownRefresh": false,
+				"navigationStyle":"custom",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/search/index",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle":"custom",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/h5/web",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		}
+	],
+	"tabBar": {
+		"color": "#8A8E99",
+		"selectedColor": "#000000",
+		"borderStyle": "white",
+		"backgroundColor": "#FFFFFF",
+		"list": [
+			{
+				"pagePath": "pages/tabbar/home",
+				"iconPath": "./static/img/tabbar/home_normal.png",
+				"selectedIconPath": "./static/img/tabbar/home_active.png",
+				"text": "首页"
+			},
+			{
+				"pagePath": "pages/tabbar/work",
+				"iconPath": "./static/img/tabbar/work_normal.png",
+				"selectedIconPath": "./static/img/tabbar/work_active.png",
+				"text": "线上办事"
+			},
+			{
+				"pagePath": "pages/tabbar/news",
+				"iconPath": "./static/img/tabbar/work_normal.png",
+				"selectedIconPath": "./static/img/tabbar/work_active.png",
+				"text": "兴安资讯"
+			},
+			{
+				"pagePath": "pages/tabbar/mine",
+				"iconPath": "./static/img/tabbar/mine_normal.png",
+				"selectedIconPath": "./static/img/tabbar/mine_active.png",
+				"text": "我的"
+			}
+		]
+	},
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "兴得通",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8",
+		"app-plus": {
+			"scrollIndicator": "none"
+		}
+	}
+}

@@ -4,8 +4,8 @@
 			<block slot="left">
 				<view class="nav-city xa-flex">
 					<view class="inner">
-						<view class="text xa-line-1">兴安盟</view>
-						<view class="weather">晴 8℃</view>
+						<view class="text xa-line-1">{{currentAddress.city || '--'}}</view>
+						<view class="weather">{{nowWeatherData.text || '--'}} {{nowWeatherData.temp || '--'}}℃</view>
 					</view>
 					<uni-icons type="arrowdown" color="#fff" size="16" />
 				</view>
@@ -140,11 +140,7 @@
 					{ text: '我是一条通知信息点击可以进详情' },
 					{ text: '我是一条通知信息点击可以进详情,我是一条通知信息点击可以进详情' },
 				],
-				covid: [
-					{ count: 0, text: '内蒙新增', color: '#00B476' },
-					{ count: 14288, text: '国内新增', color: '#FE9D4B' },
-					{ count: 278205, text: '现有确诊', color: '#F25542' }
-				],
+				covid: [],
 				traffic: [
 					{
 						thumb: '../../static/img/card_2.png',
@@ -176,7 +172,9 @@
 						date: '今天 13:34',
 						readNum: 120000
 					}
-				]
+				],
+				currentAddress: {},
+				nowWeatherData: {}
 			}
 		},
 		components: {
@@ -193,11 +191,13 @@
 				}]
 			}
 		},
+		onShow() {
+			if (this.pageLoad) {
+				this.initPage()
+			}
+		},
 		onLoad() {
-			console.log(this.vuex_token)
-			setTimeout(() => {
-				this.pageLoad = true
-			}, 1000)
+			this.initPage()
 		},
 		onPageScroll(e) {
 			if (e.scrollTop < 200) {
@@ -216,6 +216,33 @@
 		},
 		methods: {
 			tranNumber,
+			initPage () {
+				uni.getLocation({
+					type: 'gcj02',
+					geocode: true,
+					success: (res) => {
+						this.currentAddress = res.address
+						const params = {
+							location: `${res.longitude},${res.latitude}`
+						}
+						this.$api.home.getCovidData(res.address.province.replace('省', '')).then(covid => {
+							this.covid = [
+								{ count: covid.provinceAddComfirm, text: `${res.address.province || '--'}新增`, color: '#00B476' },
+								{ count: covid.chinaAddConfirm, text: '国内新增', color: '#FE9D4B' },
+								{ count: covid.chinaStoreConfirm, text: '国内现有确诊', color: '#F25542' }
+							]
+							this.pageLoad = true
+						})
+						this.$api.weather.getWeatherNow(params).then(weather => {
+							this.nowWeatherData = weather
+							this.pageLoad = true
+						})
+					},
+					fail() {
+						this.pageLoad = true
+					}
+				})
+			},
 			changeBanner (e) {
 				this.currentBannerIndex = e.detail.current
 			},

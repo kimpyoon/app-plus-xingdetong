@@ -15,9 +15,15 @@ uni.$g = {
 	throttle,
 	debounce,
 	queryParams
-} // 用于储存全局方法
+} // 用于储存uni级别的全局方法
 
 Vue.prototype.$toast = toast;
+Vue.prototype.$timeFormat = timeFormat;
+Vue.prototype.$navBack = function (delta = 1) {
+	uni.navigateBack({
+		delta
+	})
+};
 
 Vue.config.productionTip = false
 App.mpType = 'app'

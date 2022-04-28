@@ -73,7 +73,8 @@ const store = new Vuex.Store({
 			},
 			{
 				url: '../../static/img/menu_11.png',
-				text: '天气预报'
+				text: '天气预报',
+				path: '/pages/weather/index'
 			},
 			{
 				url: '../../static/img/menu_14.png',

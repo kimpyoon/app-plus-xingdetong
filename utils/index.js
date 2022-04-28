@@ -355,3 +355,31 @@ export const tranNumber = (num, point = 2) => {
 	}
 	return '0'
 }
+
+export const formatWeekTime = (value, key = 'week') => {
+	const date = new Date(value)
+	if (key === 'week') {
+		return ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'][date.getDay()]
+	} else if (key === 'status') {
+		const hour = date.getHours()
+		if (hour < 6) {
+			return '凌晨'
+		} else if (hour < 9){
+			return '早晨'
+		} else if (hour < 12){
+			return '上午'
+		} else if (hour < 14){
+			return '中午'
+		} else if (hour < 17){
+			return '下午'
+		} else if (hour < 19){
+			return '傍晚'
+		} else if (hour < 22){
+			return '夜晚'
+		} else {
+			return '深夜'
+		}
+	} else {
+		return uni.$g.timeFormat(date, key)
+	}
+}

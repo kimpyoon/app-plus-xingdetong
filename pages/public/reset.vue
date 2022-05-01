@@ -39,6 +39,13 @@
 				countdown: 0
 			};
 		},
+		onLoad(options) {
+			if (options.title) {
+				uni.setNavigationBarTitle({
+					title: options.title
+				})
+			}
+		},
 		methods: {
 			start () {
 				this.countdown = 60

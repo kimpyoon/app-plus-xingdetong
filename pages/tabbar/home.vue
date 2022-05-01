@@ -140,7 +140,11 @@
 					{ text: '我是一条通知信息点击可以进详情' },
 					{ text: '我是一条通知信息点击可以进详情,我是一条通知信息点击可以进详情' },
 				],
-				covid: [],
+				covid: [
+					{ count: 0, text: '省内新增', color: '#00B476' },
+					{ count: 0, text: '国内新增', color: '#FE9D4B' },
+					{ count: 0, text: '国内现有确诊', color: '#F25542' }
+				],
 				traffic: [
 					{
 						thumb: '../../static/img/card_2.png',
@@ -191,6 +195,12 @@
 				}]
 			}
 		},
+		onPullDownRefresh() {
+			this.initPage()
+			setTimeout(() => {
+				uni.stopPullDownRefresh()
+			}, 1000)
+		},
 		onShow() {
 			if (this.pageLoad) {
 				this.initPage()
@@ -238,8 +248,11 @@
 							this.pageLoad = true
 						})
 					},
-					fail() {
+					fail: (res) => {
 						this.pageLoad = true
+						uni.showModal({
+							content: JSON.stringify(res)
+						})
 					}
 				})
 			},

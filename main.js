@@ -24,7 +24,21 @@ Vue.prototype.$navBack = function (delta = 1) {
 		delta
 	})
 };
-
+Vue.prototype.$uGetRect = function (selector, all) {
+	return new Promise(resolve => {
+		uni.createSelectorQuery().
+		in(this)[all ? 'selectAll' : 'select'](selector)
+			.boundingClientRect(rect => {
+				if (all && Array.isArray(rect) && rect.length) {
+					resolve(rect)
+				}
+				if (!all && rect) {
+					resolve(rect)
+				}
+			})
+			.exec()
+	})
+};
 Vue.config.productionTip = false
 App.mpType = 'app'
 

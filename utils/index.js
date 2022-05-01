@@ -1,3 +1,4 @@
+import queryParams from './queryParams.js'
 export const tabbars = [
 	{
 		"iconPath": require('@/static/img/tabbar/home_normal.png'),
@@ -312,7 +313,7 @@ export const navHandler = (link, title) => {
 			return
 		} else if (link.indexOf('http') > -1) {
 			uni.navigateTo({
-				url: `/pages/h5/web?url=${encodeURIComponent(link)}`
+				url: `/pages/h5/web?url=${encodeURIComponent(link)}&title=${encodeURIComponent(title)}`
 			})
 		} else {
 			const tabbarIndex = tabbars.findIndex(n => link.indexOf(n.path) > -1)
@@ -321,8 +322,11 @@ export const navHandler = (link, title) => {
 					url: tabbars[tabbarIndex].path
 				})
 			} else {
+				const params = {
+					title
+				}
 				uni.navigateTo({
-					url: link
+					url: `${link}${queryParams(params)}`
 				})
 			}
 		}

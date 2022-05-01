@@ -1,0 +1,4 @@
+包名：com.xingdetong.www
+密码：123456
+别名：xingdetong
+SHA1: 4E:22:81:05:F9:5B:99:CB:02:EB:F7:49:67:85:8F:C8:14:E7:55:02

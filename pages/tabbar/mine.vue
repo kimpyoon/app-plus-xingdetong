@@ -1,5 +1,5 @@
 <template>
-	<view class="page">
+	<view class="page safe-area-inset-bottom">
 		<view class="status-bar"></view>
 		<view class="page-wrap" v-if="pageLoad">
 			<image src="../../static/img/mine/bg.png" class="bg"></image>
@@ -9,9 +9,9 @@
 					<image src="../../static/img/mine/ic_setting.png" class="icon"></image>
 				</view>
 				<view class="user-info xa-flex xa-col-center">
-					<image src="" class="avatar"></image>
+					<image src="../../static/img/logo.png" class="avatar" @click="navHandler('/pages/user/info')"></image>
 					<view class="right">
-						<view class="name">{{vuex_user.username || '183****2365'}}</view>
+						<view class="name"><text @click="navHandler('/pages/user/info')">{{vuex_user.username || '183****2365'}}</text></view>
 						<view class="tags xa-flex xa-col-center">
 							<view class="tag xa-flex xa-col-center">
 								<image src="../../static/img/mine/renzhengpeizhi.png" class="icon"></image>
@@ -42,7 +42,7 @@
 					</view>
 				</view>
 				<view class="card">
-					<view class="title xa-flex xa-row-between">
+					<view class="title xa-flex xa-row-between" @click="navHandler('/pages/package/index')">
 						<view class="left xa-flex">
 							<image src="../../static/img/mine/ic_1.png" class="icon"></image>
 							<text class="text">电子卡包</text>
@@ -64,6 +64,13 @@
 						</view>
 					</view>
 				</view>
+				<view class="card">
+					<view @click="navHandler(item.url)" class="cell xa-flex xa-col-center" v-for="(item,index) in cells">
+						<image :src="item.icon" class="icon"></image>
+						<view class="text">{{item.text}}</view>
+						<uni-icons type="right" color="#BBBBBB" size="16" />
+					</view>
+				</view>
 			</view>
 		</view>
 		<template v-else>
@@ -76,6 +83,7 @@
 <script>
 	import PageLoading from '../../lib/components/page-loading.vue'
 	import TabBar from '../../lib/components/tab-bar.vue'
+	import { navHandler } from '../../utils/index.js'
 	export default {
 		data() {
 			return {
@@ -123,6 +131,44 @@
 						text: '社保卡',
 						background: 'linear-gradient(135deg, #67C3F3 0%, #3590E4 100%)'
 					}
+				],
+				cells: [
+					{
+						icon: '../../static/img/mine/ic_3.png',
+						text: '办事进度'
+					},
+					{
+						icon: '../../static/img/mine/ic_3.png',
+						text: '我的收藏',
+						url: '/pages/collect/list'
+					},
+					{
+						icon: '../../static/img/mine/ic_4.png',
+						text: '预约记录'
+					},
+					{
+						icon: '../../static/img/mine/ic_5.png',
+						text: '咨询记录'
+					},
+					{
+						icon: '../../static/img/mine/ic_6.png',
+						text: '发票管理',
+						url: '/pages/invoice/list'
+					},
+					{
+						icon: '../../static/img/mine/ic_7.png',
+						text: '投诉记录'
+					},
+					{
+						icon: '../../static/img/mine/ic_8.png',
+						text: '意见反馈',
+						url: '/pages/feedback/index'
+					},
+					{
+						icon: '../../static/img/mine/ic_9.png',
+						text: '关于我们',
+						url: '/pages/user/aboutus'
+					}
 				]
 			}
 		},
@@ -136,7 +182,7 @@
 			}, 1000)
 		},
 		methods: {
-
+			navHandler
 		}
 	}
 </script>
@@ -254,6 +300,39 @@
 						font-size: 24rpx;
 						color: #797E89;
 						line-height: 34rpx;
+					}
+				}
+				.cell {
+					padding: 0 20rpx;
+					height: 112rpx;
+					position: relative;
+					&:after {
+						content: " ";
+						width: 200%;
+						height: 200%;
+						position: absolute;
+						bottom: 0;
+						left: 0;
+						border-radius: inherit;
+						transform: scale(0.5);
+						transform-origin: 0 0;
+						pointer-events: none;
+						box-sizing: border-box;
+						border: 0 #F5F5F5 solid;
+						border-bottom-width: 1px;
+					}
+					.icon {
+						margin-right: 16rpx;
+						flex: 0 0 auto;
+						width: 44rpx;
+						height: 44rpx;
+					}
+					.text {
+						flex: 1;
+						font-size: 28rpx;
+						font-weight: bold;
+						color: #2C2D2E;
+						line-height: 40rpx;
 					}
 				}
 				.row {

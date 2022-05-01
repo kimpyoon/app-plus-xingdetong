@@ -45,6 +45,7 @@ page {
 }
 .xa-flex {
 	display: flex;
+	flex-direction: row;
 }
 
 .xa-flex-wrap {
@@ -105,4 +106,15 @@ page {
 .safe-area-inset-bottom {
 	padding-bottom: env(safe-area-inset-bottom);
 }
+/* #ifndef APP-NVUE */
+::-webkit-scrollbar,
+::-webkit-scrollbar,
+::-webkit-scrollbar {
+	display: none;
+	width: 0 !important;
+	height: 0 !important;
+	-webkit-appearance: none;
+	background: transparent;
+}
+/* #endif */
 </style>

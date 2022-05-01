@@ -5,6 +5,7 @@
 			"style": {
 				"navigationBarTitleText": "兴得通",
 				"navigationStyle":"custom",
+				"enablePullDownRefresh": true,
 				"backgroundColorTop": "#F25542",
 				"app-plus": {
 					"bounce": "none"
@@ -118,9 +119,109 @@
 			}
 		},
 		{
+			"path": "pages/user/info",
+			"style": {
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#ffffff",
+				"navigationBarTitleText": "我的信息",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/user/aboutus",
+			"style": {
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#ffffff",
+				"navigationBarTitleText": "关于我们",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/user/resetphone",
+			"style": {
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#ffffff",
+				"navigationBarTitleText": "修改手机号码",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/invoice/list",
+			"style": {
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#ffffff",
+				"navigationBarTitleText": "发票管理",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/invoice/apply",
+			"style": {
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#ffffff",
+				"navigationBarTitleText": "申请开票",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/user/authentication",
+			"style": {
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#ffffff",
+				"navigationBarTitleText": "身份实名认证",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/package/index",
+			"style": {
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#ffffff",
+				"navigationBarTitleText": "我的卡包",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/collect/list",
+			"style": {
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#ffffff",
+				"navigationBarTitleText": "我的收藏",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/feedback/index",
+			"style": {
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#ffffff",
+				"navigationBarTitleText": "意见反馈",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		},
+		{
 			"path": "pages/h5/web",
 			"style": {
 				"navigationBarTitleText": "",
+				"navigationBarBackgroundColor": "#ffffff",
 				"enablePullDownRefresh": false,
 				"app-plus": {
 					"bounce": "none"

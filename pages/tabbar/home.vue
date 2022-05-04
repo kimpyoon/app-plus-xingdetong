@@ -95,7 +95,7 @@
 					<text class="text">兴安要闻</text>
 				</view>
 				<view class="article-list">
-					<view class="article-item xa-flex xa-col-center" v-for="(item, index) in articles" :key="index">
+					<view @click="navHandler('/pages/article/detail')" class="article-item xa-flex xa-col-center" v-for="(item, index) in articles" :key="index">
 						<view class="left">
 							<view class="title">{{item.title}}</view>
 							<view class="foot xa-flex xa-col-center">
@@ -225,6 +225,7 @@
 			// }, 500)
 		},
 		methods: {
+			navHandler,
 			tranNumber,
 			initPage () {
 				uni.getLocation({

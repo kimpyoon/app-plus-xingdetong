@@ -184,8 +184,8 @@
 				immediate: true,
 				handler(nVal, oVal) {
 					// 视图更新后再执行移动操作
+					this.currentIndex = nVal;
 					this.$nextTick(() => {
-						this.currentIndex = nVal;
 						this.scrollByIndex();
 					});
 				}

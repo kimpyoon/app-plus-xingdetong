@@ -5,7 +5,7 @@
 			"style": {
 				"navigationBarTitleText": "兴得通",
 				"navigationStyle":"custom",
-				"enablePullDownRefresh": true,
+				"enablePullDownRefresh": false,
 				"backgroundColorTop": "#F25542",
 				"app-plus": {
 					"bounce": "none"
@@ -16,14 +16,22 @@
 			"path": "pages/tabbar/work",
 			"style": {
 				"navigationBarTitleText": "线上办事",
-				"navigationBarBackgroundColor": "#ffffff"
+				"navigationBarBackgroundColor": "#ffffff",
+				"navigationStyle":"custom",
+				"app-plus": {
+					"bounce": "none"
+				}
 			}
 		},
 		{
 			"path": "pages/tabbar/news",
 			"style": {
 				"navigationBarTitleText": "兴安资讯",
-				"navigationBarBackgroundColor": "#ffffff"
+				"navigationBarBackgroundColor": "#ffffff",
+				"navigationStyle":"custom",
+				"app-plus": {
+					"bounce": "none"
+				}
 			}
 		},
 		{
@@ -212,6 +220,28 @@
 				"enablePullDownRefresh": false,
 				"navigationBarBackgroundColor": "#ffffff",
 				"navigationBarTitleText": "意见反馈",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/chat/list",
+			"style": {
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#ffffff",
+				"navigationBarTitleText": "",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/article/detail",
+			"style": {
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#ffffff",
+				"navigationBarTitleText": "资讯详情",
 				"app-plus": {
 					"bounce": "none"
 				}

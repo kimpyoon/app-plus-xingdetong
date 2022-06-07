@@ -61,7 +61,8 @@ const store = new Vuex.Store({
 			},
 			{
 				url: '../../static/img/menu_6.png',
-				text: '快递查询'
+				text: '快递查询',
+				path: '/pages/logistics/search'
 			},
 			{
 				url: '../../static/img/menu_10.png',

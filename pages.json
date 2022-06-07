@@ -248,6 +248,28 @@
 			}
 		},
 		{
+			"path": "pages/logistics/search",
+			"style": {
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#ffffff",
+				"navigationBarTitleText": "快递查询",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/logistics/result",
+			"style": {
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#ffffff",
+				"navigationBarTitleText": "快递查询详情",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		},
+		{
 			"path": "pages/h5/web",
 			"style": {
 				"navigationBarTitleText": "",

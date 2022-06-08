@@ -3,7 +3,7 @@
 		<view class="cell-group">
 			<view class="cell xa-flex xa-col-center xa-row-between">
 				<view class="right xa-flex xa-col-center">
-					<input @input="changeInput" @focus="focusKey = 'expressNo'" class="value" type="number" :value="expressNo" placeholder="请输入快递单号">
+					<input @input="changeInput" @focus="focusKey = 'expressNo'" class="value" type="text" :value="expressNo" placeholder="请输入快递单号">
 				</view>
 			</view>
 		</view>

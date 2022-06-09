@@ -46,19 +46,24 @@ const store = new Vuex.Store({
 				url: '../../static/img/menu_7.png',
 				text: '兴安缴费'
 			},
-			{
-				url: '../../static/img/menu_2.png',
-				text: '兴安家政'
-			},
+			// {
+			// 	url: '../../static/img/menu_2.png',
+			// 	text: '兴安家政'
+			// },
 			{
 				url: '../../static/img/menu_4.png',
 				text: '蒙速办',
 				path: 'http://zwfw.nmg.gov.cn/special_zone/sbzq?regionCode=150822000000&record=istrue'
 			},
 			{
-				url: '../../static/img/menu_8.png',
-				text: '爱兴安'
+				url: '../../static/img/menu_15.png',
+				text: '警局',
+				path: 'https://app.xinganmeng.24xsjj.com/'
 			},
+			// {
+			// 	url: '../../static/img/menu_8.png',
+			// 	text: '爱兴安'
+			// },
 			{
 				url: '../../static/img/menu_6.png',
 				text: '快递查询',
@@ -82,26 +87,26 @@ const store = new Vuex.Store({
 				text: '智游兴安',
 				path: '/pages/travel/smart'
 			},
-			{
-				url: '../../static/img/menu_1.png',
-				text: '旅游文化',
-				path: '/pages/travel/culture'
-			},
+			// {
+			// 	url: '../../static/img/menu_1.png',
+			// 	text: '旅游文化',
+			// 	path: '/pages/travel/culture'
+			// },
 			{
 				url: '../../static/img/menu_12.png',
 				text: '服务信息',
 				path: ''
 			},
-			{
-				url: '../../static/img/menu_5.png',
-				text: '票务查询',
-				path: ''
-			},
-			{
-				url: '../../static/img/menu_13.png',
-				text: '一码通',
-				path: ''
-			}
+			// {
+			// 	url: '../../static/img/menu_5.png',
+			// 	text: '票务查询',
+			// 	path: ''
+			// },
+			// {
+			// 	url: '../../static/img/menu_13.png',
+			// 	text: '一码通',
+			// 	path: ''
+			// }
 		]
 	},
 	mutations: {

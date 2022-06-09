@@ -1,7 +1,6 @@
 <script>
 	export default {
 		onLaunch: function() {
-			console.log('App Launch')
 			if (!this.vuex_token) {
 				const pages = getCurrentPages()
 				const page = pages.length ? pages[pages.length - 1] : {}
@@ -13,12 +12,6 @@
 					}, 70)
 				}
 			}
-		},
-		onShow: function() {
-			console.log('App Show')
-		},
-		onHide: function() {
-			console.log('App Hide')
 		}
 	}
 </script>

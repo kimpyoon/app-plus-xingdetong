@@ -214,14 +214,13 @@
 								bottom: 0;
 								left: 50%;
 								height: 68rpx;
-								transform: translate(-50%, 0);
+								transform: translate(-50%, -50%);
 								background: rgba(0, 0, 0, 0.3);
 								box-sizing: border-box;
 								border-radius: 0 0 16rpx 16rpx;
 								.text {
 									font-size: 24rpx;
 									color: #FFFFFF;
-									line-height: 34rpx;
 								}
 							}
 						}

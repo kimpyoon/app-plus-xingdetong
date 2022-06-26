@@ -8,19 +8,25 @@ var data = {
 	isTouchFromZPaging: false
 }
 
+var currentVm = null;
+
 export default {
 	mounted() {
 		this._handleTouch();
+		// #ifdef APP-VUE
+		this.$ownerInstance && this.$ownerInstance.callMethod('_checkVirtualListScroll');
+		// #endif
 	},
 	methods: {
 		//接收逻辑层发送的数据
 		renderPropScrollTopChange(newVal, oldVal, ownerVm, vm) {
+			if (newVal === -1) return;
+			currentVm = ownerVm;
 			data.renderScrollTop = newVal;
 		},
 		renderPropUsePageScrollChange(newVal, oldVal, ownerVm, vm) {
-			if(newVal !== -1){
-				data.renderUsePageScroll = newVal;
-			}
+			if (newVal === -1) return;
+			data.renderUsePageScroll = newVal;
 		},
 		//拦截处理touch事件
 		_handleTouch() {
@@ -38,6 +44,7 @@ export default {
 			const touch = u.getTouch(e);
 			data.startY = touch.touchY;
 			data.isTouchFromZPaging = u.getTouchFromZPaging(e.target);
+			this.$ownerInstance && this.$ownerInstance.callMethod('_updateRenderJsData');
 		},
 		_handleTouchmove(e) {
 			const touch = u.getTouch(e);
@@ -49,5 +56,9 @@ export default {
 				}
 			}
 		},
+		_removeAllEventListener(){
+			window.removeEventListener('touchstart');
+			window.removeEventListener('touchmove');
+		}
 	}
 };

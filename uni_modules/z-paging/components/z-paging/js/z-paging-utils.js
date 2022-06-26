@@ -11,6 +11,7 @@ let config = null;
 当z-paging未使用uni_modules管理时，控制台会有警告：WARNING: Module not found: Error: Can't resolve '@/uni_modules/z-paging'...
 此时注释下方try中的代码即可
 */
+// #ifdef VUE2
 try {
 	const contextKeys = require.context('@/uni_modules/z-paging', false, /\z-paging-config$/).keys();
 	if (contextKeys.length) {
@@ -18,6 +19,7 @@ try {
 		config = require('@/uni_modules/z-paging/z-paging-config' + suffix);
 	}
 } catch (e) {}
+// #endif
 
 //获取默认配置信息
 function gc(key, defaultValue) {
@@ -31,16 +33,9 @@ function gc(key, defaultValue) {
 			}
 		}
 	}
-	if (!config) {
-		return defaultValue;
-	}
-	let value = config[_toKebab(key)];
-	if (value === undefined) {
-		value = config[key];
-	} else {
-		return value;
-	}
-	return defaultValue;
+	if (!config) return defaultValue;
+	const value = config[_toKebab(key)];
+	return value === undefined ? defaultValue : value;
 }
 
 //判断两个数组是否相等
@@ -77,8 +72,8 @@ function getTouch(e) {
 //判断当前手势是否在z-paging内触发
 function getTouchFromZPaging(target) {
 	if (target && target.tagName && target.tagName !== 'BODY' && target.tagName !== 'UNI-PAGE-BODY') {
-		var classList = target.classList;
-		if (classList && classList.contains('zp-paging-touch-view')) {
+		const classList = target.classList;
+		if (classList && classList.contains('z-paging-content')) {
 			return true;
 		} else {
 			return getTouchFromZPaging(target.parentNode);

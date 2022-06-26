@@ -156,11 +156,11 @@
 						name: '公交车',
 						desc: '实时获取公交信息'
 					},
-					{
-						thumb: '',
-						name: '出行规划',
-						desc: '实时获取公交信息'
-					}
+					// {
+					// 	thumb: '',
+					// 	name: '出行规划',
+					// 	desc: '实时获取公交信息'
+					// }
 				],
 				navBarBgColor: 'transparent',
 				articles: [

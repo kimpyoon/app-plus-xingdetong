@@ -279,6 +279,28 @@
 					"bounce": "none"
 				}
 			}
+		},
+		{
+			"path": "pages/health/health",
+			"style": {
+				"navigationBarTitleText": "兴安健康",
+				"navigationBarBackgroundColor": "#ffffff",
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/payment/payment",
+			"style": {
+				"navigationBarTitleText": "兴安缴费",
+				"navigationBarBackgroundColor": "#ffffff",
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
 		}
 	],
 	"tabBar": {

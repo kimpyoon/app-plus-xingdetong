@@ -149,6 +149,11 @@ export default {
 			type: Boolean,
 			default: u.gc('safeAreaInsetBottom', false)
 		},
+		//开启底部安全区域适配后，是否使用placeholder形式实现，默认为否。为否时滚动区域会自动避开底部安全区域，也就是所有滚动内容都不会挡住底部安全区域，若设置为是，则滚动时滚动内容会挡住底部安全区域，但是当滚动到底部时才会避开底部安全区域
+		useSafeAreaPlaceholder: {
+			type: Boolean,
+			default: u.gc('useSafeAreaPlaceholder', false)
+		},
 		//第一次加载后自动隐藏loading slot，默认为是
 		autoHideLoadingAfterFirstLoaded: {
 			type: Boolean,
@@ -178,6 +183,11 @@ export default {
 		autoFullHeight: {
 			type: Boolean,
 			default: u.gc('autoFullHeight', true)
+		},
+		//是否监听列表触摸方向改变，默认为否
+		watchTouchDirectionChange: {
+			type: Boolean,
+			default: u.gc('watchTouchDirectionChange', false)
 		},
 		//是否将错误信息打印至控制台，默认为是
 		showConsoleError: {
@@ -212,6 +222,7 @@ export default {
 		})
 		this.updatePageScrollTopHeight();
 		this.updatePageScrollBottomHeight();
+		this._updateLeftAndRightWidth();
 		if (this.finalRefresherEnabled && this.useCustomRefresher) {
 			this.$nextTick(() => {
 				this.isTouchmoving = true;
@@ -228,8 +239,8 @@ export default {
 		this.finalUseVirtualList && this._virtualListInit();
 		// #endif
 		// #ifndef APP-PLUS
-		this.$nextTick(()=>{
-			setTimeout(()=>{
+		this.$nextTick(() => {
+			setTimeout(() => {
 				this._getCssSafeAreaInsetBottom();
 			},delay)
 		})
@@ -288,22 +299,16 @@ export default {
 			return this.$scopedSlots;
 		},
 		finalPagingStyle() {
-			let pagingStyle = this.pagingStyle;
+			const pagingStyle = this.pagingStyle;
 			if (!this.systemInfo) return pagingStyle;
-			const windowTop = this.systemInfo.windowTop;
-			const windowBottom = this.systemInfo.windowBottom;
+			const windowTop = this.windowTop;
+			const windowBottom = this.windowBottom;
 			if (!this.usePageScroll && this.fixed) {
 				if (windowTop && !pagingStyle.top) {
 					pagingStyle.top = windowTop + 'px';
 				}
-				if (!pagingStyle.bottom) {
-					let bottom = windowBottom || 0;
-					if (this.safeAreaInsetBottom) {
-						bottom += this.safeAreaBottom;
-					}
-					if(bottom > 0){
-						pagingStyle.bottom = bottom + 'px';
-					}
+				if (windowBottom && !pagingStyle.bottom) {
+					pagingStyle.bottom = windowBottom + 'px';
 				}
 			}
 			if (this.bgColor.length && !pagingStyle['background']) {
@@ -358,16 +363,37 @@ export default {
 			return !this.systemInfo ? 0 : this.systemInfo.windowHeight || 0;
 		},
 		windowTop() {
+			//暂时修复vue3中隐藏系统导航栏后windowTop获取不正确的问题，具体bug详见https://ask.dcloud.net.cn/question/141634
+			//感谢litangyu！！https://github.com/SmileZXLee/uni-z-paging/issues/25
+			// #ifdef VUE3 && H5
+			const pageHeadNode = document.getElementsByTagName("uni-page-head");
+			if (!pageHeadNode.length) return 0;
+			// #endif
 			return !this.systemInfo ? 0 : this.systemInfo.windowTop || 0;
 		},
 		windowBottom() {
 			if (!this.systemInfo) return 0;
 			let windowBottom = this.systemInfo.windowBottom || 0;
-			if (this.safeAreaInsetBottom) {
+			if (this.safeAreaInsetBottom && !this.useSafeAreaPlaceholder) {
 				windowBottom += this.safeAreaBottom;
 			}
 			return windowBottom;
 		},
+		isOldWebView() {
+			// #ifndef APP-NVUE
+			try {
+				const systemInfos = systemInfo.system.split(' ');
+				const deviceType = systemInfos[0];
+				const version = parseInt(systemInfos[1].slice(0,1));
+				if ((deviceType === 'iOS' && version <= 10) || (deviceType === 'Android' && version <= 6)) {
+					return true;
+				}
+			} catch(e){
+				return false;
+			}
+			// #endif
+			return false;
+		}
 	},
 	methods: {
 		//当前版本号
@@ -380,7 +406,7 @@ export default {
 		},
 		//与setSpecialEffects等效，兼容旧版本
 		setListSpecialEffects(args) {
-			this.nFixFreezing = args !== {};
+			this.nFixFreezing = args && Object.keys(args).length;
 			if (this.isIos) {
 				this.privateRefresherEnabled = 0;
 			}
@@ -562,7 +588,7 @@ export default {
 				}, 1);
 			})
 		},
-		//销毁全局emit监听
+		//销毁全局emit和listener监听
 		_offEmit(){
 			uni.$off(c.i18nUpdateKey);
 			uni.$off(c.errorUpdateKey);

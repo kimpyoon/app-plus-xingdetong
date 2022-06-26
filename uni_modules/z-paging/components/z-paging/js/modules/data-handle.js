@@ -2,6 +2,7 @@
 import u from '.././z-paging-utils'
 import c from '.././z-paging-constant'
 import Enum from '.././z-paging-enum'
+import interceptor from '../z-paging-interceptor'
 
 const ZPData = {
 	props: {
@@ -484,18 +485,14 @@ const ZPData = {
 			data = dataTypeRes.data;
 			success = dataTypeRes.success;
 			let delayTime = c.delayTime;
-			let shouldEndLoadingDelay = true;
 			// #ifdef APP-NVUE
-			if (this.useChatRecordMode) {
-				delayTime = 0
-			}
-			shouldEndLoadingDelay = false;
+			if (this.useChatRecordMode) delayTime = 0;
 			// #endif
 			this.loadingForNow = false;
 			setTimeout(() => {
 				this.pagingLoaded = true;
 				this.$nextTick(()=>{
-					this._refresherEnd(shouldEndLoadingDelay, true, tempIsUserPullDown);
+					this._refresherEnd(delayTime > 0, true, tempIsUserPullDown);
 				})
 			}, delayTime)
 			if (this.isFirstPage) {
@@ -571,7 +568,9 @@ const ZPData = {
 			newVal = [...newVal];
 			this.listRendering = true;
 			this.$nextTick(() => {
-				this.listRendering = false;
+				setTimeout(() => {
+					this.listRendering = false;
+				},50)
 			})
 			// #ifndef APP-NVUE
 			if (this.finalUseVirtualList) {
@@ -618,13 +617,12 @@ const ZPData = {
 					this.totalData = [...newVal, ...this.totalData];
 					if (this.pageNo !== this.defaultPageNo) {
 						this.privateScrollWithAnimation = 0;
-						let delayTime = 200;
 						this.$emit('update:chatIndex', idIndex);
 						setTimeout(() => {
 							this._scrollIntoView(idIndexStr, 30 + this.cacheTopHeight, false, () => {
 								this.$emit('update:chatIndex', 0);
 							});
-						}, this.usePageScroll ? 0 : delayTime)
+						}, this.usePageScroll ? 50 : 200)
 					} else {
 						this.$nextTick(() => {
 							this._scrollToBottom(false);
@@ -634,12 +632,14 @@ const ZPData = {
 		
 				} else {
 					if (this.finalConcat) {
+						const currentScrollTop = this.oldScrollTop;
 						this.totalData = [...this.totalData, ...newVal];
 						// #ifdef MP-WEIXIN
 						if (!this.isIos && !this.refresherOnly && !this.usePageScroll && newVal.length) {
 							this.loadingMoreTimeStamp = u.getTime();
-							const currentScrollTop = this.oldScrollTop;
-							this.scrollToY(currentScrollTop);
+							this.$nextTick(()=>{
+								this.scrollToY(currentScrollTop);
+							})
 						}
 						// #endif
 					} else {
@@ -654,7 +654,7 @@ const ZPData = {
 			pageNo = parseInt(pageNo);
 			pageSize = parseInt(pageSize);
 			if (pageNo < 0 || pageSize <= 0) {
-				callQueryResult(callback, []);
+				this._localPagingQueryResult(callback, [], localPagingLoadingTime);
 				return;
 			}
 			pageNo = Math.max(1,pageNo);
@@ -702,15 +702,17 @@ const ZPData = {
 			}
 		},
 		//发射query事件
-		_emitQuery(pageNo,pageSize,from){
+		_emitQuery(pageNo, pageSize, from){
 			this.requestTimeStamp = u.getTime();
-			this.$emit('query',pageNo,pageSize,from);
+			this.$emit('query', ...interceptor._handleQuery(pageNo, pageSize, from));
 		},
 		//检查complete data的类型
 		_checkDataType(data, success, isLocal) {
 			const dataType = Object.prototype.toString.call(data);
 			if (dataType === '[object Boolean]') {
 				success = data;
+				data = [];
+			} else if (dataType === '[object Null]') {
 				data = [];
 			} else if (dataType !== '[object Array]') {
 				data = [];

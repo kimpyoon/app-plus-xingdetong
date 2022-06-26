@@ -53,11 +53,12 @@ const ZPScroller = {
 			scrollTop: 0,
 			oldScrollTop: 0,
 			scrollViewStyle: {},
+			scrollViewContainerStyle: {},
 			scrollViewInStyle: {},
 			pageScrollTop: -1,
 			scrollEnable: true,
 			privateScrollWithAnimation: -1,
-			cacheScrollNodeHeight: -1,
+			cacheScrollNodeHeight: -1
 		}
 	},
 	watch: {
@@ -113,6 +114,9 @@ const ZPScroller = {
 		finalScrollTop() {
 			return this.usePageScroll ? this.pageScrollTop : this.oldScrollTop;
 		},
+		finalIsOldWebView() {
+			return this.isOldWebView && !this.usePageScroll;
+		}
 	},
 	methods: {
 		//滚动到顶部，animate为是否展示滚动动画，默认为是
@@ -310,7 +314,7 @@ const ZPScroller = {
 				if (pagingContainerH > scrollViewH) {
 					this.scrollTop = this.oldScrollTop;
 					this.$nextTick(() => {
-						this.scrollTop = pagingContainerH - scrollViewH;
+						this.scrollTop = pagingContainerH - scrollViewH + this.virtualPlaceholderTopHeight;
 						this.oldScrollTop = this.scrollTop;
 					});
 				}
@@ -418,7 +422,7 @@ const ZPScroller = {
 			// #endif
 			this.$nextTick(() => {
 				let delayTime = 0;
-				// #ifdef MP-BAIDU
+				// #ifdef MP-BAIDU || APP-NVUE
 				delayTime = 10;
 				// #endif
 				setTimeout(() => {
@@ -441,6 +445,33 @@ const ZPScroller = {
 				}, delayTime)
 			})
 		},
+		//获取slot="left"和slot="right"宽度并且更新布局
+		_updateLeftAndRightWidth(){
+			if (!this.finalIsOldWebView) return;
+			this.$nextTick(() => {
+				let delayTime = 0;
+				// #ifdef MP-BAIDU
+				delayTime = 10;
+				// #endif
+				setTimeout(() => {
+					this._getNodeClientRect('.zp-page-left').then((res) => {
+						this.scrollViewContainerStyle['left'] = res ? res[0].width + 'px' : 0;
+					});
+					this._getNodeClientRect('.zp-page-right').then((res) => {
+						this.scrollViewContainerStyle['right'] = res ? res[0].width + 'px' : 0;
+					});
+				}, delayTime)
+			})
+		},
+		//更新renderJs数据
+		_updateRenderJsData(){
+			this.renderPropUsePageScroll = -1;
+			this.renderPropUsePageScroll = this.usePageScroll;
+			if (!this.useChatRecordMode) {
+				this.renderPropScrollTop = -1;
+				this.renderPropScrollTop = this.finalScrollTop < 6 ? 0 : 10;
+			}
+		}
 	}
 }
 

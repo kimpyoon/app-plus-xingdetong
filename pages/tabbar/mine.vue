@@ -24,7 +24,7 @@
 						</view>
 					</view>
 				</view>
-				<view class="card">
+				<view class="card" v-if="false">
 					<view class="title xa-flex xa-row-between">
 						<view class="left xa-flex">
 							<image src="../../static/img/mine/ic_10.png" class="icon"></image>
@@ -41,7 +41,7 @@
 						</view>
 					</view>
 				</view>
-				<view class="card">
+				<view class="card" v-if="false">
 					<view class="title xa-flex xa-row-between" @click="navHandler('/pages/package/index')">
 						<view class="left xa-flex">
 							<image src="../../static/img/mine/ic_1.png" class="icon"></image>

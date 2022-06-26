@@ -40,11 +40,13 @@ const store = new Vuex.Store({
 		vuex_menus: lifeData.vuex_menus ? lifeData.vuex_menus : [
 			{
 				url: '../../static/img/menu_9.png',
-				text: '兴安健康'
+				text: '兴安健康',
+				path: '/pages/health/health'
 			},
 			{
 				url: '../../static/img/menu_7.png',
-				text: '兴安缴费'
+				text: '兴安缴费',
+				path: '/pages/payment/payment'
 			},
 			// {
 			// 	url: '../../static/img/menu_2.png',

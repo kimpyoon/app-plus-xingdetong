@@ -10,7 +10,7 @@
 					<text class="text">线上办事单位</text>
 				</view>
 				<view class="cell-group">
-					<view @click="navHandler(item.url, item.name)" class="cell xa-flex xa-col-center xa-row-between border-bottom" v-for="(item,index) in cells" :key="index">
+					<view @click="nav(item.url, item.name)" class="cell xa-flex xa-col-center xa-row-between border-bottom" v-for="(item,index) in cells" :key="index">
 						<text class="text">{{item.name}}</text>
 						<uni-icons type="right" color="#BBBBBB" size="16" />
 					</view>
@@ -27,7 +27,6 @@
 <script>
 	import PageLoading from '../../lib/components/page-loading.vue'
 	import TabBar from '../../lib/components/tab-bar.vue'
-	import { navHandler } from '../../utils/index.js'
 	export default {
 		data() {
 			return {
@@ -35,49 +34,13 @@
 				navBarBgColor: 'transparent',
 				cells: [
 					{
-						name: '兴安盟税务办事大厅',
-						url: '/pages/chat/list'
+						name: '居民核办身份证',
+						url: '/pages/chat/list?type=1'
 					},
 					{
-						name: '兴安盟民政局',
-						url: '/pages/chat/list'
+						name: '核发居住证',
+						url: '/pages/chat/list?type=2'
 					},
-					{
-						name: '兴安盟公安局',
-						url: '/pages/chat/list'
-					},
-					{
-						name: '兴安盟教育局',
-						url: '/pages/chat/list'
-					},
-					{
-						name: '兴安盟税务办事大厅',
-						url: '/pages/chat/list'
-					},
-					{
-						name: '兴安盟民政局',
-						url: '/pages/chat/list'
-					},
-					{
-						name: '兴安盟公安局',
-						url: '/pages/chat/list'
-					},
-					{
-						name: '兴安盟教育局',
-						url: ''
-					},
-					{
-						name: '兴安盟税务办事大厅',
-						url: '/pages/chat/list'
-					},
-					{
-						name: '兴安盟民政局',
-						url: '/pages/chat/list'
-					},
-					{
-						name: '兴安盟公安局',
-						url: '/pages/chat/list'
-					}
 				]
 			}
 		},
@@ -96,7 +59,11 @@
 			}
 		},
 		methods: {
-			navHandler
+			nav (url, name) {
+				uni.navigateTo({
+					url: `${url}&title=${encodeURIComponent(name)}`
+				})
+			}
 		}
 	}
 </script>

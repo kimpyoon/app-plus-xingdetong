@@ -3,7 +3,7 @@
 		<z-paging ref="paging" v-model="dataList" :use-chat-record-mode="true" :use-page-scroll="true" @query="queryList">
 			<view class="list">
 				<view class="item" :id="`z-paging-${index}`" v-for="(item, index) in dataList" :key="index">
-					<view class="date xa-flex xa-col-center xa-row-center">
+					<view v-if="item.dateTime" class="date xa-flex xa-col-center xa-row-center">
 						<text class="text">{{item.dateTime}}</text>
 					</view>
 					<view :class="['content-wrap', 'xa-flex', `xa-row-${item.direction}`]">
@@ -16,7 +16,7 @@
 					</view>
 				</view>
 			</view>
-			<view class="input-bottom" slot="bottom">
+			<view class="input-bottom" slot="bottom" v-if="false">
 				<view class="input-box xa-flex xa-col-center xa-row-between">
 					<input @confirm="addChatRecordClick" class="input" confirm-type="send" @input="changeInput" :value="inputValue" placeholder-style="color: rgba(51, 57, 64, 0.5);" type="text" placeholder="发送消息">
 					<image @click="uploadImgHandle" src="../../static/img/icon/ic_img_upload.png" class="icon"></image>
@@ -27,18 +27,47 @@
 </template>
 
 <script>
-	const list = [
+	const list1 = [
 		{
-			dateTime: '昨天 下午4:34',
-			avatar: '../../static/img/menu_10.png',
-			content: '您好 我想要问一下办理个税抵扣是要怎么操',
-			direction: 'right',
+			dateTime: '',
+			avatar: '../../static/img/logo.png',
+			content: `3办理地点：乌兰浩特市-长青街与代钦路30号五一派出所户籍窗口
+			办理时间：周一至周五上午8：30-11：30，下午14:30-17:30（法定节假日除外）
+			公交路线：1路公交车或步行至代钦路30号`,
+			direction: 'left',
 			type: 'text'
 		},
 		{
-			dateTime: '昨天 下午4:34',
+			dateTime: '',
 			avatar: '../../static/img/logo.png',
-			content: '您好，您是咨询什么问题？',
+			content: `2办理地点：乌兰浩特市政务服务中心二楼公安4号窗口
+			办理时间：周一至周五上午8：30-11：30，下午14:30-17:30（法定节假日除外）
+			公交路线：2路 3路政务局站下车北行50米`,
+			direction: 'left',
+			type: 'text'
+		},
+		{
+			dateTime: '',
+			avatar: '../../static/img/logo.png',
+			content: `1《中华人民共和国居民身份证法》 第二条居住在中华人民共和国境内的年满十六周岁的中国公民，应当依照本法的规定申请领取居民身份证；未满十六周岁的中国公民，可以依照本法的规定申请领取居民身份证。`,
+			direction: 'left',
+			type: 'text'
+		}
+	]
+	const list2 = [
+		{
+			dateTime: '',
+			avatar: '../../static/img/logo.png',
+			content: `2.办理地点：乌兰浩特市政务服务中心二楼公安4号窗口
+			办理时间：周一至周五上午8：30-11：30，下午14:30-17:30（法定节假日除外）
+			公交路线：2路 3路政务局站下车北行50米`,
+			direction: 'left',
+			type: 'text'
+		},
+		{
+			dateTime: '',
+			avatar: '../../static/img/logo.png',
+			content: `1【行政法规】《居住证暂行条例》（国务院令第663号） 第二条公民离开常住户口所在地，到其他城市居住半年以上，符合有合法稳定就业、合法稳定住所、连续就读条件之一的，可以依照本条例的规定申领居住证。 第八条公安机关负责居住证的申领受理、制作、发放、签注等证件管理工作。`,
 			direction: 'left',
 			type: 'text'
 		}
@@ -49,7 +78,8 @@
 			return {
 				mixins: [ZPagingMixin],
 				dataList: [],
-				inputValue: ''
+				inputValue: '',
+				type: '1'
 			}
 		},
 		onLoad(options) {
@@ -57,6 +87,9 @@
 				uni.setNavigationBarTitle({
 					title: options.title
 				})
+			}
+			if (options.type) {
+				this.type = options.type
 			}
 		},
 		onPageScroll(e) {
@@ -67,6 +100,7 @@
 		methods: {
 			queryList(pageNo, pageSize) {
 				setTimeout(() => {
+					const list = this.type === '1' ? list1 : list2
 					this.$refs.paging.complete(list);
 				}, 600)
 				//这里的pageNo和pageSize会自动计算好，直接传给服务器即可
@@ -88,7 +122,7 @@
 				if (this.inputValue && this.inputValue.trim()) {
 					this.$refs.paging.addChatRecordData({
 						dateTime: '刚刚',
-						avatar: '../../static/img/menu_10.png',
+						avatar: '../../static/img/logo.png',
 						content: this.inputValue,
 						direction: 'right',
 						type: 'text'
@@ -104,7 +138,7 @@
 					success: (res) => {
 						this.$refs.paging.addChatRecordData({
 							dateTime: '刚刚',
-							avatar: '../../static/img/menu_10.png',
+							avatar: '../../static/img/logo.png',
 							content: res.tempFilePaths[0],
 							direction: 'right',
 							type: 'img'
@@ -125,6 +159,7 @@
 		.item {
 			position: relative;
 			padding: 0 30rpx;
+			margin-top: 20rpx;
 			.avatar {
 				width: 68rpx;
 				height: 68rpx;

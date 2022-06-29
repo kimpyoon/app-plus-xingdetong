@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import app from './app.js'
 Vue.use(Vuex)
 
 let lifeData = {};
@@ -32,6 +33,9 @@ const saveLifeData = function(key, value){
 	}
 }
 const store = new Vuex.Store({
+	modules: {
+		app
+	},
 	state: {
 		// 如果上面从本地获取的lifeData对象下有对应的属性，就赋值给state中对应的变量
 		// 加上vuex_前缀，防止变量名冲突
@@ -72,12 +76,38 @@ const store = new Vuex.Store({
 				path: '/pages/logistics/search'
 			},
 			{
-				url: '../../static/img/menu_10.png',
-				text: '社保查询'
+				url: '../../static/img/menu_18.png',
+				text: '公积金',
+				path: 'https://www.xamzfgjj.cn/wx/html/bdzh.html;jsessionid=2BF63E46F1F39FA9EEEB534B922B4CA4?id=11&timestamp=1656394292415'
 			},
 			{
+				url: '../../static/img/menu_19.png',
+				text: '行程卡',
+				path: 'https://xc.caict.ac.cn/#/login'
+			},
+			{
+				url: '../../static/img/menu_20.png',
+				text: '行政公署',
+				path: 'http://www.xam.gov.cn/mcxam/index/index.html'
+			},
+			{
+				url: '../../static/img/menu_21.png',
+				text: '兴安人事',
+				path: 'http://m.xingan.offcn.com/html/shiyedanwei/'
+			},
+			{
+				url: '../../static/img/menu_22.png',
+				text: '学历查询',
+				path: 'https://www.chsi.com.cn/xlcx/lscx/query.do?response_type=code&code=001PK9ll2fbfk846Y1ml2GZ2A40PK9l7&state=wxsub&NaVTFDV4CDYx=1656511037469'
+			},
+			// {
+			// 	url: '../../static/img/menu_10.png',
+			// 	text: '社保查询'
+			// },
+			{
 				url: '../../static/img/menu_3.png',
-				text: '交通违章'
+				text: '交通违章',
+				path: 'https://m.weizhang8.cn/'
 			},
 			{
 				url: '../../static/img/menu_11.png',
@@ -97,7 +127,7 @@ const store = new Vuex.Store({
 			{
 				url: '../../static/img/menu_12.png',
 				text: '服务信息',
-				path: ''
+				path: '/pages/feedback/index'
 			},
 			// {
 			// 	url: '../../static/img/menu_5.png',

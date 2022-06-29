@@ -2,9 +2,11 @@
 	<view class="page">
 		<view class="page-wrap" v-if="pageLoad">
 			<image src="../../static/img/work/bg.png" class="bg"></image>
+			<uni-nav-bar statusBar title="兴安咨询" color="#ffffff" :border="false" :backgroundColor="navBarBgColor" fixed></uni-nav-bar>
+			<uni-nav-bar backgroundColor="transparent" :border="false"></uni-nav-bar>
 			<view class="container">
 				<z-paging ref="paging" refresher-theme-style="white" v-model="articles" :use-page-scroll="true" @query="queryList">
-					<view class="head" slot="top">
+					<!-- <view class="head" slot="top">
 						<news-head-bar :backgroundColor="navBarBgColor"></news-head-bar>
 						<view class="tab-box" :style="{background: navBarBgColor}">
 							<tabs :list="tabs" :activeItemStyle="{'font-size': '32rpx'}" :current="curTabIndex" @change="changeTab" bgColor="transparent" height="74" bar-width="36" active-color="#ffffff" inactive-color="#ffffff"></tabs>
@@ -21,16 +23,16 @@
 								</view>
 							</swiper-item>
 						</swiper>
-					</view>
+					</view> -->
 					<view class="article-list">
-						<view @click="navHandler('/pages/article/detail')" class="article-item xa-flex xa-col-center" v-for="(item, index) in articles" :key="index">
+						<view @click="toArticle(item)" class="article-item xa-flex xa-col-center" v-for="(item, index) in articles" :key="index">
 							<view class="left">
 								<view class="title">{{item.title}}</view>
 								<view class="foot xa-flex xa-col-center">
 									<view class="date">{{item.date}}</view>
 									<view class="read-num">
-										<text class="label">阅读量</text>
-										<text class="num">{{tranNumber(item.readNum)}}</text>
+										<text class="label">来源：</text>
+										<text class="num">{{item.editor}}</text>
 									</view>
 								</view>
 							</view>
@@ -56,39 +58,14 @@
 	import NewsHeadBar from '../../lib/components/news-head-bar.vue'
 	import Tabs from '../../lib/components/tabs.vue'
 	import { navHandler, tranNumber } from '../../utils/index.js'
-	const dataList = [
-						{
-							title: '半年报奶粉企业增长分化 新国标 影响或不',
-							thumb: '../../static/img/article_2.png',
-							date: '今天 13:34',
-							readNum: 120000
-						},
-						{
-							title: '年轻广告从业者是否需要购买一 份重疾险？',
-							thumb: '../../static/img/article_1.png',
-							date: '今天 13:34',
-							readNum: 120000
-						},
-						{
-							title: '半年报奶粉企业增长分化 新国标 影响或不',
-							thumb: '../../static/img/article_2.png',
-							date: '今天 13:34',
-							readNum: 120000
-						},
-						{
-							title: '年轻广告从业者是否需要购买一 份重疾险？',
-							thumb: '../../static/img/article_1.png',
-							date: '今天 13:34',
-							readNum: 120000
-						}
-					]
+	import { articles } from '../../utils/common.js'
 	export default {
 		mixins: [ZPagingMixin],
 		data() {
 			return {
 				pageLoad: false,
 				navBarBgColor: 'transparent',
-				articles: [],
+				articles: [...articles],
 				curTabIndex: 0,
 				tabs: [
 					{
@@ -132,6 +109,10 @@
 		methods: {
 			navHandler,
 			tranNumber,
+			toArticle (item) {
+				uni.setStorageSync('article', item)
+				navHandler('/pages/article/detail')
+			},
 			queryList(pageNo, pageSize) {
 				setTimeout(() => {
 					this.changeTab(this.curTabIndex)
@@ -153,7 +134,7 @@
 				if (index > 0) {
 					this.$refs.paging.complete([]);
 				} else {
-					this.$refs.paging.complete(dataList);
+					this.$refs.paging.complete(articles);
 				}
 			},
 			change(e) {
@@ -169,7 +150,7 @@
 	.page-wrap {
 		padding-bottom: 60rpx;
 		background-color: #F5F6FA;
-		min-height: unset;
+		min-height: 85vh;
 		.bg {
 			position: fixed;
 			top: 0;
@@ -227,6 +208,9 @@
 					}
 				}
 			}
+			.slot {
+				height: 200rpx;
+			}
 			.article-list {
 				margin: 24rpx auto 0;
 				width: 710rpx;
@@ -249,6 +233,7 @@
 						content: '';
 					}
 					.left {
+						flex: 1;
 						.title {
 							font-size: 28rpx;
 							font-weight: bold;

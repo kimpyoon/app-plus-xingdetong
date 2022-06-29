@@ -258,7 +258,7 @@ export function saveImages(images) {
 // #ifdef APP-PLUS
 const res = uni.getSystemInfoSync();
 export const platform = res.platform
-export const isIos = uni.getSystemInfoSync().platform == 'ios'
+export const isIos = platform == 'ios'
 export const jumpMiniApp = (param) => {
 	plus.share.getServices(function(s){
 		const shares = {};

@@ -69,7 +69,7 @@
 					</view>
 				</view>
 			</view>
-			<view class="section">
+			<view class="section" v-if="false">
 				<view class="s-title xa-flex xa-col-center">
 					<image src="../../static/img/icon/bus_icon.png" class="icon"></image>
 					<text class="text">交通出行</text>
@@ -95,14 +95,14 @@
 					<text class="text">兴安要闻</text>
 				</view>
 				<view class="article-list">
-					<view @click="navHandler('/pages/article/detail')" class="article-item xa-flex xa-col-center" v-for="(item, index) in articles" :key="index">
+					<view @click="toArticle(item)" class="article-item xa-flex xa-col-center" v-for="(item, index) in articles" :key="index">
 						<view class="left">
 							<view class="title">{{item.title}}</view>
 							<view class="foot xa-flex xa-col-center">
 								<view class="date">{{item.date}}</view>
 								<view class="read-num">
-									<text class="label">阅读量</text>
-									<text class="num">{{tranNumber(item.readNum)}}</text>
+									<text class="label">来源：</text>
+									<text class="num">{{item.editor}}</text>
 								</view>
 							</view>
 						</view>
@@ -126,6 +126,7 @@
 	import TabBar from '../../lib/components/tab-bar.vue'
 	import debounce from '../../utils/debounce.js'
 	import { navHandler, tranNumber } from '../../utils/index.js'
+	import { articles } from '../../utils/common.js'
 	export default {
 		data() {
 			return {
@@ -163,20 +164,7 @@
 					// }
 				],
 				navBarBgColor: 'transparent',
-				articles: [
-					{
-						title: '半年报奶粉企业增长分化 新国标 影响或不',
-						thumb: '../../static/img/article_2.png',
-						date: '今天 13:34',
-						readNum: 120000
-					},
-					{
-						title: '年轻广告从业者是否需要购买一 份重疾险？',
-						thumb: '../../static/img/article_1.png',
-						date: '今天 13:34',
-						readNum: 120000
-					}
-				],
+				articles: [articles[0], articles[1]],
 				currentAddress: {},
 				nowWeatherData: {}
 			}
@@ -227,6 +215,10 @@
 		methods: {
 			navHandler,
 			tranNumber,
+			toArticle (item) {
+				uni.setStorageSync('article', item)
+				navHandler('/pages/article/detail')
+			},
 			initPage () {
 				uni.getLocation({
 					type: 'gcj02',

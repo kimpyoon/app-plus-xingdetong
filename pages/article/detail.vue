@@ -4,18 +4,18 @@
 			<view class="card">
 				<view class="head">
 					<view class="title">
-						<text class="text">自治区本级大厅支持预约办理</text>
+						<text class="text">{{article.title}}</text>
 					</view>
 					<view class="desc xa-flex xa-col-center xa-row-center">
-						<text class="date">2022-04-21 14:33</text>
+						<text class="date">{{article.date}}</text>
 						<view class="read-num">
-							<text class="label">阅读量</text>
-							<text class="num">12万</text>
+							<text class="label">来源：</text>
+							<text class="num">{{article.editor}}</text>
 						</view>
 					</view>
 				</view>
 				<view class="message">
-					<rich-text :nodes="message"></rich-text>
+					<rich-text :nodes="node" v-for="(node,index) in article.content" :key="index"></rich-text>
 				</view>
 			</view>
 		</view>
@@ -42,9 +42,13 @@
 			PageLoading
 		},
 		onLoad() {
-			setTimeout(() => {
-				this.pageLoad = true
-			}, 300)
+			uni.getStorage({
+				key: 'article',
+				success: res => {
+					this.article = res.data
+					this.pageLoad = true
+				}
+			})
 		},
 		methods: {
 

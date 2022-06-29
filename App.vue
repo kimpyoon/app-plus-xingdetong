@@ -1,6 +1,9 @@
 <script>
 	export default {
 		onLaunch: function() {
+			// #ifdef APP-PLUS
+			this.$store.dispatch('app/checkUpdate');
+			// #endif
 			if (!this.vuex_token) {
 				const pages = getCurrentPages()
 				const page = pages.length ? pages[pages.length - 1] : {}

@@ -301,6 +301,17 @@
 					"bounce": "none"
 				}
 			}
+		},
+		{
+			"path": "pages/comm/update",
+			"style": {
+				"navigationBarTitleText": "升级应用",
+				"navigationBarBackgroundColor": "#ffffff",
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
 		}
 	],
 	"tabBar": {

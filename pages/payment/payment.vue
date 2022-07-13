@@ -5,7 +5,7 @@
 				<image :src="item.bg" class="bg" mode="widthFix"></image>
 				<view class="content">
 					<view class="name"><text>{{item.name}}</text></view>
-					<view class="desc"><text>{{item.desc}}</text></view>
+					<view class="desc" v-if="item.desc"><text>{{item.desc}}</text></view>
 					<button class="button xa-flex xa-col-center xa-row-center"><text>立即查看</text></button>
 				</view>
 			</view>
@@ -21,19 +21,19 @@
 				cards: [
 					{
 						name: '交电费',
-						desc: '我是一句文案描述',
+						desc: '',
 						bg: '../../static/img/fee/df.png',
 						path: 'http://117.161.31.233:8001/tsyy/pay_cost_aggregation/index.html'
 					},
 					{
 						name: '交水费',
-						desc: '我是一句文案描述',
+						desc: '',
 						bg: '../../static/img/fee/sf.png',
 						path: 'http://117.161.31.233:8001/tsyy/pay_cost_aggregation/index.html'
 					},
 					{
 						name: '交电视费',
-						desc: '我是一句文案描述',
+						desc: '',
 						bg: '../../static/img/fee/tv.png',
 						path: 'https://online.96066.com:8443/mcrweb/login.shtml?channelcode=MSB&redirect=INDEX&timestamp=20201109&sign=73E0C85625A8EE39856F2E08B77F93F0'
 					}
@@ -68,7 +68,8 @@
 				box-sizing: border-box;
 				z-index: 1;
 				.name {
-					padding-top: 54rpx;
+					// padding-top: 54rpx;
+					padding-top: 80rpx;
 					font-size: 36rpx;
 					font-weight: bold;
 					color: #FFFFFF;

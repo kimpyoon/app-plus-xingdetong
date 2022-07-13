@@ -303,6 +303,17 @@
 			}
 		},
 		{
+			"path": "pages/housekeeping/list",
+			"style": {
+				"navigationBarTitleText": "兴安家政",
+				"navigationBarBackgroundColor": "#ffffff",
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		},
+		{
 			"path": "pages/comm/update",
 			"style": {
 				"navigationBarTitleText": "升级应用",

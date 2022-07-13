@@ -12,7 +12,7 @@
 				<view class="cell xa-flex xa-col-center xa-row-between">
 					<text class="label">手机号</text>
 					<view class="right xa-flex xa-col-center">
-						<text class="value">18514463635</text>
+						<text class="value">{{vuex_user.username}}</text>
 						<text class="a" @click="navHandler('/pages/user/resetphone')">变更</text>
 					</view>
 				</view>
@@ -73,7 +73,13 @@
 		},
 		methods: {
 			navHandler,
-			submitHandle () {}
+			submitHandle () {
+				uni.$g.vuex('vuex_user', {})
+				uni.$g.vuex('vuex_token', '')
+				uni.reLaunch({
+					url: '/pages/public/login'
+				})
+			}
 		}
 	}
 </script>

@@ -11,7 +11,7 @@
 				<view class="user-info xa-flex xa-col-center">
 					<image src="../../static/img/logo.png" class="avatar" @click="navHandler('/pages/user/info')"></image>
 					<view class="right">
-						<view class="name"><text @click="navHandler('/pages/user/info')">{{vuex_user.username || '183****2365'}}</text></view>
+						<view class="name"><text @click="navHandler('/pages/user/info')">{{vuex_user.username || '未设置'}}</text></view>
 						<view class="tags xa-flex xa-col-center">
 							<view class="tag xa-flex xa-col-center">
 								<image src="../../static/img/mine/renzhengpeizhi.png" class="icon"></image>
@@ -133,28 +133,28 @@
 					}
 				],
 				cells: [
-					{
-						icon: '../../static/img/mine/ic_3.png',
-						text: '办事进度'
-					},
+					// {
+					// 	icon: '../../static/img/mine/ic_3.png',
+					// 	text: '办事进度'
+					// },
 					{
 						icon: '../../static/img/mine/ic_3.png',
 						text: '我的收藏',
 						url: '/pages/collect/list'
 					},
-					{
-						icon: '../../static/img/mine/ic_4.png',
-						text: '预约记录'
-					},
-					{
-						icon: '../../static/img/mine/ic_5.png',
-						text: '咨询记录'
-					},
-					{
-						icon: '../../static/img/mine/ic_6.png',
-						text: '发票管理',
-						url: '/pages/invoice/list'
-					},
+					// {
+					// 	icon: '../../static/img/mine/ic_4.png',
+					// 	text: '预约记录'
+					// },
+					// {
+					// 	icon: '../../static/img/mine/ic_5.png',
+					// 	text: '咨询记录'
+					// },
+					// {
+					// 	icon: '../../static/img/mine/ic_6.png',
+					// 	text: '发票管理',
+					// 	url: '/pages/invoice/list'
+					// },
 					{
 						icon: '../../static/img/mine/ic_7.png',
 						text: '投诉记录'

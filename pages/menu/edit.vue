@@ -147,6 +147,7 @@
 				font-size: 26rpx;
 				color: #262A33;
 				line-height: 36rpx;
+				white-space: nowrap;
 			}
 		}
 	}

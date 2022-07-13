@@ -44,7 +44,7 @@ const store = new Vuex.Store({
 		vuex_menus: lifeData.vuex_menus ? lifeData.vuex_menus : [
 			{
 				url: '../../static/img/menu_9.png',
-				text: '兴安健康',
+				text: '疫情防控',
 				path: '/pages/health/health'
 			},
 			{
@@ -52,15 +52,16 @@ const store = new Vuex.Store({
 				text: '兴安缴费',
 				path: '/pages/payment/payment'
 			},
-			// {
-			// 	url: '../../static/img/menu_2.png',
-			// 	text: '兴安家政'
-			// },
 			{
-				url: '../../static/img/menu_4.png',
-				text: '蒙速办',
-				path: 'http://zwfw.nmg.gov.cn/special_zone/sbzq?regionCode=150822000000&record=istrue'
+				url: '../../static/img/menu_2.png',
+				text: '兴安家政',
+				path: '/pages/housekeeping/list'
 			},
+			// {
+			// 	url: '../../static/img/menu_4.png',
+			// 	text: '蒙速办',
+			// 	path: 'http://zwfw.nmg.gov.cn/special_zone/sbzq?regionCode=150822000000&record=istrue'
+			// },
 			{
 				url: '../../static/img/menu_15.png',
 				text: '警局',
@@ -87,7 +88,7 @@ const store = new Vuex.Store({
 			},
 			{
 				url: '../../static/img/menu_20.png',
-				text: '行政公署',
+				text: '政务动态',
 				path: 'http://www.xam.gov.cn/mcxam/index/index.html'
 			},
 			{
@@ -114,11 +115,11 @@ const store = new Vuex.Store({
 				text: '天气预报',
 				path: '/pages/weather/index'
 			},
-			{
-				url: '../../static/img/menu_14.png',
-				text: '智游兴安',
-				path: '/pages/travel/smart'
-			},
+			// {
+			// 	url: '../../static/img/menu_14.png',
+			// 	text: '智游兴安',
+			// 	path: 'https://m.ctrip.com/html5/'
+			// },
 			// {
 			// 	url: '../../static/img/menu_1.png',
 			// 	text: '旅游文化',
@@ -128,6 +129,42 @@ const store = new Vuex.Store({
 				url: '../../static/img/menu_12.png',
 				text: '服务信息',
 				path: '/pages/feedback/index'
+			},
+			{
+				url: '../../static/img/menu_27.png',
+				text: '机票',
+				path: 'https://m.ctrip.com/html5/flight/swift/index?sourceid=497&allianceid=4897&sid=182042&sepopup=888&wakeminiproid=17&inpopup=true&openapp=3'
+			},
+			{
+				url: '../../static/img/menu_28.png',
+				text: '公共资源',
+				path: 'http://www.xamggzyjyzx.org.cn/'
+			},
+			{
+				url: '../../static/img/menu_29.png',
+				text: '火车票',
+				path: 'https://m.ctrip.com/webapp/train/?sourceid=497&allianceid=4897&sid=182042&sepopup=888&wakeminiproid=17&inpopup=true'
+			},
+			{
+				url: '../../static/img/menu_30.png',
+				text: '科普中国',
+				path: 'https://www.kepuchina.cn/'
+			},
+			{
+				url: '../../static/img/menu_23.png',
+				text: '出租车',
+			},
+			{
+				url: '../../static/img/menu_24.png',
+				text: '公交车',
+			},
+			{
+				url: '../../static/img/menu_25.png',
+				text: '兴安健康',
+			},
+			{
+				url: '../../static/img/menu_26.png',
+				text: '指尖兴安',
 			},
 			// {
 			// 	url: '../../static/img/menu_5.png',

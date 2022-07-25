@@ -4,7 +4,7 @@
 			<block slot="left">
 				<view class="nav-city xa-flex">
 					<view class="inner">
-						<view class="text xa-line-1">{{currentAddress.city || '--'}}</view>
+						<view class="text xa-line-1">{{vuex_location.address.city || '--'}}</view>
 						<view class="weather">{{nowWeatherData.text || '--'}} {{nowWeatherData.temp || '--'}}℃</view>
 					</view>
 					<uni-icons type="arrowdown" color="#fff" size="16" />
@@ -127,6 +127,9 @@
 	import debounce from '../../utils/debounce.js'
 	import { navHandler, tranNumber } from '../../utils/index.js'
 	import { articles } from '../../utils/common.js'
+	// #ifdef MP-WEIXIN
+	import amap from '@/lib/common/amap-wx.130.js'
+	// #endif
 	export default {
 		data() {
 			return {
@@ -164,8 +167,9 @@
 				],
 				navBarBgColor: 'transparent',
 				articles: [articles[0], articles[1]],
-				currentAddress: {},
-				nowWeatherData: {}
+				nowWeatherData: {},
+				amapPlugin: null,
+				locationInfo: {}
 			}
 		},
 		components: {
@@ -189,12 +193,47 @@
 			}, 1000)
 		},
 		onShow() {
-			if (this.pageLoad) {
+			if (!uni.$g.test.isEmpty(this.locationInfo)) {
 				this.initPage()
 			}
 		},
 		onLoad() {
-			this.initPage()
+			// #ifdef APP-PLUS
+			uni.getLocation({
+				type: 'gcj02',
+				geocode: true,
+				success: (res) => {
+					this.locationInfo = res
+					uni.$g.vuex('vuex_location', res)
+					this.initPage()
+				},
+				fail: (res) => {
+					this.pageLoad = true
+					uni.showModal({
+						content: JSON.stringify(res)
+					})
+				}
+			})
+			// #endif
+			// #ifdef MP-WEIXIN
+			this.amapPlugin = new amap.AMapWX({
+				key: 'e7d6ff13c9d93743e02b8a666b22d060'
+			})
+			this.amapPlugin.getRegeo({
+				success: (data) => {
+					uni.$g.vuex('vuex_location', {
+						longitude: data[0].longitude,
+						latitude: data[0]latitude,
+						address: data[0].regeocodeData.addressComponent
+					})
+					this.locationInfo.longitude = data[0].longitude
+					this.locationInfo.latitude = data[0].latitude
+					this.locationInfo.address = data[0].regeocodeData.addressComponent
+					this.initPage()
+					console.log(data)
+				}
+			});
+			// #endif
 		},
 		onPageScroll(e) {
 			if (e.scrollTop < 200) {
@@ -219,33 +258,21 @@
 				navHandler('/pages/article/detail')
 			},
 			initPage () {
-				uni.getLocation({
-					type: 'gcj02',
-					geocode: true,
-					success: (res) => {
-						this.currentAddress = res.address
-						const params = {
-							location: `${res.longitude},${res.latitude}`
-						}
-						this.$api.home.getCovidData(res.address.province.replace('省', '')).then(covid => {
-							this.covid = [
-								{ count: covid.provinceAddComfirm, text: `${res.address.province || '--'}新增`, color: '#00B476' },
-								{ count: covid.chinaAddConfirm, text: '国内新增', color: '#FE9D4B' },
-								{ count: covid.chinaStoreConfirm, text: '国内现有确诊', color: '#F25542' }
-							]
-							this.pageLoad = true
-						})
-						this.$api.weather.getWeatherNow(params).then(weather => {
-							this.nowWeatherData = weather
-							this.pageLoad = true
-						})
-					},
-					fail: (res) => {
-						this.pageLoad = true
-						uni.showModal({
-							content: JSON.stringify(res)
-						})
-					}
+				const params = {
+					location: `${this.locationInfo.longitude},${this.locationInfo.latitude}`
+				}
+				const province = this.locationInfo.address && this.locationInfo.address.province ? this.locationInfo.address.province.replace('省', '') : ''
+				this.$api.home.getCovidData(province).then(covid => {
+					this.covid = [
+						{ count: covid.provinceAddComfirm, text: `${this.locationInfo.address.province || '--'}新增`, color: '#00B476' },
+						{ count: covid.chinaAddConfirm, text: '国内新增', color: '#FE9D4B' },
+						{ count: covid.chinaStoreConfirm, text: '国内现有确诊', color: '#F25542' }
+					]
+					this.pageLoad = true
+				})
+				this.$api.weather.getWeatherNow(params).then(weather => {
+					this.nowWeatherData = weather
+					this.pageLoad = true
 				})
 			},
 			changeBanner (e) {

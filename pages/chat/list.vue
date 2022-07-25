@@ -85,7 +85,7 @@
 		onLoad(options) {
 			if (options.title) {
 				uni.setNavigationBarTitle({
-					title: options.title
+					title: decodeURIComponent(options.title)
 				})
 			}
 			if (options.type) {

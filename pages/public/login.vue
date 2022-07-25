@@ -161,6 +161,7 @@
 		mounted() {
 			// 加载支持的登录方式
 			// this.getProvider()
+			uni.hideTabBar()
 		},
 		methods: {
 			getProvider () {

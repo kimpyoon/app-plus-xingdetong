@@ -41,6 +41,11 @@ const store = new Vuex.Store({
 		// 加上vuex_前缀，防止变量名冲突
 		vuex_user: lifeData.vuex_user ? lifeData.vuex_user : {},
 		vuex_token: lifeData.vuex_token ? lifeData.vuex_token : '',
+		vuex_location: {
+			latitude: 46.082371,
+			longitude: 122.037746,
+			address: {}
+		},
 		vuex_menus: lifeData.vuex_menus ? lifeData.vuex_menus : [
 			{
 				url: '../../static/img/menu_9.png',
@@ -64,7 +69,7 @@ const store = new Vuex.Store({
 			// },
 			{
 				url: '../../static/img/menu_15.png',
-				text: '警局',
+				text: '警务服务',
 				path: 'https://app.xinganmeng.24xsjj.com/'
 			},
 			// {
@@ -132,7 +137,7 @@ const store = new Vuex.Store({
 			},
 			{
 				url: '../../static/img/menu_27.png',
-				text: '机票',
+				text: '机票预订',
 				path: 'https://m.ctrip.com/html5/flight/swift/index?sourceid=497&allianceid=4897&sid=182042&sepopup=888&wakeminiproid=17&inpopup=true&openapp=3'
 			},
 			{
@@ -142,7 +147,7 @@ const store = new Vuex.Store({
 			},
 			{
 				url: '../../static/img/menu_29.png',
-				text: '火车票',
+				text: '火车票预订',
 				path: 'https://m.ctrip.com/webapp/train/?sourceid=497&allianceid=4897&sid=182042&sepopup=888&wakeminiproid=17&inpopup=true'
 			},
 			{
@@ -153,6 +158,7 @@ const store = new Vuex.Store({
 			{
 				url: '../../static/img/menu_23.png',
 				text: '出租车',
+				path: 'https://s.pdb2.com/l/CNL8e8Fr6fHNp8R'
 			},
 			{
 				url: '../../static/img/menu_24.png',
@@ -160,11 +166,18 @@ const store = new Vuex.Store({
 			},
 			{
 				url: '../../static/img/menu_25.png',
-				text: '兴安健康',
+				text: '健康兴安',
+				path: 'https://s.pdb2.com/l/CMLopdf5cmgNp8r'
 			},
 			{
 				url: '../../static/img/menu_26.png',
-				text: '指尖兴安',
+				text: '指尖兴安盟',
+				path: 'https://s.pdb2.com/l/D6K7cR8kOO36OQR'
+			},
+			{
+				url: '../../static/img/menu_31.png',
+				text: '市政一体化',
+				path: 'https://app.zwfw.nmg.gov.cn/icity/apps/areas/neimenggu/xam-zone/index.html'
 			},
 			// {
 			// 	url: '../../static/img/menu_5.png',

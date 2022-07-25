@@ -6,8 +6,8 @@
 				<text class="text">当前定位站点</text>
 			</view>
 			<view class="row xa-flex xa-flex-wrap">
-				<view @click="getLocal" class="col xa-flex xa-col-center xa-row-center">
-					{{currentPlace.name || '点击定位'}}
+				<view @click="getLocal" :class="{active: currentLocal === vuex_location.address.city}" class="col xa-flex xa-col-center xa-row-center">
+					{{currentLocal || '点击定位'}}
 				</view>
 			</view>
 		</view>
@@ -17,8 +17,8 @@
 				<text class="text">选择旗县站点</text>
 			</view>
 			<view class="row xa-flex xa-flex-wrap">
-				<view @click="currentCounty = item.text" :key="index" class="col xa-flex xa-col-center xa-row-center" :class="{active: currentCounty === item.text}" v-for="(item, index) in countyList">
-					{{item.text}}
+				<view @click="selectHandle(item)" :key="index" class="col xa-flex xa-col-center xa-row-center" :class="{active: currentCounty === item.address.city}" v-for="(item, index) in countyList">
+					{{item.address.city}}
 				</view>
 			</view>
 		</view>
@@ -32,45 +32,77 @@
 				currentPlace: {},
 				countyList: [
 					{
-						text: '兴安盟本级'
+						longitude: 122.037746,
+						latitude: 46.082371,
+						address: {
+							city: '兴安盟本级'
+						}
 					},
 					{
-						text: '乌兰浩特市'
+						longitude: 122.093316,
+						latitude: 46.07223,
+						address: {
+							city: '乌兰浩特市'
+						}
 					},
 					{
-						text: '阿尔山市'
+						longitude: 119.943569,
+						latitude: 47.177428,
+						address: {
+							city: '阿尔山市'
+						}
 					},
 					{
-						text: '科尔沁右翼前旗'
+						longitude: 121.952513,
+						latitude: 46.079673,
+						address: {
+							city: '科尔沁右翼前旗'
+						}
 					},
 					{
-						text: '科尔沁右翼中旗'
+						longitude: 121.476238,
+						latitude: 45.060633,
+						address: {
+							city: '科尔沁右翼中旗'
+						}
 					},
 					{
-						text: '扎赉特旗'
+						longitude: 122.89957,
+						latitude: 46.72314,
+						address: {
+							city: '扎赉特旗'
+						}
 					}
 				],
-				currentCounty: ''
+				currentCounty: '',
+				currentLocal: ''
 			}
 		},
 		onLoad() {
-
+			this.getLocal()
 		},
 		methods: {
+			selectHandle (item) {
+				uni.$g.vuex('vuex_location', item)
+				this.currentCounty = item.address.city
+			},
 			getLocal () {
 				const that = this
 				uni.getLocation({
 					type: 'gcj02',
-					success: function ({ latitude, longitude }) {
-						uni.chooseLocation({
-							latitude: latitude,
-							longitude: longitude,
-							success: function (res) {
-								that.currentPlace = res
-								console.log('位置名称：' + res.name);
-								console.log('详细地址：' + res.address);
-							}
-						});
+					geocode: true,
+					success: function (res) {
+						uni.$g.vuex('vuex_location', res)
+						that.currentLocal = res.address.city
+						// uni.chooseLocation({
+						// 	latitude: res.latitude,
+						// 	longitude: res.longitude,
+						// 	success: function (res) {
+						// 		that.currentPlace = res
+						// 		console.log('位置名称：' + res.name);
+						// 		console.log('详细地址：' + res.address);
+						// 	}
+						// });
 					}
 				});
 			}

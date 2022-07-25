@@ -11,7 +11,8 @@ const CONFIG = {
 
 	//生产环境配置
 	production: {
-		baseUrl: "http://xdt.bihaichaosheng.vip/app"
+		// baseUrl: "http://xdt.bihaichaosheng.vip/app"
+		baseUrl: "http://1iv9065600.zicp.vip/app"
 	}
 
 }

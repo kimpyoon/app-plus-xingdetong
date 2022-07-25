@@ -7,7 +7,7 @@
 				<view class="head">
 					<view class="temp-box xa-flex xa-col-bottom xa-row-center">
 						<view class="temp xa-flex xa-col-bottom">
-							<text :class="`icon qi-${nowData.icon}`"></text>
+							<text class="icon" :class="[`qi-${nowData.icon}`]"></text>
 							<text class="num">{{nowData.temp}}</text>
 							<text class="unit">℃</text>
 						</view>
@@ -22,7 +22,7 @@
 							<view class="item" v-for="(item, index) in dayData" :key="index">
 								<view class="time">{{formatWeekTime(item.fxTime, 'status')}}{{formatWeekTime(item.fxTime, 'hh:MM')}}</view>
 								<view class="icon-box">
-									<text :class="`icon qi-${item.icon}`"></text>
+									<text class="icon" :class="[`qi-${item.icon}`]"></text>
 								</view>
 								<view class="temp">{{item.temp}}℃</view>
 							</view>
@@ -33,7 +33,7 @@
 					<view class="row">
 						<view class="col xa-flex xa-col-center xa-row-between" v-for="(item, index) in weekData" :key="index">
 							<text class="text">{{item.fxDate}}</text>
-							<text :class="`icon qi-${item.iconDay}`"></text>
+							<text class="icon" :class="[`qi-${item.iconDay}`]"></text>
 							<text class="text">{{item.tempMax}} / {{item.tempMin}}℃</text>
 						</view>
 					</view>
@@ -61,6 +61,13 @@
 			}
 		},
 		onLoad(options) {
+			const params = {
+				location: `${this.vuex_location.longitude},${this.vuex_location.latitude}`
+			}
+			this.getWeatherNow(params)
+			this.getWeather24h(params)
+			this.getWeather7d(params)
+			return
 			uni.getLocation({
 				type: 'gcj02',
 				success: (res) => {

@@ -65,7 +65,7 @@
 					</view>
 				</view>
 				<view class="card">
-					<view @click="navHandler(item.url)" class="cell xa-flex xa-col-center" v-for="(item,index) in cells">
+					<view @click="navHandler(item.url)" class="cell xa-flex xa-col-center" :key="index" v-for="(item,index) in cells">
 						<image :src="item.icon" class="icon"></image>
 						<view class="text">{{item.text}}</view>
 						<uni-icons type="right" color="#BBBBBB" size="16" />

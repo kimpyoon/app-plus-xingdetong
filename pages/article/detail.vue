@@ -15,7 +15,7 @@
 					</view>
 				</view>
 				<view class="message">
-					<rich-text :nodes="node" v-for="(node,index) in article.content" :key="index"></rich-text>
+					<rich-text :nodes="node" v-for="(node, index) in article.content" :key="index"></rich-text>
 				</view>
 			</view>
 		</view>
@@ -31,11 +31,7 @@
 		data () {
 			return {
 				pageLoad: false,
-				message: `
-				<p>　为进一步做好辖区疫情防控工作，督促药店落实疫情防控有关规定，科右前旗公安局居力很派出所民警近日对辖区药店进行疫情防控安全检查。</p>
-				<div><img src="../../static/img/article-demo.png" style="width: 100%;" /></div>
-				<p>民警重点检查退烧、止咳、抗感冒、抗病毒类药品的购买、销售是否按要求进行登记上报。同时，民警要求工作人员要认真登记药品名称、规格、数量、购买人与使用人的姓名、身份证号码、详细地址及联系电话等信息，杜绝此类药品流入非法渠道和违规销售咳嗽退烧类药品。 记者于舰勐摄</p>
-				`
+				article: {}
 			}
 		},
 		components: {

@@ -16,7 +16,8 @@
 				长按拖动可以调整排序
 			</view>
 			<view class="inner">
-				<drag-sort :list="menus" @change="sortChange" :disabled="disableEdit">
+				<drag-sort @nav="nav" :list="menus" @change="sortChange" :disabled="disableEdit">
+					<!-- #ifdef APP-PLUS -->
 					<template v-slot:content="{item}">
 						<view @click="nav(item.path)" class="grid-item-box xa-flex xa-flex-column xa-col-center xa-row-center">
 							<image class="image" :src="item.url" mode="aspectFill" />
@@ -24,6 +25,7 @@
 							<image v-show="!disableEdit" src="../../static/img/icon/dot_index.png" v-if="item.SortNumber < 11" class="dot"></image>
 						</view>
 					</template>
+					<!-- #endif -->
 				</drag-sort>
 			</view>
 		</view>
@@ -31,7 +33,7 @@
 </template>
 
 <script>
-	import DragSort from '../../lib/components/drag-sorts/index.vue'
+	import DragSort from '../../lib/drag-sorts/index.vue'
 	import { navHandler } from '../../utils/index.js'
 	export default {
 		data() {

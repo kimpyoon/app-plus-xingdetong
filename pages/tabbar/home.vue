@@ -4,8 +4,8 @@
 			<block slot="left">
 				<view class="nav-city xa-flex">
 					<view class="inner">
-						<view class="text xa-line-1">兴安盟</view>
-						<view class="weather">晴 8℃</view>
+						<view class="text xa-line-1">{{currentAddress.city || '--'}}</view>
+						<view class="weather">{{nowWeatherData.text || '--'}} {{nowWeatherData.temp || '--'}}℃</view>
 					</view>
 					<uni-icons type="arrowdown" color="#fff" size="16" />
 				</view>
@@ -69,7 +69,7 @@
 					</view>
 				</view>
 			</view>
-			<view class="section">
+			<view class="section" v-if="false">
 				<view class="s-title xa-flex xa-col-center">
 					<image src="../../static/img/icon/bus_icon.png" class="icon"></image>
 					<text class="text">交通出行</text>
@@ -95,14 +95,14 @@
 					<text class="text">兴安要闻</text>
 				</view>
 				<view class="article-list">
-					<view class="article-item xa-flex xa-col-center" v-for="(item, index) in articles" :key="index">
+					<view @click="toArticle(item)" class="article-item xa-flex xa-col-center" v-for="(item, index) in articles" :key="index">
 						<view class="left">
 							<view class="title">{{item.title}}</view>
 							<view class="foot xa-flex xa-col-center">
 								<view class="date">{{item.date}}</view>
 								<view class="read-num">
-									<text class="label">阅读量</text>
-									<text class="num">{{tranNumber(item.readNum)}}</text>
+									<text class="label">来源：</text>
+									<text class="num">{{item.editor}}</text>
 								</view>
 							</view>
 						</view>
@@ -126,6 +126,7 @@
 	import TabBar from '../../lib/components/tab-bar.vue'
 	import debounce from '../../utils/debounce.js'
 	import { navHandler, tranNumber } from '../../utils/index.js'
+	import { articles } from '../../utils/common.js'
 	export default {
 		data() {
 			return {
@@ -137,13 +138,12 @@
 					}
 				],
 				noticeList: [
-					{ text: '我是一条通知信息点击可以进详情' },
-					{ text: '我是一条通知信息点击可以进详情,我是一条通知信息点击可以进详情' },
+					{ text: '入盟人员及时核酸检测遵守防疫政策' }
 				],
 				covid: [
-					{ count: 0, text: '内蒙新增', color: '#00B476' },
-					{ count: 14288, text: '国内新增', color: '#FE9D4B' },
-					{ count: 278205, text: '现有确诊', color: '#F25542' }
+					{ count: 0, text: '省内新增', color: '#00B476' },
+					{ count: 0, text: '国内新增', color: '#FE9D4B' },
+					{ count: 0, text: '国内现有确诊', color: '#F25542' }
 				],
 				traffic: [
 					{
@@ -156,27 +156,16 @@
 						name: '公交车',
 						desc: '实时获取公交信息'
 					},
-					{
-						thumb: '',
-						name: '出行规划',
-						desc: '实时获取公交信息'
-					}
+					// {
+					// 	thumb: '',
+					// 	name: '出行规划',
+					// 	desc: '实时获取公交信息'
+					// }
 				],
 				navBarBgColor: 'transparent',
-				articles: [
-					{
-						title: '半年报奶粉企业增长分化 新国标 影响或不',
-						thumb: '../../static/img/article_2.png',
-						date: '今天 13:34',
-						readNum: 120000
-					},
-					{
-						title: '年轻广告从业者是否需要购买一 份重疾险？',
-						thumb: '../../static/img/article_1.png',
-						date: '今天 13:34',
-						readNum: 120000
-					}
-				]
+				articles: [articles[0], articles[1]],
+				currentAddress: {},
+				nowWeatherData: {}
 			}
 		},
 		components: {
@@ -193,11 +182,19 @@
 				}]
 			}
 		},
-		onLoad() {
-			console.log(this.vuex_token)
+		onPullDownRefresh() {
+			this.initPage()
 			setTimeout(() => {
-				this.pageLoad = true
+				uni.stopPullDownRefresh()
 			}, 1000)
+		},
+		onShow() {
+			if (this.pageLoad) {
+				this.initPage()
+			}
+		},
+		onLoad() {
+			this.initPage()
 		},
 		onPageScroll(e) {
 			if (e.scrollTop < 200) {
@@ -215,7 +212,42 @@
 			// }, 500)
 		},
 		methods: {
+			navHandler,
 			tranNumber,
+			toArticle (item) {
+				uni.setStorageSync('article', item)
+				navHandler('/pages/article/detail')
+			},
+			initPage () {
+				uni.getLocation({
+					type: 'gcj02',
+					geocode: true,
+					success: (res) => {
+						this.currentAddress = res.address
+						const params = {
+							location: `${res.longitude},${res.latitude}`
+						}
+						this.$api.home.getCovidData(res.address.province.replace('省', '')).then(covid => {
+							this.covid = [
+								{ count: covid.provinceAddComfirm, text: `${res.address.province || '--'}新增`, color: '#00B476' },
+								{ count: covid.chinaAddConfirm, text: '国内新增', color: '#FE9D4B' },
+								{ count: covid.chinaStoreConfirm, text: '国内现有确诊', color: '#F25542' }
+							]
+							this.pageLoad = true
+						})
+						this.$api.weather.getWeatherNow(params).then(weather => {
+							this.nowWeatherData = weather
+							this.pageLoad = true
+						})
+					},
+					fail: (res) => {
+						this.pageLoad = true
+						uni.showModal({
+							content: JSON.stringify(res)
+						})
+					}
+				})
+			},
 			changeBanner (e) {
 				this.currentBannerIndex = e.detail.current
 			},

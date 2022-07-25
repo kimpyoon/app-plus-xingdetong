@@ -13,6 +13,7 @@ const install = (Vue, vm) => {
 			}
 			let headers = data.header || {}
 			console.log(config.baseUrl + data.url)
+			console.log('-----platform----', platform)
 			uni.request({
 				url: config.baseUrl + data.url, 
 				data: data.params || '',

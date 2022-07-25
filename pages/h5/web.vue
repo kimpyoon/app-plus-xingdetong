@@ -6,7 +6,8 @@
 	export default {
 		data () {
 			return {
-				url: ''
+				url: '',
+				webView: {}
 			}
 		},
 		onLoad(options) {

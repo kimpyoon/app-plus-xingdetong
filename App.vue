@@ -1,7 +1,9 @@
 <script>
 	export default {
 		onLaunch: function() {
-			console.log('App Launch')
+			// #ifdef APP-PLUS
+			this.$store.dispatch('app/checkUpdate');
+			// #endif
 			if (!this.vuex_token) {
 				const pages = getCurrentPages()
 				const page = pages.length ? pages[pages.length - 1] : {}
@@ -13,12 +15,6 @@
 					}, 70)
 				}
 			}
-		},
-		onShow: function() {
-			console.log('App Show')
-		},
-		onHide: function() {
-			console.log('App Hide')
 		}
 	}
 </script>
@@ -45,6 +41,7 @@ page {
 }
 .xa-flex {
 	display: flex;
+	flex-direction: row;
 }
 
 .xa-flex-wrap {
@@ -105,4 +102,15 @@ page {
 .safe-area-inset-bottom {
 	padding-bottom: env(safe-area-inset-bottom);
 }
+/* #ifndef APP-NVUE */
+::-webkit-scrollbar,
+::-webkit-scrollbar,
+::-webkit-scrollbar {
+	display: none;
+	width: 0 !important;
+	height: 0 !important;
+	-webkit-appearance: none;
+	background: transparent;
+}
+/* #endif */
 </style>

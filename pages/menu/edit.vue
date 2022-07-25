@@ -18,7 +18,7 @@
 			<view class="inner">
 				<drag-sort :list="menus" @change="sortChange" :disabled="disableEdit">
 					<template v-slot:content="{item}">
-						<view class="grid-item-box xa-flex xa-flex-column xa-col-center xa-row-center">
+						<view @click="nav(item.path)" class="grid-item-box xa-flex xa-flex-column xa-col-center xa-row-center">
 							<image class="image" :src="item.url" mode="aspectFill" />
 							<text class="text">{{item.text}}</text>
 							<image v-show="!disableEdit" src="../../static/img/icon/dot_index.png" v-if="item.SortNumber < 11" class="dot"></image>
@@ -32,6 +32,7 @@
 
 <script>
 	import DragSort from '../../lib/components/drag-sorts/index.vue'
+	import { navHandler } from '../../utils/index.js'
 	export default {
 		data() {
 			return {
@@ -44,6 +45,11 @@
 			this.menus = JSON.parse((JSON.stringify(this.vuex_menus)))
 		},
 		methods: {
+			nav (path) {
+				if (this.disableEdit) {
+					navHandler(path)
+				}
+			},
 			clickRightNavBarButton () {
 				if (this.saveText === '管理') {
 					this.saveText = '保存'
@@ -141,6 +147,7 @@
 				font-size: 26rpx;
 				color: #262A33;
 				line-height: 36rpx;
+				white-space: nowrap;
 			}
 		}
 	}

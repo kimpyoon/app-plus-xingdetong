@@ -15,10 +15,30 @@ uni.$g = {
 	throttle,
 	debounce,
 	queryParams
-} // 用于储存全局方法
+} // 用于储存uni级别的全局方法
 
 Vue.prototype.$toast = toast;
-
+Vue.prototype.$timeFormat = timeFormat;
+Vue.prototype.$navBack = function (delta = 1) {
+	uni.navigateBack({
+		delta
+	})
+};
+Vue.prototype.$uGetRect = function (selector, all) {
+	return new Promise(resolve => {
+		uni.createSelectorQuery().
+		in(this)[all ? 'selectAll' : 'select'](selector)
+			.boundingClientRect(rect => {
+				if (all && Array.isArray(rect) && rect.length) {
+					resolve(rect)
+				}
+				if (!all && rect) {
+					resolve(rect)
+				}
+			})
+			.exec()
+	})
+};
 Vue.config.productionTip = false
 App.mpType = 'app'
 

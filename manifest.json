@@ -2,11 +2,16 @@
     "name" : "兴得通",
     "appid" : "__UNI__B68CE5E",
     "description" : "",
-    "versionName" : "1.0.0",
-    "versionCode" : "100",
+    "versionName" : "1.0.1",
+    "versionCode" : 101,
     "transformPx" : false,
     /* 5+App特有相关 */
     "app-plus" : {
+        "safearea" : {
+            "bottom" : {
+                "offset" : "none"
+            }
+        },
         "usingComponents" : true,
         "nvueStyleCompiler" : "uni-app",
         "compilerVersion" : 3,
@@ -27,13 +32,18 @@
             /* android打包配置 */
             "android" : {
                 "permissions" : [
+                    "<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\"/>",
+                    "<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\"/>",
+                    "<uses-permission android:name=\"android.permission.ACCESS_LOCATION_EXTRA_COMMANDS\"/>",
                     "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>",
                     "<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>",
+                    "<uses-permission android:name=\"android.permission.AUTHENTICATE_ACCOUNTS\"/>",
                     "<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>",
                     "<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>",
-                    "<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>"
+                    "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\"/>"
                 ],
-                "abiFilters" : [ "armeabi-v7a", "arm64-v8a" ]
+                "abiFilters" : [ "armeabi-v7a", "arm64-v8a" ],
+                "autoSdkPermissions" : true
             },
             /* ios打包配置 */
             "ios" : {
@@ -52,14 +62,14 @@
                 "geolocation" : {
                     "amap" : {
                         "__platform__" : [ "ios", "android" ],
-                        "appkey_ios" : "48e85877d7d8877661aeb7392c54deff",
-                        "appkey_android" : "fb3f1ccb34616c70f068aa950f3e27df"
+                        "appkey_ios" : "b14079d4b6fda2ca8fded1b66dc66d2a",
+                        "appkey_android" : "b04eb01e6cadce924d21cfde70a7f987"
                     }
                 },
                 "maps" : {
                     "amap" : {
-                        "appkey_ios" : "48e85877d7d8877661aeb7392c54deff",
-                        "appkey_android" : "fb3f1ccb34616c70f068aa950f3e27df"
+                        "appkey_ios" : "b14079d4b6fda2ca8fded1b66dc66d2a",
+                        "appkey_android" : "b04eb01e6cadce924d21cfde70a7f987"
                     }
                 }
             },
@@ -94,6 +104,9 @@
                         "spotlight@3x" : "build/120x120.png"
                     }
                 }
+            },
+            "splashscreen" : {
+                "useOriginalMsgbox" : true
             }
         },
         "nvueLaunchMode" : ""

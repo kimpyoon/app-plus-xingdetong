@@ -5,6 +5,7 @@
 			"style": {
 				"navigationBarTitleText": "兴得通",
 				"navigationStyle":"custom",
+				"enablePullDownRefresh": false,
 				"backgroundColorTop": "#F25542",
 				"app-plus": {
 					"bounce": "none"
@@ -14,61 +15,83 @@
 		{
 			"path": "pages/tabbar/work",
 			"style": {
-				"navigationBarTitleText": "线上办事"
+				"navigationBarTitleText": "线上办事",
+				"navigationBarBackgroundColor": "#ffffff",
+				"navigationStyle":"custom",
+				"app-plus": {
+					"bounce": "none"
+				}
 			}
 		},
 		{
 			"path": "pages/tabbar/news",
 			"style": {
-				"navigationBarTitleText": "兴安资讯"
+				"navigationBarTitleText": "兴安资讯",
+				"navigationBarBackgroundColor": "#ffffff",
+				"navigationStyle":"custom",
+				"app-plus": {
+					"bounce": "none"
+				}
 			}
 		},
 		{
 			"path": "pages/tabbar/mine",
 			"style": {
-				"navigationBarTitleText": "兴得通"
+				"navigationBarTitleText": "兴得通",
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#ffffff",
+				"navigationStyle":"custom",
+				"app-plus": {
+					"bounce": "none"
+				}
 			}
 		},
 		{
 			"path": "pages/public/login",
 			"style": {
 				"navigationBarTitleText": "登录",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#ffffff"
 			}
 		},
 		{
 			"path": "pages/public/regist",
 			"style": {
 				"navigationBarTitleText": "注册",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#ffffff"
 			}
 		},
 		{
 			"path": "pages/public/reset",
 			"style": {
 				"navigationBarTitleText": "找回密码",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#ffffff"
 			}
 		},
 		{
 			"path": "pages/location/select",
 			"style": {
 				"navigationBarTitleText": "选择站点",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#ffffff"
 			}
 		},
 		{
 			"path": "pages/travel/culture",
 			"style": {
 				"navigationBarTitleText": "旅游文化",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#ffffff"
 			}
 		},
 		{
 			"path": "pages/travel/smart",
 			"style": {
 				"navigationBarTitleText": "智游兴安",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#ffffff"
 			}
 		},
 		{
@@ -94,9 +117,207 @@
 			}
 		},
 		{
+			"path": "pages/weather/index",
+			"style": {
+				"enablePullDownRefresh": false,
+				"navigationStyle":"custom",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/user/info",
+			"style": {
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#ffffff",
+				"navigationBarTitleText": "我的信息",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/user/aboutus",
+			"style": {
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#ffffff",
+				"navigationBarTitleText": "关于我们",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/user/resetphone",
+			"style": {
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#ffffff",
+				"navigationBarTitleText": "修改手机号码",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/invoice/list",
+			"style": {
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#ffffff",
+				"navigationBarTitleText": "发票管理",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/invoice/apply",
+			"style": {
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#ffffff",
+				"navigationBarTitleText": "申请开票",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/user/authentication",
+			"style": {
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#ffffff",
+				"navigationBarTitleText": "身份实名认证",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/package/index",
+			"style": {
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#ffffff",
+				"navigationBarTitleText": "我的卡包",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/collect/list",
+			"style": {
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#ffffff",
+				"navigationBarTitleText": "我的收藏",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/feedback/index",
+			"style": {
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#ffffff",
+				"navigationBarTitleText": "意见反馈",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/chat/list",
+			"style": {
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#ffffff",
+				"navigationBarTitleText": "",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/article/detail",
+			"style": {
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#ffffff",
+				"navigationBarTitleText": "资讯详情",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/logistics/search",
+			"style": {
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#ffffff",
+				"navigationBarTitleText": "快递查询",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/logistics/result",
+			"style": {
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#ffffff",
+				"navigationBarTitleText": "快递查询详情",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		},
+		{
 			"path": "pages/h5/web",
 			"style": {
 				"navigationBarTitleText": "",
+				"navigationBarBackgroundColor": "#ffffff",
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/health/health",
+			"style": {
+				"navigationBarTitleText": "兴安健康",
+				"navigationBarBackgroundColor": "#ffffff",
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/payment/payment",
+			"style": {
+				"navigationBarTitleText": "兴安缴费",
+				"navigationBarBackgroundColor": "#ffffff",
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/housekeeping/list",
+			"style": {
+				"navigationBarTitleText": "兴安家政",
+				"navigationBarBackgroundColor": "#ffffff",
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/comm/update",
+			"style": {
+				"navigationBarTitleText": "升级应用",
+				"navigationBarBackgroundColor": "#ffffff",
 				"enablePullDownRefresh": false,
 				"app-plus": {
 					"bounce": "none"

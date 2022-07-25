@@ -298,6 +298,7 @@
 				this.$api.user[api](params).then(res => {
 					if (res) {
 						uni.$g.vuex('vuex_token', res)
+						uni.$g.vuex('vuex_user.username', params.username)
 						const goPage = uni.getStorageSync('goPage')
 						if (goPage && goPage.indexOf('tabbar') > -1) {
 							uni.switchTab({

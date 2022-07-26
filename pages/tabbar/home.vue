@@ -223,7 +223,7 @@
 				success: (data) => {
 					uni.$g.vuex('vuex_location', {
 						longitude: data[0].longitude,
-						latitude: data[0]latitude,
+						latitude: data[0].latitude,
 						address: data[0].regeocodeData.addressComponent
 					})
 					this.locationInfo.longitude = data[0].longitude

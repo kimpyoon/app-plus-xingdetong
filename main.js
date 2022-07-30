@@ -8,7 +8,6 @@ import timeFormat from './utils/timeFormat.js'
 import throttle from './utils/throttle.js'
 import debounce from './utils/debounce.js'
 import queryParams from './utils/queryParams.js'
-
 uni.$g = {
 	test,
 	timeFormat,

@@ -22,7 +22,7 @@
 						<view @click="nav(item.path)" class="grid-item-box xa-flex xa-flex-column xa-col-center xa-row-center">
 							<image class="image" :src="item.url" mode="aspectFill" />
 							<text class="text">{{item.text}}</text>
-							<image v-show="!disableEdit" src="../../static/img/icon/dot_index.png" v-if="item.SortNumber < 11" class="dot"></image>
+							<image v-show="!disableEdit" :src="`${prefixUrl}/img/icon/dot_index.png`" v-if="item.SortNumber < 11" class="dot"></image>
 						</view>
 					</template>
 					<!-- #endif -->
@@ -35,9 +35,11 @@
 <script>
 	import DragSort from '../../lib/drag-sorts/index.vue'
 	import { navHandler } from '../../utils/index.js'
+	import { prefixUrl } from '@/config/common.js'
 	export default {
 		data() {
 			return {
+				prefixUrl,
 				saveText: '管理',
 				disableEdit: true,
 				menus: []

@@ -1,23 +1,27 @@
 <template>
 	<view class="page">
-		<z-paging ref="paging" :paging-style="{margin: 0,padding:0}" v-model="list" :use-page-scroll="true" @query="queryList">
+		<z-paging ref="paging" v-model="list" :use-page-scroll="false" @query="queryList">
 			<view class="list">
-				<view class="item xa-flex xa-row-center xa-col-center" v-for="(item,index) in list" :key="index">
-					<image class="bg" :src="item.thumb" mode="aspectFill"></image>
+				<view class="item" v-for="(item,index) in list" :key="index">
+					<view class="thumb">
+						<image class="img" :src="item.thumb" mode="widthFix"></image>
+					</view>
 					<view class="content">
 						<view class="handle">
 							<view class="inner">
 								<view class="title">
 									<text class="text">{{item.title}}</text>
 								</view>
-								<view class="address xa-flex xa-col-center xa-row-between">
+								<view class="address xa-flex xa-row-between">
 									<view class="left xa-flex xa-col-center">
 										<uni-icons type="location-filled" size="20" color="#333940"></uni-icons>
 										<text class="text">{{item.address}}</text>
 									</view>
-									<view class="right xa-flex xa-col-center" @click="phoneCall(item.phone)">
-										<uni-icons type="phone-filled" size="20" color="#333940"></uni-icons>
-										<text class="text">{{item.phone}}</text>
+									<view class="right" @click="phoneCall(item.phone)">
+										<view class="icon">
+											<uni-icons type="phone-filled" size="20" color="#F25542"></uni-icons>
+										</view>
+										<!-- <view class="text">电话</view> -->
 									</view>
 								</view>
 							</view>
@@ -31,6 +35,7 @@
 
 <script>
 	import ZPagingMixin from '@/uni_modules/z-paging/components/z-paging/js/z-paging-mixin'
+	import { prefixUrl } from '../../config/common.js'
 	export default {
 		mixins: [ZPagingMixin],
 		data () {
@@ -49,19 +54,19 @@
 						{
 							title: '润达家政',
 							address: '乌兰浩特市五一广场',
-							thumb: '../../static/img/18404829827.png',
+							thumb: `${prefixUrl}/img/18404829827.png`,
 							phone: '18404829827'
 						},
 						{
 							title: '揽家家政',
 							address: '乌兰浩特市万达',
-							thumb: '../../static/img/18548200711.png',
+							thumb: `${prefixUrl}/img/18548200711.png`,
 							phone: '18548200711'
 						},
 						{
 							title: '亮洁家政',
 							address: '乌兰浩特市五一广场',
-							thumb: '../../static/img/13644898812.png',
+							thumb: `${prefixUrl}/img/13644898812.png`,
 							phone: '13644898812'
 						}
 					]);
@@ -91,35 +96,23 @@
 .page {
 	background-color: #F5F6FA;
 	font-size: 0;
-	.img {
-		width: 100%;
-	}
 	.list {
+		padding-top: 20rpx;
 		.item {
 			position: relative;
 			margin: 0 auto 24rpx;
 			width: 710rpx;
-			height: 400rpx;
 			background-color: #ffffff;
 			border-radius: 0 0 16rpx 16rpx;
 			overflow: hidden;
-			.bg {
-				position: absolute;
-				top: 0;
-				right: 0;
-				bottom: 0;
-				left: 0;
+			.thumb {
 				width: 100%;
-				height: 100%;
+				font-size: 0;
+			}
+			.img {
+				width: 100%;
 			}
 			.content {
-				position: relative;
-				display: flex;
-				flex-direction: column;
-				justify-content: flex-end;
-				width: 100%;
-				height: 400rpx;
-				z-index: 1;
 				.handle {
 					width: 100%;
 					.blur {
@@ -147,6 +140,9 @@
 						}
 						.address {
 							margin-top: 10rpx;
+							.icon {
+								text-align: center;
+							}
 							.text {
 								color: #333940;
 								font-size: 28rpx;

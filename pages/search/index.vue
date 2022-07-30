@@ -12,7 +12,7 @@
 		<template v-if="hadSearch">
 			<view class="empty xa-flex xa-col-center xa-row-center" v-if="isEmpty">
 				<view class="inner">
-					<view><image src="../../static/img/search_empty.png" class="img"></image></view>
+					<view><image :src="`${prefixUrl}/img/search_empty.png`" class="img"></image></view>
 					<view class="text">暂无搜索结果</view>
 				</view>
 			</view>
@@ -51,9 +51,11 @@
 <script>
 	import debounce from '../../utils/debounce.js'
 	import { navHandler } from '../../utils/index.js'
+	import { prefixUrl } from '@/config/common.js'
 	export default {
 		data() {
 			return {
+				prefixUrl,
 				inputText: '',
 				quickStarts: [
 					{

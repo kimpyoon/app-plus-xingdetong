@@ -2,7 +2,7 @@
 	<view class="safe-area-inset-bottom page">
 		<view class="section">
 			<view class="s-title xa-flex xa-col-center">
-				<image src="../../static/img/icon/loc_icon_1.png" class="icon"></image>
+				<image :src="`${prefixUrl}/img/icon/loc_icon_1.png`" class="icon"></image>
 				<text class="text">当前定位站点</text>
 			</view>
 			<view class="row xa-flex xa-flex-wrap">
@@ -13,7 +13,7 @@
 		</view>
 		<view class="section">
 			<view class="s-title xa-flex xa-col-center">
-				<image src="../../static/img/icon/loc_icon_2.png" class="icon"></image>
+				<image :src="`${prefixUrl}/img/icon/loc_icon_2.png`" class="icon"></image>
 				<text class="text">选择旗县站点</text>
 			</view>
 			<view class="row xa-flex xa-flex-wrap">
@@ -26,28 +26,30 @@
 </template>
 
 <script>
+	import { prefixUrl } from '@/config/common.js'
 	export default {
 		data() {
 			return {
+				prefixUrl,
 				currentPlace: {},
 				countyList: [
 					{
-						longitude: 122.037746,
-						latitude: 46.082371,
+						longitude: 121.593972,
+						latitude: 45.381918,
 						address: {
-							city: '兴安盟本级'
+							city: '突泉'
 						}
 					},
 					{
-						longitude: 122.093316,
-						latitude: 46.07223,
+						longitude: 122.093309,
+						latitude: 46.072233,
 						address: {
 							city: '乌兰浩特市'
 						}
 					},
 					{
-						longitude: 119.943569,
-						latitude: 47.177428,
+						longitude: 119.943575,
+						latitude: 47.17744,
 						address: {
 							city: '阿尔山市'
 						}

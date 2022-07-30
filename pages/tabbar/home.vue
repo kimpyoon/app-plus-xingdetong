@@ -55,7 +55,7 @@
 			}"></notice-bar>
 			<view class="section">
 				<view class="s-title xa-flex xa-col-center">
-					<image src="../../static/img/icon/love_icon.png" class="icon"></image>
+					<image :src="`${prefixUrl}/img/icon/love_icon.png`" class="icon"></image>
 					<text class="text">抗击疫情</text>
 				</view>
 				<view class="card xa-flex xa-col-center xa-row-center">
@@ -71,7 +71,7 @@
 			</view>
 			<view class="section" v-if="false">
 				<view class="s-title xa-flex xa-col-center">
-					<image src="../../static/img/icon/bus_icon.png" class="icon"></image>
+					<image :src="`${prefixUrl}/img/icon/bus_icon.png`" class="icon"></image>
 					<text class="text">交通出行</text>
 				</view>
 				<view class="traffic-wrap">
@@ -91,7 +91,7 @@
 			</view>
 			<view class="section">
 				<view class="s-title xa-flex xa-col-center">
-					<image src="../../static/img/icon/hot_icon.png" class="icon"></image>
+					<image :src="`${prefixUrl}/img/icon/hot_icon.png`" class="icon"></image>
 					<text class="text">兴安要闻</text>
 				</view>
 				<view class="article-list">
@@ -127,17 +127,19 @@
 	import debounce from '../../utils/debounce.js'
 	import { navHandler, tranNumber } from '../../utils/index.js'
 	import { articles } from '../../utils/common.js'
+	import { prefixUrl } from '@/config/common.js'
 	// #ifdef MP-WEIXIN
 	import amap from '@/lib/common/amap-wx.130.js'
 	// #endif
 	export default {
 		data() {
 			return {
+				prefixUrl,
 				pageLoad: true,
 				currentBannerIndex: 0,
 				banners: [
 					{
-						url: '../../static/img/home_banner.png'
+						url: `${prefixUrl}/img/home_banner.png`
 					}
 				],
 				noticeList: [
@@ -150,12 +152,12 @@
 				],
 				traffic: [
 					{
-						thumb: '../../static/img/card_2.png',
+						thumb: `${prefixUrl}/img/card_2.png`,
 						name: '出租车',
 						desc: '在线叫车方便快捷'
 					},
 					{
-						thumb: '../../static/img/card_1.png',
+						thumb: `${prefixUrl}/img/card_1.png`,
 						name: '公交车',
 						desc: '实时获取公交信息'
 					},
@@ -180,7 +182,7 @@
 		computed: {
 			menuList () {
 				return [...this.vuex_menus.slice(0, 11), {
-					url: '../../static/img/menu_more.png',
+					url: `${prefixUrl}/img/menu_more.png`,
 					text: '更多',
 					path: '/pages/menu/edit'
 				}]

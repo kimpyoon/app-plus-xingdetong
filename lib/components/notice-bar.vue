@@ -1,7 +1,7 @@
 <template>
 	<view class="notice-bar xa-flex xa-col-center" :style="customStyle">
 		<view class="left-icon-wrap">
-			<image src="../../static/img/icon/bell_icon.png" class="icon"></image>
+			<image :src="`${prefixUrl}/img/icon/bell_icon.png`" class="icon"></image>
 		</view>
 		<swiper :disable-touch="disableTouch" @change="change" :autoplay="autoplay" :vertical="vertical" circular :interval="duration" class="swiper">
 			<swiper-item v-for="(item, index) in list" :key="index" class="swiper-item xa-flex xa-col-center">
@@ -12,13 +12,14 @@
 				</view>
 			</swiper-item>
 		</swiper>
-		<view class="right-icon-wrap">
+		<!-- <view class="right-icon-wrap">
 			<uni-icons type="right" color="#262A33" size="16" />
-		</view>
+		</view> -->
 	</view>
 </template>
 
 <script>
+	import { prefixUrl } from '@/config/common.js'
 	export default {
 		props: {
 			list: {
@@ -54,6 +55,11 @@
 			valueKey: {
 				type: String,
 				default: 'text'
+			}
+		},
+		data () {
+			return {
+				prefixUrl
 			}
 		},
 		methods: {

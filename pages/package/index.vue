@@ -14,6 +14,7 @@
 </template>
 
 <script>
+	import { prefixUrl } from '../../config/common.js'
 	export default {
 		data () {
 			return {
@@ -21,27 +22,27 @@
 					{
 						name: '健康卡',
 						desc: '我是一句文案描述',
-						bg: '../../static/img/package/jiankangka.png'
+						bg: `${prefixUrl}/img/package/jiankangka.png`
 					},
 					{
 						name: '医保电子凭证',
 						desc: '我是一句文案描述',
-						bg: '../../static/img/package/yibaoka.png'
+						bg: `${prefixUrl}/img/package/yibaoka.png`
 					},
 					{
 						name: '社会保障卡',
 						desc: '我是一句文案描述',
-						bg: '../../static/img/package/shebaoka.png'
+						bg: `${prefixUrl}/img/package/shebaoka.png`
 					},
 					{
 						name: '驾驶证',
 						desc: '我是一句文案描述',
-						bg: '../../static/img/package/jiashizheng.png'
+						bg: `${prefixUrl}/img/package/jiashizheng.png`
 					},
 					{
 						name: '行驶证',
 						desc: '我是一句文案描述',
-						bg: '../../static/img/package/xingshizheng.png'
+						bg: `${prefixUrl}/img/package/xingshizheng.png`
 					}
 				]
 			}

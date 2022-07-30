@@ -1,8 +1,18 @@
 <template>
 	<view class="page">
-		<uni-nav-bar left-icon="left" title="兴得通" :color="navBarColor" statusBar :backgroundColor="navBarBgColor" :border="false" @clickLeft="$navBack" fixed></uni-nav-bar>
+		<uni-nav-bar left-icon="left" title="兴得通" :color="navBarColor" @clickRight="toSelectLocal" statusBar :backgroundColor="navBarBgColor" :border="false" @clickLeft="$navBack" fixed>
+			<block slot="right">
+				<view class="nav-city xa-flex">
+					<view class="inner">
+						<view class="text xa-line-1" :style="{color:navBarColor}">{{vuex_location.address.city || '--'}}</view>
+						<view class="weather" :style="{color:navBarColor}">{{nowData.text || '--'}} {{nowData.temp || '--'}}℃</view>
+					</view>
+					<uni-icons type="arrowdown" :color="navBarColor" size="16" />
+				</view>
+			</block>
+		</uni-nav-bar>
 		<view class="page-wrap" v-if="pageLoad">
-			<image src="../../static/img/weather/bg.png" mode="" class="bg"></image>
+			<image :src="`${prefixUrl}/img/weather/bg.png`" mode="" class="bg"></image>
 			<view class="content">
 				<view class="head">
 					<view class="temp-box xa-flex xa-col-bottom xa-row-center">
@@ -49,9 +59,11 @@
 <script>
 	import { formatWeekTime } from '../../utils/index.js'
 	import PageLoading from '../../lib/components/page-loading.vue'
+	import { prefixUrl } from '@/config/common.js'
 	export default {
 		data () {
 			return {
+				prefixUrl,
 				pageLoad: false,
 				navBarColor: '#ffffff',
 				navBarBgColor: 'rgba(255, 255, 255, 0)',
@@ -60,7 +72,7 @@
 				dayData: []
 			}
 		},
-		onLoad(options) {
+		onShow() {
 			const params = {
 				location: `${this.vuex_location.longitude},${this.vuex_location.latitude}`
 			}
@@ -91,6 +103,11 @@
 		},
 		methods: {
 			formatWeekTime,
+			toSelectLocal () {
+				uni.navigateTo({
+					url: '/pages/location/select'
+				})
+			},
 			getWeatherNow(location) {
 				this.$api.weather.getWeatherNow(location).then(res => {
 					this.nowData = res
@@ -123,6 +140,25 @@
 	background-color: #ffffff;
 	box-sizing: border-box;
 	min-height: 100vh;
+	.nav-city {
+		flex: 0 0 auto;
+		width: 100%;
+		.inner {
+			flex: 1;
+			width: 100%;
+		}
+		.text {
+			font-size: 26rpx;
+			color: #fff;
+			line-height: 36rpx;
+			max-width: 110rpx;
+		}
+		.weather {
+			font-size: 20rpx;
+			color: #fff;
+			line-height: 28rpx;
+		}
+	}
 	.page-wrap {
 		.bg {
 			position: absolute;

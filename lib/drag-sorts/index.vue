@@ -22,7 +22,7 @@
 				<view @click="$emit('nav', item.path)" class="grid-item-box xa-flex xa-flex-column xa-col-center xa-row-center">
 					<image class="image" :src="item.url" mode="aspectFill" />
 					<text class="text">{{item.text}}</text>
-					<image v-show="!disabled" src="@/static/img/icon/dot_index.png" v-if="item.SortNumber < 11" class="dot"></image>
+					<image v-show="!disabled" :src="`${prefixUrl}/img/icon/dot_index.png`" v-if="item.SortNumber < 11" class="dot"></image>
 				</view>
 				<!-- #endif -->
 				<!-- #ifdef APP-PLUS -->
@@ -35,10 +35,12 @@
 </template>
 
 <script>
+import { prefixUrl } from '@/config/common.js'
 export default {
 	name: 'drag-sort',
 	data () {
 		return {
+			prefixUrl,
 			styleObject: {
 			color: 'red',
 			fontSize: '13px'

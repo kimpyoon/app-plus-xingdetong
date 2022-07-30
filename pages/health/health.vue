@@ -15,6 +15,7 @@
 
 <script>
 	import { navHandler } from '../../utils/index.js'
+	import { prefixUrl } from '../../config/common.js'
 	export default {
 		data () {
 			return {
@@ -22,25 +23,25 @@
 					{
 						name: '防疫政策',
 						desc: '',
-						bg: '../../static/img/health/fyzc.png',
+						bg: `${prefixUrl}/img/health/fyzc.png`,
 						path: 'https://mp.weixin.qq.com/s/6k-GZOvRqIv8EzbWA6tQhg'
 					},
 					// {
 					// 	name: '预约挂号',
 					// 	desc: '',
-					// 	bg: '../../static/img/health/yygh.png',
+					// 	bg: '{prefixUrl}/img/health/yygh.png',
 					// 	path: 'https://expert.baidu.com/med/template/#/pages/guahao/hospitaldetail/index?sf_ref=search_gh_5589&from=&title=%E5%86%85%E8%92%99%E5%8F%A4%E8%87%AA%E6%B2%BB%E5%8C%BA%E4%BA%BA%E6%B0%91%E5%8C%BB%E9%99%A2&hospital=%E5%86%85%E8%92%99%E5%8F%A4%E8%87%AA%E6%B2%BB%E5%8C%BA%E4%BA%BA%E6%B0%91%E5%8C%BB%E9%99%A2&hospital_id=xqwRIxWWG2ij8kBa6JWV4w%3D%3D&fclk=%E5%86%85%E8%92%99%E5%8F%A4%E8%87%AA%E6%B2%BB%E5%8C%BA%E4%BA%BA%E6%B0%91%E5%8C%BB%E9%99%A2&lid=7209443561102620993&referlid=2345768970&_=1q6akam0jhy'
 					// },
 					{
 						name: '核酸检测机构',
 						desc: '',
-						bg: '../../static/img/health/hsjcjg.png',
+						bg: `${prefixUrl}/img/health/hsjcjg.png`,
 						path: 'https://nmg.inspurhealth.com/ihealth-icity/nmg_pass/index.html#/nucleicAcidCity'
 					},
 					// {
 					// 	name: '市人民医院',
 					// 	desc: '',
-					// 	bg: '../../static/img/health/srmyy.png',
+					// 	bg: '{prefixUrl}/img/health/srmyy.png',
 					// 	path: 'http://wlhtwx.udeyun.cn/WxServer/Views/index1.aspx'
 					// }
 				]

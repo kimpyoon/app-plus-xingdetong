@@ -5,7 +5,7 @@
 				<view class="cell avatar xa-flex xa-col-center xa-row-between">
 					<text class="label">头像</text>
 					<view class="right xa-flex xa-col-center">
-						<image src="../../static/img/logo.png" class="img"></image>
+						<image :src="`${prefixUrl}/img/logo.png`" class="img"></image>
 						<uni-icons type="right" color="#6f788d" size="14" />
 					</view>
 				</view>
@@ -57,9 +57,11 @@
 <script>
 	import PageLoading from '../../lib/components/page-loading.vue'
 	import { navHandler } from '../../utils/index.js'
+	import { prefixUrl } from '@/config/common.js'
 	export default {
 		data () {
 			return {
+				prefixUrl,
 				pageLoad: false
 			}
 		},

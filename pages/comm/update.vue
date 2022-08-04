@@ -1,6 +1,19 @@
 <template>
 	<view class="mask">
-		<view @click.stop="onClick" class="content" v-if="app.newVersion">
+		<view class="dialog">
+			<image class="bg" :src="`${prefixUrl}/img/update.png`" mode="widthFix"></image>
+			<uni-icons type="close" size="28" class="close" color="#fff" @click.stop="cancelUpdate" v-if="!app.newVersion.force && !app.isDownLoading"></uni-icons>
+			<view class="inner">
+				<view class="title">新版本更新提示</view>
+				<scroll-view scroll-y="true" class="scroll-wrap">
+					<view class="desc">{{ app.newVersion.content }}</view>
+				</scroll-view>
+				<view class="handle">
+					<view class="btn" @click.stop="doDownload">{{app.isDownLoading ? '应用更新中...' : '立即更新'}}</view>
+				</view>
+			</view>
+		</view>
+<!-- 		<view @click.stop="onClick" class="content" v-if="app.newVersion">
 			<block v-if="app.isDownLoading">
 				<view class="title">升级APP</view>
 				<view class="progress">
@@ -23,13 +36,19 @@
 					<view class="btn btn-primary" @click.stop="doDownload">立即升级</view>
 				</view>
 			</block>
-		</view>
+		</view> -->
 	</view>
 </template>
 
 <script>
 import { mapState } from 'vuex';
+import { prefixUrl } from '@/config/common.js'
 export default {
+	data () {
+		return {
+			prefixUrl
+		}
+	},
 	onBackPress(e) {
 		if (e.from == 'backbutton') {
 			return true;
@@ -80,7 +99,65 @@ page {
 	/* #endif */
 	justify-content: center;
 	align-items: center;
-	background-color: rgba(0, 0, 0, 0.4);
+	background-color: rgba(0, 0, 0, 0.6);
+}
+
+.dialog {
+	position: relative;
+	width: 610rpx;
+	.close {
+		position: absolute;
+		top: 80rpx;
+		right: 8rpx;
+		z-index: 1;
+	}
+	.bg {
+		width: 100%;
+	}
+	.inner {
+		padding: 310rpx 0 138rpx;
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		z-index: 1;
+		.title {
+			font-size: 36rpx;
+			font-weight: bold;
+			color: #262A33;
+			line-height: 50rpx;
+			text-align: center;
+		}
+		.scroll-wrap {
+			margin: 50rpx auto 76rpx;
+			height: 240rpx;
+			.desc {
+				padding: 0 50rpx;
+				font-size: 28rpx;
+				color: #333333;
+				line-height: 60rpx;
+				opacity: 0.5;
+			}
+		}
+		.handle {
+			padding: 0 50rpx;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			.btn {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				flex: 1;
+				height: 100rpx;
+				background: linear-gradient(135deg, #FD6A50 0%, #FD4B62 100%);
+				border-radius: 50rpx;
+				color: #ffffff;
+				font-size: 32rpx;
+			}
+		}
+	}
 }
 
 .content {

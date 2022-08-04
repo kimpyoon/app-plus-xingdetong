@@ -24,13 +24,27 @@
 						name: '交电费',
 						desc: '',
 						bg: `${prefixUrl}/img/fee/df.png`,
-						path: ''
+						path: {
+							// #ifdef MP-WEIXIN
+							appId: 'wxd2ade0f25a874ee2'
+							// #endif
+							// #ifdef APP-PLUS
+							appId: 'gh_aceb9bd462ab'
+							// #endif
+						}
 					},
 					{
 						name: '交水费',
 						desc: '',
 						bg: `${prefixUrl}/img/fee/sf.png`,
-						path: ''
+						path: {
+							// #ifdef MP-WEIXIN
+							appId: 'wxd2ade0f25a874ee2'
+							// #endif
+							// #ifdef APP-PLUS
+							appId: 'gh_aceb9bd462ab'
+							// #endif
+						}
 					},
 					{
 						name: '交电视费',

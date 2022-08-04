@@ -85,7 +85,7 @@ const store = new Vuex.Store({
 			{
 				url: `${prefixUrl}/img/menu_18.png`,
 				text: '公积金',
-				path: 'https://www.xamzfgjj.cn/wx/html/bdzh.html;jsessionid=2BF63E46F1F39FA9EEEB534B922B4CA4?id=11&timestamp=1656394292415'
+				path: 'http://www.xamzfgjj.cn/wt-web-gr/grlogin'
 			},
 			{
 				url: `${prefixUrl}/img/menu_19.png`,
@@ -107,10 +107,11 @@ const store = new Vuex.Store({
 				text: '学历查询',
 				path: 'https://www.chsi.com.cn/xlcx/lscx/query.do?response_type=code&code=001PK9ll2fbfk846Y1ml2GZ2A40PK9l7&state=wxsub&NaVTFDV4CDYx=1656511037469'
 			},
-			// {
-			// 	url: '${prefixUrl}/img/menu_10.png',
-			// 	text: '社保查询'
-			// },
+			{
+				url: `${prefixUrl}/img/menu_10.png`,
+				text: '社保查询',
+				path: ''
+			},
 			{
 				url: `${prefixUrl}/img/menu_3.png`,
 				text: '交通违章',
@@ -179,6 +180,46 @@ const store = new Vuex.Store({
 				url: `${prefixUrl}/img/menu_31.png`,
 				text: '市政一体化',
 				path: 'https://app.zwfw.nmg.gov.cn/icity/apps/areas/neimenggu/xam-zone/index.html'
+			},
+			{
+				url: `${prefixUrl}/img/menu_32.png`,
+				text: '12123',
+				path: ''
+			},
+			{
+				url: `${prefixUrl}/img/menu_33.png`,
+				text: '低保',
+				path: ''
+			},
+			{
+				url: `${prefixUrl}/img/menu_34.png`,
+				text: '红色旅游',
+				path: ''
+			},
+			{
+				url: `${prefixUrl}/img/menu_35.png`,
+				text: '景区景点',
+				path: ''
+			},
+			{
+				url: `${prefixUrl}/img/menu_36.png`,
+				text: '民宿酒店',
+				path: ''
+			},
+			{
+				url: `${prefixUrl}/img/menu_37.png`,
+				text: '特色餐饮',
+				path: ''
+			},
+			{
+				url: `${prefixUrl}/img/menu_38.png`,
+				text: '体育馆定制',
+				path: ''
+			},
+			{
+				url: `${prefixUrl}/img/menu_39.png`,
+				text: '养老',
+				path: ''
 			},
 			// {
 			// 	url: '${prefixUrl}/img/menu_5.png',

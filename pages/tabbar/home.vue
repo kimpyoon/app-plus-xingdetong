@@ -4,7 +4,12 @@
 			<block slot="left">
 				<view class="nav-city xa-flex">
 					<view class="inner">
-						<view class="text xa-line-1">{{vuex_location.address.city || '--'}}</view>
+						<view class="text xa-line-1">
+							<template v-if="vuex_location.address">
+								{{vuex_location.address.city || '--'}}
+							</template>
+							<template v-else>--</template>
+						</view>
 						<view class="weather">{{nowWeatherData.text || '--'}} {{nowWeatherData.temp || '--'}}℃</view>
 					</view>
 					<uni-icons type="arrowdown" color="#fff" size="16" />
@@ -261,7 +266,7 @@
 			},
 			initPage () {
 				const params = {
-					location: `${this.locationInfo.longitude},${this.locationInfo.latitude}`
+					location: `${this.vuex_location.longitude},${this.vuex_location.latitude}`
 				}
 				const province = this.locationInfo.address && this.locationInfo.address.province ? this.locationInfo.address.province.replace('省', '') : ''
 				this.$api.home.getCovidData(province).then(covid => {
@@ -275,6 +280,7 @@
 				this.$api.weather.getWeatherNow(params).then(weather => {
 					this.nowWeatherData = weather
 					this.pageLoad = true
+					console.log(res)
 				})
 			},
 			changeBanner (e) {

@@ -7,7 +7,7 @@
 						<view class="text xa-line-1" :style="{color:navBarColor}">{{vuex_location.address.city || '--'}}</view>
 						<view class="weather" :style="{color:navBarColor}">{{nowData.text || '--'}} {{nowData.temp || '--'}}℃</view>
 					</view>
-					<uni-icons type="arrowdown" :color="navBarColor" size="16" />
+					<!-- <uni-icons type="arrowdown" :color="navBarColor" size="16" /> -->
 				</view>
 			</block>
 		</uni-nav-bar>
@@ -157,6 +157,7 @@
 			font-size: 20rpx;
 			color: #fff;
 			line-height: 28rpx;
+			white-space: nowrap;
 		}
 	}
 	.page-wrap {

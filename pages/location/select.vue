@@ -22,6 +22,9 @@
 				</view>
 			</view>
 		</view>
+		<view class="submit">
+			<button class="button xa-flex xa-col-center xa-row-center" @click="submitHandle">确 定</button>
+		</view>
 	</view>
 </template>
 
@@ -77,16 +80,21 @@
 					}
 				],
 				currentCounty: '',
-				currentLocal: ''
+				currentLocal: '',
+				currentItem: {}
 			}
 		},
 		onLoad() {
-			this.getLocal()
+			// this.getLocal()
 		},
 		methods: {
 			selectHandle (item) {
-				uni.$g.vuex('vuex_location', item)
+				this.currentItem = item
 				this.currentCounty = item.address.city
+			},
+			submitHandle () {
+				uni.$g.vuex('vuex_location', this.currentItem)
+				uni.navigateBack()
 			},
 			getLocal () {
 				const that = this
@@ -95,6 +103,7 @@
 					geocode: true,
 					success: function (res) {
 						uni.$g.vuex('vuex_location', res)
+						that.currentItem = res
 						that.currentLocal = res.address.city
 						// uni.chooseLocation({
 						// 	latitude: res.latitude,
@@ -119,6 +128,18 @@
 	background-color: #F5F6FA;
 	box-sizing: border-box;
 	min-height: 100vh;
+	.submit {
+		margin-top: 60rpx;
+		.button {
+			width: 650rpx;
+			height: 100rpx;
+			background: linear-gradient(135deg, #FD6A50 0%, #FD4B62 100%);
+			border-radius: 50rpx;
+			font-size: 32rpx;
+			color: #FFFFFF;
+			line-height: 44rpx;
+		}
+	}
 	.section {
 		margin-top: 24rpx;
 		padding: 20rpx 0 20rpx 20rpx;

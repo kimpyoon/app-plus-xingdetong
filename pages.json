@@ -317,8 +317,12 @@
 			"path": "pages/comm/update",
 			"style": {
 				"navigationBarTitleText": "升级应用",
-				"navigationBarBackgroundColor": "#ffffff",
+				//#ifdef APP-PLUS
+				"backgroundColor": "rgba(255,255,255,0)",
+				//#endif
+				"navigationBarBackgroundColor": "#f8f8f8",
 				"enablePullDownRefresh": false,
+				"navigationStyle":"custom",
 				"app-plus": {
 					"bounce": "none"
 				}

@@ -40,7 +40,7 @@
 						longitude: 121.593972,
 						latitude: 45.381918,
 						address: {
-							city: '突泉'
+							city: '突泉县'
 						}
 					},
 					{

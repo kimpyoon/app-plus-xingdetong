@@ -49,19 +49,142 @@ const store = new Vuex.Store({
 		},
 		vuex_menus: lifeData.vuex_menus ? lifeData.vuex_menus : [
 			{
-				url: `${prefixUrl}/img/menu_9.png`,
-				text: '疫情防控',
-				path: '/pages/health/health'
-			},
-			{
 				url: `${prefixUrl}/img/menu_7.png`,
 				text: '兴安缴费',
 				path: '/pages/payment/payment'
 			},
 			{
+				url: `${prefixUrl}/img/menu_25.png`,
+				text: '健康兴安',
+				//#ifdef APP-PLUS
+				path: 'https://s.pdb2.com/l/CMLopdf5cmgNp8r'
+				//#endif
+				//#ifdef MP-WEIXIN
+				path: {
+					appId: 'wx8ec43bc7a9893865'
+				}
+				//#endif
+			},
+			{
+				url: `${prefixUrl}/img/menu_26.png`,
+				text: '指尖兴安盟',
+				//#ifdef APP-PLUS
+				path: 'https://s.pdb2.com/l/D6K7cR8kOO36OQR'
+				//#endif
+				//#ifdef MP-WEIXIN
+				path: {
+					appId: 'wx08f48af8f1ab0b9f'
+				}
+				//#endif
+			},
+			{
+				url: `${prefixUrl}/img/menu_6.png`,
+				text: '快递查询',
+				path: '/pages/logistics/search'
+			},
+			{
+				url: `${prefixUrl}/img/menu_27.png`,
+				text: '机票预订',
+				//#ifdef APP-PLUS
+				path: 'https://m.ctrip.com/html5/flight/swift/index?sourceid=497&allianceid=4897&sid=182042&sepopup=888&wakeminiproid=17&inpopup=true&openapp=3'
+				//#endif
+				//#ifdef MP-WEIXIN
+				path: {
+					appId: 'wx0e6ed4f51db9d078'
+				}
+				//#endif
+			},
+			{
+				url: `${prefixUrl}/img/menu_29.png`,
+				text: '火车票预订',
+				//#ifdef APP-PLUS
+				path: 'https://m.ctrip.com/webapp/train/?sourceid=497&allianceid=4897&sid=182042&sepopup=888&wakeminiproid=17&inpopup=true'
+				//#endif
+				//#ifdef MP-WEIXIN
+				path: {
+					appId: 'wx0e6ed4f51db9d078'
+				}
+				//#endif
+			},
+			{
+				url: `${prefixUrl}/img/menu_24.png`,
+				text: '公交车',
+			},
+			{
+				url: `${prefixUrl}/img/menu_23.png`,
+				text: '出租车',
+				//#ifdef APP-PLUS
+				path: 'https://s.pdb2.com/l/CNL8e8Fr6fHNp8R'
+				//#endif
+				//#ifdef MP-WEIXIN
+				path: {
+					appId: 'wxa37497ccd08b7cce'
+				}
+				//#endif
+			},
+			//#ifndef MP-WEIXIN
+			{
+				url: `${prefixUrl}/img/menu_18.png`,
+				text: '公积金',
+				path: 'http://www.xamzfgjj.cn/wt-web-gr/grlogin'
+			},
+			//#endif
+			{
+				url: `${prefixUrl}/img/menu_9.png`,
+				text: '疫情防控',
+				path: '/pages/health/health'
+			},
+			{
+				url: `${prefixUrl}/img/menu_19.png`,
+				text: '行程卡',
+				//#ifdef APP-PLUS
+				path: 'https://xc.caict.ac.cn/#/login'
+				//#endif
+				//#ifdef MP-WEIXIN
+				path: {
+					appId: 'wx8f446acf8c4a85f5'
+				}
+				//#endif
+			},
+			//#ifndef MP-WEIXIN
+			{
+				url: `${prefixUrl}/img/menu_22.png`,
+				text: '学历查询',
+				path: 'https://www.chsi.com.cn/xlcx/lscx/query.do?response_type=code&code=001PK9ll2fbfk846Y1ml2GZ2A40PK9l7&state=wxsub&NaVTFDV4CDYx=1656511037469'
+			},
+			//#endif
+			{
+				url: `${prefixUrl}/img/menu_11.png`,
+				text: '天气预报',
+				path: '/pages/weather/index'
+			},
+			//#ifndef MP-WEIXIN
+			{
+				url: `${prefixUrl}/img/menu_21.png`,
+				text: '兴安人事',
+				path: 'http://m.xingan.offcn.com/html/shiyedanwei/'
+			},
+			{
+				url: `${prefixUrl}/img/menu_28.png`,
+				text: '公共资源',
+				path: 'http://www.xamggzyjyzx.org.cn/'
+			},
+			//#endif
+			{
 				url: `${prefixUrl}/img/menu_2.png`,
 				text: '兴安家政',
 				path: '/pages/housekeeping/list'
+			},
+			//#ifndef MP-WEIXIN
+			{
+				url: `${prefixUrl}/img/menu_3.png`,
+				text: '交通违章',
+				path: 'https://m.weizhang8.cn/'
+			},
+			{
+				url: `${prefixUrl}/img/menu_20.png`,
+				text: '政务动态',
+				path: 'http://www.xam.gov.cn/mcxam/index/index.html'
 			},
 			// {
 			// 	url: '${prefixUrl}/img/menu_4.png',
@@ -77,51 +200,11 @@ const store = new Vuex.Store({
 			// 	url: '${prefixUrl}/img/menu_8.png',
 			// 	text: '爱兴安'
 			// },
-			{
-				url: `${prefixUrl}/img/menu_6.png`,
-				text: '快递查询',
-				path: '/pages/logistics/search'
-			},
-			{
-				url: `${prefixUrl}/img/menu_18.png`,
-				text: '公积金',
-				path: 'http://www.xamzfgjj.cn/wt-web-gr/grlogin'
-			},
-			{
-				url: `${prefixUrl}/img/menu_19.png`,
-				text: '行程卡',
-				path: 'https://xc.caict.ac.cn/#/login'
-			},
-			{
-				url: `${prefixUrl}/img/menu_20.png`,
-				text: '政务动态',
-				path: 'http://www.xam.gov.cn/mcxam/index/index.html'
-			},
-			{
-				url: `${prefixUrl}/img/menu_21.png`,
-				text: '兴安人事',
-				path: 'http://m.xingan.offcn.com/html/shiyedanwei/'
-			},
-			{
-				url: `${prefixUrl}/img/menu_22.png`,
-				text: '学历查询',
-				path: 'https://www.chsi.com.cn/xlcx/lscx/query.do?response_type=code&code=001PK9ll2fbfk846Y1ml2GZ2A40PK9l7&state=wxsub&NaVTFDV4CDYx=1656511037469'
-			},
-			{
-				url: `${prefixUrl}/img/menu_10.png`,
-				text: '社保查询',
-				path: ''
-			},
-			{
-				url: `${prefixUrl}/img/menu_3.png`,
-				text: '交通违章',
-				path: 'https://m.weizhang8.cn/'
-			},
-			{
-				url: `${prefixUrl}/img/menu_11.png`,
-				text: '天气预报',
-				path: '/pages/weather/index'
-			},
+			// {
+			// 	url: `${prefixUrl}/img/menu_10.png`,
+			// 	text: '社保查询',
+			// 	path: ''
+			// },
 			// {
 			// 	url: '${prefixUrl}/img/menu_14.png',
 			// 	text: '智游兴安',
@@ -133,94 +216,61 @@ const store = new Vuex.Store({
 			// 	path: '/pages/travel/culture'
 			// },
 			{
-				url: `${prefixUrl}/img/menu_12.png`,
-				text: '服务信息',
-				path: '/pages/feedback/index'
-			},
-			{
-				url: `${prefixUrl}/img/menu_27.png`,
-				text: '机票预订',
-				path: 'https://m.ctrip.com/html5/flight/swift/index?sourceid=497&allianceid=4897&sid=182042&sepopup=888&wakeminiproid=17&inpopup=true&openapp=3'
-			},
-			{
-				url: `${prefixUrl}/img/menu_28.png`,
-				text: '公共资源',
-				path: 'http://www.xamggzyjyzx.org.cn/'
-			},
-			{
-				url: `${prefixUrl}/img/menu_29.png`,
-				text: '火车票预订',
-				path: 'https://m.ctrip.com/webapp/train/?sourceid=497&allianceid=4897&sid=182042&sepopup=888&wakeminiproid=17&inpopup=true'
-			},
-			{
 				url: `${prefixUrl}/img/menu_30.png`,
 				text: '科普中国',
 				path: 'https://www.kepuchina.cn/'
-			},
-			{
-				url: `${prefixUrl}/img/menu_23.png`,
-				text: '出租车',
-				path: 'https://s.pdb2.com/l/CNL8e8Fr6fHNp8R'
-			},
-			{
-				url: `${prefixUrl}/img/menu_24.png`,
-				text: '公交车',
-			},
-			{
-				url: `${prefixUrl}/img/menu_25.png`,
-				text: '健康兴安',
-				path: 'https://s.pdb2.com/l/CMLopdf5cmgNp8r'
-			},
-			{
-				url: `${prefixUrl}/img/menu_26.png`,
-				text: '指尖兴安盟',
-				path: 'https://s.pdb2.com/l/D6K7cR8kOO36OQR'
 			},
 			{
 				url: `${prefixUrl}/img/menu_31.png`,
 				text: '市政一体化',
 				path: 'https://app.zwfw.nmg.gov.cn/icity/apps/areas/neimenggu/xam-zone/index.html'
 			},
+			//#endif
 			{
-				url: `${prefixUrl}/img/menu_32.png`,
-				text: '12123',
-				path: ''
+				url: `${prefixUrl}/img/menu_12.png`,
+				text: '信息反馈',
+				path: '/pages/feedback/index'
 			},
-			{
-				url: `${prefixUrl}/img/menu_33.png`,
-				text: '低保',
-				path: ''
-			},
-			{
-				url: `${prefixUrl}/img/menu_34.png`,
-				text: '红色旅游',
-				path: ''
-			},
-			{
-				url: `${prefixUrl}/img/menu_35.png`,
-				text: '景区景点',
-				path: ''
-			},
-			{
-				url: `${prefixUrl}/img/menu_36.png`,
-				text: '民宿酒店',
-				path: ''
-			},
-			{
-				url: `${prefixUrl}/img/menu_37.png`,
-				text: '特色餐饮',
-				path: ''
-			},
-			{
-				url: `${prefixUrl}/img/menu_38.png`,
-				text: '体育馆定制',
-				path: ''
-			},
-			{
-				url: `${prefixUrl}/img/menu_39.png`,
-				text: '养老',
-				path: ''
-			},
+			// {
+			// 	url: `${prefixUrl}/img/menu_32.png`,
+			// 	text: '12123',
+			// 	path: ''
+			// },
+			// {
+			// 	url: `${prefixUrl}/img/menu_33.png`,
+			// 	text: '低保',
+			// 	path: ''
+			// },
+			// {
+			// 	url: `${prefixUrl}/img/menu_34.png`,
+			// 	text: '红色旅游',
+			// 	path: ''
+			// },
+			// {
+			// 	url: `${prefixUrl}/img/menu_35.png`,
+			// 	text: '景区景点',
+			// 	path: ''
+			// },
+			// {
+			// 	url: `${prefixUrl}/img/menu_36.png`,
+			// 	text: '民宿酒店',
+			// 	path: ''
+			// },
+			// {
+			// 	url: `${prefixUrl}/img/menu_37.png`,
+			// 	text: '特色餐饮',
+			// 	path: ''
+			// },
+			// {
+			// 	url: `${prefixUrl}/img/menu_38.png`,
+			// 	text: '体育馆定制',
+			// 	path: ''
+			// },
+			// {
+			// 	url: `${prefixUrl}/img/menu_39.png`,
+			// 	text: '养老',
+			// 	path: ''
+			// },
 			// {
 			// 	url: '${prefixUrl}/img/menu_5.png',
 			// 	text: '票务查询',

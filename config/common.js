@@ -1,1 +1,1 @@
-export const prefixUrl = 'http://xdt.bihaichaosheng.vip:7003'
+export const prefixUrl = 'https://syzl.xam.gov.cn/xingdetong/file'

@@ -481,6 +481,7 @@
 						}
 						.foot {
 							margin-top: 58rpx;
+							white-space: nowrap;
 							.date {
 								font-size: 24rpx;
 								color: #A2A2A2;

@@ -1,24 +1,24 @@
 <template>
 	<view class="page">
-		<image src="../../static/img/login_bg.png" class="bg"></image>
+		<image :src="`${prefixUrl}/img/login_bg.png`" class="bg"></image>
 		<view class="page-wrap">
 			<view class="logo">
-				<image src="../../static/img/logo.png" mode="scaleToFill" class="img"></image>
+				<image :src="`${prefixUrl}/img/logo.png`" mode="scaleToFill" class="img"></image>
 			</view>
 			<view class="h1">欢迎注册兴得通</view>
-			<view class="h4">我是一局APP宣传语</view>
+			<!-- <view class="h4">我是一局APP宣传语</view> -->
 			<view class="form-wrap">
 				<view class="form">
 					<template v-if="registType === '1'">
 						<view class="cell">
 							<view class="left-icon">
-								<image src="../../static/img/icon/phone.png" class="img"></image>
+								<image :src="`${prefixUrl}/img/icon/phone.png`" class="img"></image>
 							</view>
 							<input class="input" @input="changeInput" @focus="focusKey = 'phone'" maxlength="11" type="text" :value="form.phone" placeholder="请输入手机号" placeholder-style="color:#9f9f9f" />
 						</view>
 						<view class="cell">
 							<view class="left-icon">
-								<image src="../../static/img/icon/valid.png" class="img"></image>
+								<image :src="`${prefixUrl}/img/icon/valid.png`" class="img"></image>
 							</view>
 							<input class="input code-input" @input="changeInput" @focus="focusKey = 'code'" maxlength="6" type="text" :value="form.code" placeholder="请输入手机验证码" placeholder-style="color:#9f9f9f" />
 							<text class="code" v-if="countdown > 0">{{countdown}}</text>
@@ -28,19 +28,19 @@
 					<template v-if="registType === '2'">
 						<view class="cell">
 							<view class="left-icon">
-								<image src="../../static/img/icon/business.png" class="img"></image>
+								<image :src="`${prefixUrl}/img/icon/business.png`" class="img"></image>
 							</view>
 							<input class="input" @input="changeInput" @focus="focusKey = 'businessName'" type="text" :value="form.businessName" placeholder="请输入单位名称" placeholder-style="color:#9f9f9f" />
 						</view>
 						<view class="cell">
 							<view class="left-icon">
-								<image src="../../static/img/icon/idcard.png" class="img"></image>
+								<image :src="`${prefixUrl}/img/icon/idcard.png`" class="img"></image>
 							</view>
 							<input class="input" @input="changeInput" @focus="focusKey = 'socialCreditCode'" type="text" :value="form.socialCreditCode" placeholder="请输入统一社会信用代码" placeholder-style="color:#9f9f9f" />
 						</view>
 						<view class="cell" @click="showPicker = true">
 							<view class="left-icon">
-								<image src="../../static/img/icon/user.png" class="img"></image>
+								<image :src="`${prefixUrl}/img/icon/user.png`" class="img"></image>
 							</view>
 							<picker @change="bindPickerChange" :value="typeIndex" :range="legalPersonTypes" range-key="text">
 								<view class="input">
@@ -57,7 +57,7 @@
 					</template>
 					<view class="cell">
 						<view class="left-icon">
-							<image src="../../static/img/icon/password.png" class="img"></image>
+							<image :src="`${prefixUrl}/img/icon/password.png`" class="img"></image>
 						</view>
 						<input class="input" :password="!showPassword" @input="changeInput" @focus="focusKey = 'password'" type="text" :value="form.password" placeholder="请设置登录密码" placeholder-style="color:#9f9f9f" />
 						<view class="icon">
@@ -67,7 +67,7 @@
 					</view>
 					<view class="cell">
 						<view class="left-icon">
-							<image src="../../static/img/icon/password.png" class="img"></image>
+							<image :src="`${prefixUrl}/img/icon/password.png`" class="img"></image>
 						</view>
 						<input class="input" :password="!showConfirmPassword" @input="changeInput" @focus="focusKey = 'confirmPassword'" type="text" :value="form.confirmPassword" placeholder="再次确认密码" placeholder-style="color:#9f9f9f" />
 						<view class="icon">
@@ -84,16 +84,18 @@
 					<text class="text" @click="back" style="color: #ED413A;">立即登录</text>
 				</view>
 			</view>
-			<image src="../../static/img/login_foot_bg.png" mode="" class="foot-bg"></image>
+			<image :src="`${prefixUrl}/img/login_foot_bg.png`" mode="" class="foot-bg"></image>
 		</view>
 	</view>
 </template>
 
 <script>
 	import { legalPersonTypes } from '../../utils/common.js'
+	import { prefixUrl } from '@/config/common.js'
 	export default {
 		data() {
 			return {
+				prefixUrl,
 				form: {
 					phone: '',
 					code: '',
@@ -277,7 +279,7 @@
 			line-height: 40rpx;
 		}
 		.logo {
-			margin-top: 28rpx;
+			margin-top: 33rpx;
 			.img {
 				width: 120rpx;
 				height: 120rpx;

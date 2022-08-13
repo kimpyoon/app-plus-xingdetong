@@ -1,7 +1,7 @@
 <template>
 	<view class="page">
 		<view class="page-wrap" v-if="pageLoad">
-			<image src="../../static/img/work/bg.png" class="bg"></image>
+			<image :src="`${prefixUrl}/img/work/bg.png`" class="bg"></image>
 			<uni-nav-bar statusBar title="兴安咨询" color="#ffffff" :border="false" :backgroundColor="navBarBgColor" fixed></uni-nav-bar>
 			<uni-nav-bar backgroundColor="transparent" :border="false"></uni-nav-bar>
 			<view class="container">
@@ -59,10 +59,12 @@
 	import Tabs from '../../lib/components/tabs.vue'
 	import { navHandler, tranNumber } from '../../utils/index.js'
 	import { articles } from '../../utils/common.js'
+	import { prefixUrl } from '../../config/common.js'
 	export default {
 		mixins: [ZPagingMixin],
 		data() {
 			return {
+				prefixUrl,
 				pageLoad: false,
 				navBarBgColor: 'transparent',
 				articles: [...articles],
@@ -83,7 +85,7 @@
 				],
 				banners: [
 					{
-						url: '/static/img/login_foot_bg.png',
+						url: `${prefixUrl}/img/login_foot_bg.png`,
 						title: '我是一条新闻的标题'
 					}
 				],
@@ -242,6 +244,7 @@
 						}
 						.foot {
 							margin-top: 58rpx;
+							white-space: nowrap;
 							.date {
 								font-size: 24rpx;
 								color: #A2A2A2;

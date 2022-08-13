@@ -4,7 +4,12 @@
 			<block slot="left">
 				<view class="nav-city xa-flex">
 					<view class="inner">
-						<view class="text xa-line-1">{{currentAddress.city || '--'}}</view>
+						<view class="text xa-line-1">
+							<template v-if="vuex_location.address">
+								{{vuex_location.address.city || '--'}}
+							</template>
+							<template v-else>--</template>
+						</view>
 						<view class="weather">{{nowWeatherData.text || '--'}} {{nowWeatherData.temp || '--'}}℃</view>
 					</view>
 					<uni-icons type="arrowdown" color="#fff" size="16" />
@@ -55,7 +60,7 @@
 			}"></notice-bar>
 			<view class="section">
 				<view class="s-title xa-flex xa-col-center">
-					<image src="../../static/img/icon/love_icon.png" class="icon"></image>
+					<image :src="`${prefixUrl}/img/icon/love_icon.png`" class="icon"></image>
 					<text class="text">抗击疫情</text>
 				</view>
 				<view class="card xa-flex xa-col-center xa-row-center">
@@ -71,7 +76,7 @@
 			</view>
 			<view class="section" v-if="false">
 				<view class="s-title xa-flex xa-col-center">
-					<image src="../../static/img/icon/bus_icon.png" class="icon"></image>
+					<image :src="`${prefixUrl}/img/icon/bus_icon.png`" class="icon"></image>
 					<text class="text">交通出行</text>
 				</view>
 				<view class="traffic-wrap">
@@ -91,7 +96,7 @@
 			</view>
 			<view class="section">
 				<view class="s-title xa-flex xa-col-center">
-					<image src="../../static/img/icon/hot_icon.png" class="icon"></image>
+					<image :src="`${prefixUrl}/img/icon/hot_icon.png`" class="icon"></image>
 					<text class="text">兴安要闻</text>
 				</view>
 				<view class="article-list">
@@ -127,14 +132,19 @@
 	import debounce from '../../utils/debounce.js'
 	import { navHandler, tranNumber } from '../../utils/index.js'
 	import { articles } from '../../utils/common.js'
+	import { prefixUrl } from '@/config/common.js'
+	// #ifdef MP-WEIXIN
+	import amap from '@/lib/common/amap-wx.130.js'
+	// #endif
 	export default {
 		data() {
 			return {
+				prefixUrl,
 				pageLoad: true,
 				currentBannerIndex: 0,
 				banners: [
 					{
-						url: '../../static/img/home_banner.png'
+						url: `${prefixUrl}/img/home_banner.png`
 					}
 				],
 				noticeList: [
@@ -147,12 +157,12 @@
 				],
 				traffic: [
 					{
-						thumb: '../../static/img/card_2.png',
+						thumb: `${prefixUrl}/img/card_2.png`,
 						name: '出租车',
 						desc: '在线叫车方便快捷'
 					},
 					{
-						thumb: '../../static/img/card_1.png',
+						thumb: `${prefixUrl}/img/card_1.png`,
 						name: '公交车',
 						desc: '实时获取公交信息'
 					},
@@ -164,8 +174,9 @@
 				],
 				navBarBgColor: 'transparent',
 				articles: [articles[0], articles[1]],
-				currentAddress: {},
-				nowWeatherData: {}
+				nowWeatherData: {},
+				amapPlugin: null,
+				locationInfo: {}
 			}
 		},
 		components: {
@@ -176,7 +187,7 @@
 		computed: {
 			menuList () {
 				return [...this.vuex_menus.slice(0, 11), {
-					url: '../../static/img/menu_more.png',
+					url: `${prefixUrl}/img/menu_more.png`,
 					text: '更多',
 					path: '/pages/menu/edit'
 				}]
@@ -189,12 +200,47 @@
 			}, 1000)
 		},
 		onShow() {
-			if (this.pageLoad) {
+			if (!uni.$g.test.isEmpty(this.locationInfo)) {
 				this.initPage()
 			}
 		},
 		onLoad() {
-			this.initPage()
+			// #ifdef APP-PLUS
+			uni.getLocation({
+				type: 'gcj02',
+				geocode: true,
+				success: (res) => {
+					this.locationInfo = res
+					uni.$g.vuex('vuex_location', res)
+					this.initPage()
+				},
+				fail: (res) => {
+					this.pageLoad = true
+					uni.showModal({
+						content: JSON.stringify(res)
+					})
+				}
+			})
+			// #endif
+			// #ifdef MP-WEIXIN
+			this.amapPlugin = new amap.AMapWX({
+				key: 'e7d6ff13c9d93743e02b8a666b22d060'
+			})
+			this.amapPlugin.getRegeo({
+				success: (data) => {
+					uni.$g.vuex('vuex_location', {
+						longitude: data[0].longitude,
+						latitude: data[0].latitude,
+						address: data[0].regeocodeData.addressComponent
+					})
+					this.locationInfo.longitude = data[0].longitude
+					this.locationInfo.latitude = data[0].latitude
+					this.locationInfo.address = data[0].regeocodeData.addressComponent
+					this.initPage()
+					console.log(data)
+				}
+			});
+			// #endif
 		},
 		onPageScroll(e) {
 			if (e.scrollTop < 200) {
@@ -219,33 +265,22 @@
 				navHandler('/pages/article/detail')
 			},
 			initPage () {
-				uni.getLocation({
-					type: 'gcj02',
-					geocode: true,
-					success: (res) => {
-						this.currentAddress = res.address
-						const params = {
-							location: `${res.longitude},${res.latitude}`
-						}
-						this.$api.home.getCovidData(res.address.province.replace('省', '')).then(covid => {
-							this.covid = [
-								{ count: covid.provinceAddComfirm, text: `${res.address.province || '--'}新增`, color: '#00B476' },
-								{ count: covid.chinaAddConfirm, text: '国内新增', color: '#FE9D4B' },
-								{ count: covid.chinaStoreConfirm, text: '国内现有确诊', color: '#F25542' }
-							]
-							this.pageLoad = true
-						})
-						this.$api.weather.getWeatherNow(params).then(weather => {
-							this.nowWeatherData = weather
-							this.pageLoad = true
-						})
-					},
-					fail: (res) => {
-						this.pageLoad = true
-						uni.showModal({
-							content: JSON.stringify(res)
-						})
-					}
+				const params = {
+					location: `${this.vuex_location.longitude},${this.vuex_location.latitude}`
+				}
+				const province = this.locationInfo.address && this.locationInfo.address.province ? this.locationInfo.address.province.replace('省', '') : ''
+				this.$api.home.getCovidData(province).then(covid => {
+					this.covid = [
+						{ count: covid.provinceAddComfirm, text: `${this.locationInfo.address.province || '--'}新增`, color: '#00B476' },
+						{ count: covid.chinaAddConfirm, text: '国内新增', color: '#FE9D4B' },
+						{ count: covid.chinaStoreConfirm, text: '国内现有确诊', color: '#F25542' }
+					]
+					this.pageLoad = true
+				})
+				this.$api.weather.getWeatherNow(params).then(weather => {
+					this.nowWeatherData = weather
+					this.pageLoad = true
+					console.log(res)
 				})
 			},
 			changeBanner (e) {
@@ -446,6 +481,7 @@
 						}
 						.foot {
 							margin-top: 58rpx;
+							white-space: nowrap;
 							.date {
 								font-size: 24rpx;
 								color: #A2A2A2;

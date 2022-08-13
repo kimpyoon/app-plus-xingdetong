@@ -1,12 +1,12 @@
 <template>
 	<view class="page">
-		<image src="../../static/img/login_bg.png" class="bg"></image>
+		<image :src="`${prefixUrl}/img/login_bg.png`" class="bg"></image>
 		<view class="page-wrap">
 			<view class="logo">
-				<image src="../../static/img/logo.png" mode="scaleToFill" class="img"></image>
+				<image :src="`${prefixUrl}/img/logo.png`" mode="scaleToFill" class="img"></image>
 			</view>
 			<view class="h1">欢迎登录兴得通</view>
-			<view class="h4">我是一局APP宣传语</view>
+			<!-- <view class="h4">我是一局APP宣传语</view> -->
 			<view class="form-wrap">
 				<view class="tabs xa-flex xa-row-between">
 					<view @click="selectLoginMethod(item.value)" :class="['tab', {
@@ -17,14 +17,14 @@
 					<view v-show="curTab === 1">
 						<view class="cell">
 							<view class="left-icon">
-								<image src="../../static/img/icon/phone.png" class="img" v-if="codeLogin"></image>
-								<image src="../../static/img/icon/user.png" class="img" v-else></image>
+								<image :src="`${prefixUrl}/img/icon/phone.png`" class="img" v-if="codeLogin"></image>
+								<image :src="`${prefixUrl}/img/icon/user.png`" class="img" v-else></image>
 							</view>
 							<input class="input" @input="changeInput" @focus="focusKey = 'phone'" type="text" :value="form.phone" placeholder="请输入手机号" placeholder-style="color:#9f9f9f" />
 						</view>
 						<view class="cell" v-if="codeLogin">
 							<view class="left-icon">
-								<image src="../../static/img/icon/valid.png" class="img"></image>
+								<image :src="`${prefixUrl}/img/icon/valid.png`" class="img"></image>
 							</view>
 							<input class="input code-input" @input="changeInput" @focus="focusKey = 'code'" maxlength="6" type="text" :value="form.code" placeholder="请输入手机验证码" placeholder-style="color:#9f9f9f" />
 							<text class="code" v-if="countdown > 0">{{countdown}}</text>
@@ -32,7 +32,7 @@
 						</view>
 						<view class="cell" v-else>
 							<view class="left-icon">
-								<image src="../../static/img/icon/password.png" class="img"></image>
+								<image :src="`${prefixUrl}/img/icon/password.png`" class="img"></image>
 							</view>
 							<input class="input" type="text" :password="!showPassword" @input="changeInput" @focus="focusKey = 'password'" :value="form.password" placeholder="请输入登录密码" placeholder-style="color:#9f9f9f" />
 							<view class="icon">
@@ -44,13 +44,13 @@
 					<view v-show="curTab === 2">
 						<view class="cell">
 							<view class="left-icon">
-								<image src="../../static/img/icon/idcard.png" class="img"></image>
+								<image :src="`${prefixUrl}/img/icon/idcard.png`" class="img"></image>
 							</view>
 							<input class="input" type="text" @input="changeInput" @focus="focusKey = 'creditNo'" :value="form.creditNo" placeholder="请输入统一社会信用代码" placeholder-style="color:#9f9f9f" />
 						</view>
 						<view class="cell">
 							<view class="left-icon">
-								<image src="../../static/img/icon/password.png" class="img"></image>
+								<image :src="`${prefixUrl}/img/icon/password.png`" class="img"></image>
 							</view>
 							<input class="input" type="text" :password="!showBusinesePassword" @input="changeInput" @focus="focusKey = 'businesePassword'" :value="form.businesePassword" placeholder="请输入登录密码" placeholder-style="color:#9f9f9f" />
 							<view class="icon">
@@ -84,11 +84,11 @@
 				<view class="label">其他登录方式</view>
 				<view class="inner xa-flex xa-col-center xa-row-center">
 					<view class="item" v-if="!codeLogin" @click="codeLogin = true">
-						<view class="icon"><image src="../../static/img/icon/valid-code.png" class="img"></image></view>
+						<view class="icon"><image :src="`${prefixUrl}/img/icon/valid-code.png`" class="img"></image></view>
 						<view class="text">验证码登录</view>
 					</view>
 					<view class="item" v-else @click="codeLogin = false">
-						<view class="icon"><image src="../../static/img/icon/valid-code.png" class="img"></image></view>
+						<view class="icon"><image :src="`${prefixUrl}/img/icon/valid-code.png`" class="img"></image></view>
 						<view class="text">密码登录</view>
 					</view>
 					<view class="item" @click="getOpenId(item)" v-for="item in loginList" :key="item.appcode">
@@ -97,15 +97,17 @@
 					</view>
 				</view>
 			</view>
-			<image src="../../static/img/login_foot_bg.png" mode="" class="foot-bg"></image>
+			<image :src="`${prefixUrl}/img/login_foot_bg.png`" mode="" class="foot-bg"></image>
 		</view>
 	</view>
 </template>
 
 <script>
+	import { prefixUrl } from '@/config/common.js'
 	export default {
 		data() {
 			return {
+				prefixUrl,
 				curTab: 1,
 				codeLogin: false, // true: 验证码登录
 				focusKey: '',
@@ -161,6 +163,7 @@
 		mounted() {
 			// 加载支持的登录方式
 			// this.getProvider()
+			uni.hideTabBar()
 		},
 		methods: {
 			getProvider () {
@@ -399,7 +402,7 @@
 		}
 		.form-wrap {
 			position: relative;
-			margin-top: 60rpx;
+			margin-top: 65rpx;
 			z-index: 1;
 			.tabs {
 				padding: 6rpx 170rpx;

@@ -28,20 +28,22 @@ export const tabbars = [
 		"tag": "",
 		"middle": false
 	},
-	{
-		"iconPath": require('@/static/img/tabbar/news_normal.png'),
-		"selectIconPath": require('@/static/img/tabbar/news_active.png'),
-		"color": "#8A8E99",
-		"selectColor": "#000000",
-		"fontSize": "22rpx",
-		"text": "兴安资讯",
-		"path": "pages/tabbar/news",
-		"showDot": false,
-		"dot": 0,
-		"showTag": false,
-		"tag": "",
-		"middle": false
-	},
+	//#ifndef MP-WEIXIN
+	 {
+	 	"iconPath": require('@/static/img/tabbar/news_normal.png'),
+	 	"selectIconPath": require('@/static/img/tabbar/news_active.png'),
+	 	"color": "#8A8E99",
+	 	"selectColor": "#000000",
+	 	"fontSize": "22rpx",
+	 	"text": "兴安资讯",
+	 	"path": "pages/tabbar/news",
+	 	"showDot": false,
+	 	"dot": 0,
+	 	"showTag": false,
+	 	"tag": "",
+	 	"middle": false
+	 },
+	//#endif
 	{
 		"iconPath": require('@/static/img/tabbar/mine_normal.png'),
 		"selectIconPath": require('@/static/img/tabbar/mine_active.png'),

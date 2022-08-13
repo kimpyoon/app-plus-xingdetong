@@ -3,11 +3,11 @@
 		<view class="page-wrap" v-if="pageLoad">
 			<uni-nav-bar statusBar title="线上办事" color="#ffffff" :border="false" :backgroundColor="navBarBgColor" fixed></uni-nav-bar>
 			<uni-nav-bar backgroundColor="transparent"></uni-nav-bar>
-			<image src="../../static/img/work/bg.png" class="bg"></image>
+			<image :src="`${prefixUrl}/img/work/bg.png`" class="bg"></image>
 			<view class="section">
 				<view class="title xa-flex xa-col-center border-bottom">
-					<image src="../../static/img/work/ic_love.png" class="icon"></image>
-					<text class="text">线上办事单位</text>
+					<image :src="`${prefixUrl}/img/work/ic_love.png`" class="icon"></image>
+					<text class="text">线上办事</text>
 				</view>
 				<view class="cell-group">
 					<view @click="nav(item.url, item.name)" class="cell xa-flex xa-col-center xa-row-between border-bottom" v-for="(item,index) in cells" :key="index">
@@ -27,9 +27,11 @@
 <script>
 	import PageLoading from '../../lib/components/page-loading.vue'
 	import TabBar from '../../lib/components/tab-bar.vue'
+	import { prefixUrl } from '@/config/common.js'
 	export default {
 		data() {
 			return {
+				prefixUrl,
 				pageLoad: false,
 				navBarBgColor: 'transparent',
 				cells: [

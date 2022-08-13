@@ -2,23 +2,23 @@
 	<view class="page safe-area-inset-bottom">
 		<view class="status-bar"></view>
 		<view class="page-wrap" v-if="pageLoad">
-			<image src="../../static/img/mine/bg.png" class="bg"></image>
+			<image :src="`${prefixUrl}/img/mine/bg.png`" class="bg"></image>
 			<view class="content">
 				<view class="setting xa-flex xa-col-center xa-row-right">
-					<image src="../../static/img/mine/ic_message.png" class="icon"></image>
-					<image src="../../static/img/mine/ic_setting.png" class="icon"></image>
+					<image :src="`${prefixUrl}/img/mine/ic_message.png`" class="icon"></image>
+					<image :src="`${prefixUrl}/img/mine/ic_setting.png`" class="icon"></image>
 				</view>
 				<view class="user-info xa-flex xa-col-center">
-					<image src="../../static/img/logo.png" class="avatar" @click="navHandler('/pages/user/info')"></image>
+					<image :src="`${prefixUrl}/img/logo.png`" class="avatar" @click="navHandler('/pages/user/info')"></image>
 					<view class="right">
 						<view class="name"><text @click="navHandler('/pages/user/info')">{{vuex_user.username || '未设置'}}</text></view>
 						<view class="tags xa-flex xa-col-center">
 							<view class="tag xa-flex xa-col-center">
-								<image src="../../static/img/mine/renzhengpeizhi.png" class="icon"></image>
+								<image :src="`${prefixUrl}/img/mine/renzhengpeizhi.png`" class="icon"></image>
 								<text class="text">未认证</text>
 							</view>
 							<view class="tag xa-flex xa-col-center">
-								<image src="../../static/img/mine/gerenyonghu.png" class="icon"></image>
+								<image :src="`${prefixUrl}/img/mine/gerenyonghu.png`" class="icon"></image>
 								<text class="text">个人用户</text>
 							</view>
 						</view>
@@ -27,7 +27,7 @@
 				<view class="card" v-if="false">
 					<view class="title xa-flex xa-row-between">
 						<view class="left xa-flex">
-							<image src="../../static/img/mine/ic_10.png" class="icon"></image>
+							<image :src="`${prefixUrl}/img/mine/ic_10.png`" class="icon"></image>
 							<text class="text">我的档案</text>
 						</view>
 					</view>
@@ -44,7 +44,7 @@
 				<view class="card" v-if="false">
 					<view class="title xa-flex xa-row-between" @click="navHandler('/pages/package/index')">
 						<view class="left xa-flex">
-							<image src="../../static/img/mine/ic_1.png" class="icon"></image>
+							<image :src="`${prefixUrl}/img/mine/ic_1.png`" class="icon"></image>
 							<text class="text">电子卡包</text>
 						</view>
 						<view class="right xa-flex">
@@ -65,7 +65,7 @@
 					</view>
 				</view>
 				<view class="card">
-					<view @click="navHandler(item.url)" class="cell xa-flex xa-col-center" v-for="(item,index) in cells">
+					<view @click="navHandler(item.url)" class="cell xa-flex xa-col-center" :key="index" v-for="(item,index) in cells">
 						<image :src="item.icon" class="icon"></image>
 						<view class="text">{{item.text}}</view>
 						<uni-icons type="right" color="#BBBBBB" size="16" />
@@ -84,88 +84,90 @@
 	import PageLoading from '../../lib/components/page-loading.vue'
 	import TabBar from '../../lib/components/tab-bar.vue'
 	import { navHandler } from '../../utils/index.js'
+	import { prefixUrl } from '../../config/common.js'
 	export default {
 		data() {
 			return {
+				prefixUrl,
 				pageLoad: false,
 				quickStartLarge: [
 					{
-						bg: '../../static/img/mine/shebaochaxun.png',
+						bg: `${prefixUrl}/img/mine/shebaochaxun.png`,
 						text: '社保',
 						width: 204
 					},
 					{
-						bg: '../../static/img/mine/yibao.png',
+						bg: `${prefixUrl}/img/mine/yibao.png`,
 						text: '医保',
 						width: 204
 					},
 					{
-						bg: '../../static/img/mine/gongjijin.png',
+						bg: `${prefixUrl}/img/mine/gongjijin.png`,
 						text: '公积金',
 						width: 204
 					},
 					{
-						bg: '../../static/img/mine/jiaoshuijilu.png',
+						bg: `${prefixUrl}/img/mine/jiaoshuijilu.png`,
 						text: '缴税记录',
 						width: 426
 					},
 					{
-						bg: '../../static/img/mine/budongchan.png',
+						bg: `${prefixUrl}/img/mine/budongchan.png`,
 						text: '不动产',
 						width: 204
 					}
 				],
 				card: [
 					{
-						icon: '../../static/img/mine/jiankangma.png',
+						icon: `${prefixUrl}/img/mine/jiankangma.png`,
 						text: '健康码',
 						background: 'linear-gradient(135deg, #FFC689 0%, #FF5151 100%)'
 					},
 					{
-						icon: '../../static/img/mine/yibaoka.png',
+						icon: `${prefixUrl}/img/mine/yibaoka.png`,
 						text: '医保卡',
 						background: 'linear-gradient(135deg, #37D68A 0%, #00B478 100%)'
 					},
 					{
-						icon: '../../static/img/mine/shebaoka.png',
+						icon: `${prefixUrl}/img/mine/shebaoka.png`,
 						text: '社保卡',
 						background: 'linear-gradient(135deg, #67C3F3 0%, #3590E4 100%)'
 					}
 				],
 				cells: [
 					// {
-					// 	icon: '../../static/img/mine/ic_3.png',
+					// 	icon: '${prefixUrl}/img/mine/ic_3.png',
 					// 	text: '办事进度'
 					// },
 					{
-						icon: '../../static/img/mine/ic_3.png',
+						icon: `${prefixUrl}/img/mine/ic_3.png`,
 						text: '我的收藏',
 						url: '/pages/collect/list'
 					},
 					// {
-					// 	icon: '../../static/img/mine/ic_4.png',
+					// 	icon: '${prefixUrl}/img/mine/ic_4.png',
 					// 	text: '预约记录'
 					// },
 					// {
-					// 	icon: '../../static/img/mine/ic_5.png',
+					// 	icon: '${prefixUrl}/img/mine/ic_5.png',
 					// 	text: '咨询记录'
 					// },
 					// {
-					// 	icon: '../../static/img/mine/ic_6.png',
+					// 	icon: '${prefixUrl}/img/mine/ic_6.png',
 					// 	text: '发票管理',
 					// 	url: '/pages/invoice/list'
 					// },
 					{
-						icon: '../../static/img/mine/ic_7.png',
+						icon: `${prefixUrl}/img/mine/ic_7.png`,
 						text: '投诉记录'
 					},
 					{
-						icon: '../../static/img/mine/ic_8.png',
+						icon: `${prefixUrl}/img/mine/ic_8.png`,
 						text: '意见反馈',
 						url: '/pages/feedback/index'
 					},
 					{
-						icon: '../../static/img/mine/ic_9.png',
+						icon: `${prefixUrl}/img/mine/ic_9.png`,
 						text: '关于我们',
 						url: '/pages/user/aboutus'
 					}

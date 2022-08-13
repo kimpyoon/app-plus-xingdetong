@@ -24,13 +24,23 @@
 		data () {
 			return {
 				pageLoad: false,
-				appVersion: plus.runtime.version,
+				appVersion: '',
 			}
 		},
 		components: {
 			PageLoading
 		},
 		onLoad() {
+			// #ifdef APP-PLUS
+			this.appVersion = plus.runtime.version
+			// #endif
+			// #ifdef MP-WEIXIN
+			uni.getSystemInfo({
+				success: (res) => {
+					this.appVersion = res.appVersion
+				}
+			})
+			// #endif
 			setTimeout(() => {
 				this.pageLoad = true
 			}, 1000)

@@ -18,10 +18,16 @@
 			class="drag-sort-item"
 			:style="boxStyle"
 			:class="{'active': active == index, 'long-touch': hadTouch && active == index}">
-				<!-- <view class="item">
-					<text>{{item[props.label]}}</text>
-				</view> -->
+				<!-- #ifdef MP-WEIXIN -->
+				<view @click="$emit('nav', item.path)" class="grid-item-box xa-flex xa-flex-column xa-col-center xa-row-center">
+					<image class="image" :src="item.url" mode="aspectFill" />
+					<text class="text">{{item.text}}</text>
+					<image v-show="!disabled" :src="`${prefixUrl}/img/icon/dot_index.png`" v-if="item.SortNumber < 11" class="dot"></image>
+				</view>
+				<!-- #endif -->
+				<!-- #ifdef APP-PLUS -->
 				<slot name="content" :item="item"></slot>
+				<!-- #endif -->
 			</movable-view>
 		</movable-area>
 	</view>
@@ -29,12 +35,12 @@
 </template>
 
 <script>
+import { prefixUrl } from '@/config/common.js'
 export default {
 	name: 'drag-sort',
-	mixins: [],
-	components: {},
 	data () {
 		return {
+			prefixUrl,
 			styleObject: {
 			color: 'red',
 			fontSize: '13px'
@@ -88,24 +94,22 @@ export default {
 		}
 	},
 	watch: {
-		list:{
-		handler(){
-			debugger
+		list (nVal, oVal) {
+			// #ifdef APP-PLUS
 			this.onUpdateCurrentList()
-		},
-		deep:true
-			
+			// #endif
+			// #ifdef MP-WEIXIN
+			if (JSON.stringify(nVal) !== JSON.stringify(oVal)) {
+				// this.onUpdateCurrentList()
+			}
+			// #endif
 		}
 	},
-	created () {
+	mounted () {
 		const res = uni.getSystemInfoSync();
 		this.windowWidth = res.windowWidth - 20
 		this.onUpdateCurrentList()
 	},
-	mounted () {
-	},
-	updated () {},
-	filters: {},
 	methods: {
 		onUpdateCurrentList (list = this.list) {
 			let arr = []
@@ -265,9 +269,32 @@ export default {
 		width: 173rpx;
 		height: 140rpx;
 		text-align: center;
-		/* background-color: #007aff; */
 		color: #fff;
 		box-sizing: border-box;
+		.grid-item-box {
+			position: relative;
+			padding: 30rpx 0;
+			flex: 1;
+			.dot {
+				position: absolute;
+				top: 28rpx;
+				right: 36rpx;
+				width: 30rpx;
+				height: 30rpx;
+			}
+			.image {
+				width: 84rpx;
+				height: 84rpx;
+				flex: 0 0 auto;
+			}
+			.text {
+				margin-top: 20rpx;
+				font-size: 26rpx;
+				color: #262A33;
+				line-height: 36rpx;
+				white-space: nowrap;
+			}
+		}
 	}
 	.active {
 		/* box-shadow: 0 0 40rpx #DDDDDD; */

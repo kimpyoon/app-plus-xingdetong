@@ -9,10 +9,10 @@
 				const page = pages.length ? pages[pages.length - 1] : {}
 				if (uni.$g.test.isEmpty(page) || !uni.$g.test.contains(page.route, 'login')) {
 					setTimeout(() => {
-						uni.navigateTo({
-							url: '/pages/public/login'
-						})
-					}, 70)
+						// uni.navigateTo({
+						// 	url: '/pages/public/login'
+						// })
+					}, 300)
 				}
 			}
 		}

@@ -60,12 +60,14 @@ const install = (Vue, vm) => {
 								uni.setStorageSync("goPage", goPage)
 							}
 						}
-						uni.navigateTo({
-							url:'/pages/public/login',
-							fail(e) {
-								console.log(e)
-							}
-						})
+						setTimeout(() => {
+							uni.navigateTo({
+								url:'/pages/public/login',
+								fail(e) {
+									console.log(e)
+								}
+							})
+						}, 300)
 					}else {
 						uni.showToast({
 							title:res.data.msg||'网络错误',

@@ -1,3 +1,4 @@
+import { prefixUrl } from '@/config/common.js'
 export const legalPersonTypes = [
 	{
 		value: 1,
@@ -34,7 +35,7 @@ export const articles = [
 		title: '乌兰浩特供电服务中心：带电消缺除隐患',
 		editor: '兴安新闻网',
 		date: '22-05-17 08:55',
-		thumb: '../../static/img/article/img_1.jpg',
+		thumb: `${prefixUrl}/img/article/img_1.jpg`,
 		content: [
 			`<p style='text-indent: 1em;'>5月12日，乌兰浩特供电服务中心带电作业班对成吉思汗周围重点线路进行带电消缺，保障群众用电安全。</p>`,
 			`<p style='text-indent: 1em;'>“今天采用带电作业方式，不停电进行消缺，对周边群众用电没有一点儿影响。”带电作业班工作负责人吴祖利说。随着带电作业车绝缘臂升空，在十二、三米的高空，工作人员经过一小时的紧张作业，对三处危急隐患进行带电消缺处理。由于必须穿戴绝缘服，王勇军等工作人员大汗淋漓，浑身已经湿透。</p>`,
@@ -47,7 +48,7 @@ export const articles = [
 		title: '【创建全国市域社会治理现代化试点地区】',
 		editor: '兴安新闻网',
 		date: '22-05-18 09:12',
-		thumb: '../../static/img/article/img_2.jpg',
+		thumb: `${prefixUrl}/img/article/img_2.jpg`,
 		content: [
 			`<p style='text-indent: 1em;'>“你好，请问你们店里场所码更新了吗？根据疫情防控工作需要，兴安盟所有场所都要生成专属二维码。”“你好，请问你和家人的健康码都升级了吗？新的健康码需要注册、填写详细住址。”……近段时间，我盟各个街道、社区工作人员都在推进更新健康码工作，居民进入商铺、单位、重点场所时也会被提示需要更新健康码。那么，更新后的健康码有什么不同呢？</p>`,
 			`<p style='text-indent: 1em;'>“之前的健康码主要作为出入通行的电子凭证，更新后的二维码实现了防疫码、行程码、健康码合一。流动人员扫描商户等各类场所的专属二维码后，可以记录轨迹信息，并在盟域社会治理中心的疫情防控平台形成行程列表信息，支持人员扫码信息分类、查询、统计、导出。扫码轨迹全记录为疫情防控流调溯源，密接、次密接人员排查等提供了数据基础，进而实现精准防控。”盟域社会治理中心信息研判科科长卢国翔介绍道。</p>`,
@@ -62,23 +63,23 @@ export const articles = [
 		title: '盟委网信办开展“五抓五提升”专项调研',
 		editor: '兴安新闻网',
 		date: '22-05-19 10:25',
-		thumb: '../../static/img/article/img_3.jpg',
+		thumb: `${prefixUrl}/img/article/img_3.jpg`,
 		content: [
 			`<p style='text-indent: 1em;'>为进一步探索加强新业态、新就业群体党建工作，盟委网信办以破解难点重点问题的行动和成效为抓手，在全盟主播带货(网红)行业开展“五抓五提升”专项调研，全面推进“两新”党建工作落实落细。</p>`,
 			`<p style='text-indent: 1em;'>“今天采用带电作业方式，不停电进行消缺，对周边群众用电没有一点儿影响。”带电作业班工作负责人吴祖利说。随着带电作业车绝缘臂升空，在十二、三米的高空，工作人员经过一小时的紧张作业，对三处危急隐患进行带电消缺处理。由于必须穿戴绝缘服，王勇军等工作人员大汗淋漓，浑身已经湿透。</p>`,
 			`<p style='text-indent: 1em;'>4月26-27日，盟委组织部非公有制经济组织和社会组织工作委员会办公室主任张宁、盟委网信办互联网党建办公室一行深入兴安家政、兴安盟电子商务直播基地、居力很镇红旗村等地开展调研工作。调研组一行实地参观了企业的培训基地，直播间及党支部办公地点，深入了解了企业运营模式、运营特点、党建工作及职工的从业人数、保险缴纳、政治面貌等情况，更是对兴安家政的“直播带岗”的网络化新模式进行了详细了解。</p>`,
 			`<p style='text-indent: 1em;'>同时，针对企业运营特点，了解企业需求及党建工作难点，对企业党建工作给予指导性建议。接下来，盟委网信办将按照行业特征明显、管理体系健全、设置行业党组织可行的要求，推动党组织应建尽建。了解企业诉求难点，切实帮助企业解决实际困难，推动企业做好党建工作，逐步推动形成地方党委负总责、组织部门(“两新”工委)牵头抓总、行业部门各负其责、街道社区兜底管理的工作格局，切实做好“五抓五提升”专项行动工作。</p>`,
-			`<div><img src="../../static/img/article/img_3.jpg" style="width: 100%;" /></div>`
+			`<div><img src="${prefixUrl}/img/article/img_3.jpg" style="width: 100%;" /></div>`
 		]
 	},
 	{
 		title: '天鹅踏春来',
 		editor: '兴安新闻网',
 		date: '22-05-20 07:30',
-		thumb: '../../static/img/article/img_4.jpg',
+		thumb: `${prefixUrl}/img/article/img_4.jpg`,
 		content: [
 			`<p style='text-indent: 1em;'>近日来，随着天气逐渐回暖，突泉县宝石水库迎来了近百只天鹅。美丽的白天鹅三五成群，与栖息在这里的其它水鸟水中嬉戏玩耍、觅食，顽皮地相互追赶欢快游弋，安静地梳理华丽羽毛，水面上“歌声”一片，美景如诗如画。给这片水域增添了一分和谐与灵动，构成了一幅美丽的生态画卷。</p>`,
-			`<div><img src="../../static/img/article/img_4.jpg" style="width: 100%;" /></div>`,
+			`<div><img src="${prefixUrl}/img/article/img_4.jpg" style="width: 100%;" /></div>`,
 			`<p style='text-indent: 1em;'>赖志强摄</p>`
 		]
 	},
@@ -86,10 +87,10 @@ export const articles = [
 		title: '产品旺销 生产忙',
 		editor: '兴安新闻网',
 		date: '22-05-21 11:25',
-		thumb: '../../static/img/article/img_5.jpg',
+		thumb: `${prefixUrl}/img/article/img_5.jpg`,
 		content: [
 			`<p style='text-indent: 1em;'>春节过后，敬业集团乌兰浩特钢铁有限责任公司各生产经营技改工作紧张有序展开，一派繁忙景象。刚刚过去的2021年，乌钢全年上缴税金8904.57万元，同比增加31.04%，成为我盟工业战线第一家达到并突破60亿元企业。图为乌钢炼钢厂连铸车间正在进行拉钢作业。</p>`,
-			`<div><img src="../../static/img/article/img_5.jpg" style="width: 100%;" /></div>`,
+			`<div><img src="${prefixUrl}/img/article/img_5.jpg" style="width: 100%;" /></div>`,
 			`<p style='text-indent: 1em;'>郑志宏摄</p>`
 		]
 	},
@@ -97,10 +98,10 @@ export const articles = [
 		title: '种出“莓”好“钱”景',
 		editor: '兴安新闻网',
 		date: '22-05-22 08:16',
-		thumb: '../../static/img/article/img_6.jpg',
+		thumb: `${prefixUrl}/img/article/img_6.jpg`,
 		content: [
 			`<p style='text-indent: 1em;'>乌兰浩特市义勒力特镇花香草莓采摘园大棚内，红彤彤、娇艳欲滴的草莓宛如一颗颗璀璨的红宝石镶嵌在绿叶丛中，时不时会有游客提着篮子前来采摘。据花香草莓采摘园农户杨杨介绍，今年他共种植6栋近900平方米的草莓大棚，采摘期可从1月持续到6月。同时，他还利用线上预定、经销商签单、送货上门等方式打开了销路，预计年收入可达40余万元。</p>`,
-			`<div><img src="../../static/img/article/img_6.jpg" style="width: 100%;" /></div>`,
+			`<div><img src="${prefixUrl}/img/article/img_6.jpg" style="width: 100%;" /></div>`,
 			`<p style='text-indent: 1em;'>郑志宏摄</p>`
 		]
 	},
@@ -108,10 +109,10 @@ export const articles = [
 		title: '草编培训 到家门',
 		editor: '兴安新闻网',
 		date: '22-05-23 08:57',
-		thumb: '../../static/img/article/img_7.jpg',
+		thumb: `${prefixUrl}/img/article/img_7.jpg`,
 		content: [
 			`<p style='text-indent: 1em;'>为进一步拓宽村民创业就业渠道，突泉县水泉镇邀请内蒙古自治区非物质文化遗产草编技艺代表性传承人王翠华，从草编的基本知识、手法、技巧等几个方面向村民传授草编技能，此次培训惠及百余名村民，真正让老百姓在家门口学习到一项实用技能，拓展了增收致富渠道。</p>`,
-			`<div><img src="../../static/img/article/img_7.jpg" style="width: 100%;" /></div>`,
+			`<div><img src="${prefixUrl}/img/article/img_7.jpg" style="width: 100%;" /></div>`,
 			`<p style='text-indent: 1em;'>曾令刚摄</p>`
 		]
 	},

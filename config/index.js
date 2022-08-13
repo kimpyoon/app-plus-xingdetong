@@ -2,7 +2,7 @@ const CONFIG = {
 	//开发环境配置
 	development: {
 		// #ifndef H5
-		baseUrl: "http://xdt.bihaichaosheng.vip/app",
+		baseUrl: "https://syzl.xam.gov.cn/xingdetong/api/app",
 		// #endif
 		// #ifdef H5
 		baseUrl: "/app",
@@ -11,7 +11,8 @@ const CONFIG = {
 
 	//生产环境配置
 	production: {
-		baseUrl: "http://xdt.bihaichaosheng.vip/app"
+		baseUrl: "https://syzl.xam.gov.cn/xingdetong/api/app"
+		// baseUrl: "http://1iv9065600.zicp.vip/app"
 	}
 
 }

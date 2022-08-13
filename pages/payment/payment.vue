@@ -15,6 +15,7 @@
 
 <script>
 	import { navHandler } from '../../utils/index.js'
+	import { prefixUrl } from '../../config/common.js'
 	export default {
 		data () {
 			return {
@@ -22,19 +23,33 @@
 					{
 						name: '交电费',
 						desc: '',
-						bg: '../../static/img/fee/df.png',
-						path: 'http://117.161.31.233:8001/tsyy/pay_cost_aggregation/index.html'
+						bg: `${prefixUrl}/img/fee/df.png`,
+						path: {
+							// #ifdef MP-WEIXIN
+							appId: 'wxd2ade0f25a874ee2'
+							// #endif
+							// #ifdef APP-PLUS
+							appId: 'gh_aceb9bd462ab'
+							// #endif
+						}
 					},
 					{
 						name: '交水费',
 						desc: '',
-						bg: '../../static/img/fee/sf.png',
-						path: 'http://117.161.31.233:8001/tsyy/pay_cost_aggregation/index.html'
+						bg: `${prefixUrl}/img/fee/sf.png`,
+						path: {
+							// #ifdef MP-WEIXIN
+							appId: 'wxd2ade0f25a874ee2'
+							// #endif
+							// #ifdef APP-PLUS
+							appId: 'gh_aceb9bd462ab'
+							// #endif
+						}
 					},
 					{
 						name: '交电视费',
 						desc: '',
-						bg: '../../static/img/fee/tv.png',
+						bg: `${prefixUrl}/img/fee/tv.png`,
 						path: 'https://online.96066.com:8443/mcrweb/login.shtml?channelcode=MSB&redirect=INDEX&timestamp=20201109&sign=73E0C85625A8EE39856F2E08B77F93F0'
 					}
 				]

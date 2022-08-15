@@ -51,31 +51,39 @@ const store = new Vuex.Store({
 			{
 				url: `${prefixUrl}/img/menu_7.png`,
 				text: '兴安缴费',
-				path: '/pages/payment/payment'
+				// path: '/pages/payment/payment'
+				path: {
+					// #ifdef MP-WEIXIN
+					appId: 'wxd2ade0f25a874ee2'
+					// #endif
+					// #ifdef APP-PLUS
+					appId: 'gh_aceb9bd462ab'
+					// #endif
+				}
 			},
 			{
 				url: `${prefixUrl}/img/menu_25.png`,
 				text: '健康兴安',
-				//#ifdef APP-PLUS
-				path: 'https://s.pdb2.com/l/CMLopdf5cmgNp8r'
-				//#endif
-				//#ifdef MP-WEIXIN
 				path: {
+					//#ifdef APP-PLUS
+					appId: 'gh_e1986c811382'
+					//#endif
+					//#ifdef MP-WEIXIN
 					appId: 'wx8ec43bc7a9893865'
+					//#endif
 				}
-				//#endif
 			},
 			{
 				url: `${prefixUrl}/img/menu_26.png`,
 				text: '指尖兴安盟',
-				//#ifdef APP-PLUS
-				path: 'https://s.pdb2.com/l/D6K7cR8kOO36OQR'
-				//#endif
-				//#ifdef MP-WEIXIN
 				path: {
+					//#ifdef APP-PLUS
+					appId: 'gh_ed79d2b8a872'
+					//#endif
+					//#ifdef MP-WEIXIN
 					appId: 'wx08f48af8f1ab0b9f'
+					//#endif
 				}
-				//#endif
 			},
 			{
 				url: `${prefixUrl}/img/menu_6.png`,
@@ -85,26 +93,28 @@ const store = new Vuex.Store({
 			{
 				url: `${prefixUrl}/img/menu_27.png`,
 				text: '机票预订',
-				//#ifdef APP-PLUS
-				path: 'https://m.ctrip.com/html5/flight/swift/index?sourceid=497&allianceid=4897&sid=182042&sepopup=888&wakeminiproid=17&inpopup=true&openapp=3'
-				//#endif
-				//#ifdef MP-WEIXIN
 				path: {
-					appId: 'wx0e6ed4f51db9d078'
+					//#ifdef APP-PLUS
+					appId: 'gh_36ada103ba97',
+					//#endif
+					//#ifdef MP-WEIXIN
+					appId: 'wx0e6ed4f51db9d078',
+					//#endif
+					path: '/pages/flight/pages/home/index'
 				}
-				//#endif
 			},
 			{
 				url: `${prefixUrl}/img/menu_29.png`,
 				text: '火车票预订',
-				//#ifdef APP-PLUS
-				path: 'https://m.ctrip.com/webapp/train/?sourceid=497&allianceid=4897&sid=182042&sepopup=888&wakeminiproid=17&inpopup=true'
-				//#endif
-				//#ifdef MP-WEIXIN
 				path: {
-					appId: 'wx0e6ed4f51db9d078'
+					//#ifdef APP-PLUS
+					appId: 'gh_36ada103ba97',
+					//#endif
+					//#ifdef MP-WEIXIN
+					appId: 'wx0e6ed4f51db9d078',
+					//#endif
+					path: '/pages/train/index/index'
 				}
-				//#endif
 			},
 			{
 				url: `${prefixUrl}/img/menu_24.png`,
@@ -113,14 +123,14 @@ const store = new Vuex.Store({
 			{
 				url: `${prefixUrl}/img/menu_23.png`,
 				text: '出租车',
-				//#ifdef APP-PLUS
-				path: 'https://s.pdb2.com/l/CNL8e8Fr6fHNp8R'
-				//#endif
-				//#ifdef MP-WEIXIN
 				path: {
+					//#ifdef APP-PLUS
+					appId: 'gh_daac5963a78d'
+					//#endif
+					//#ifdef MP-WEIXIN
 					appId: 'wxa37497ccd08b7cce'
+					//#endif
 				}
-				//#endif
 			},
 			//#ifndef MP-WEIXIN
 			{
@@ -137,14 +147,14 @@ const store = new Vuex.Store({
 			{
 				url: `${prefixUrl}/img/menu_19.png`,
 				text: '行程卡',
-				//#ifdef APP-PLUS
-				path: 'https://xc.caict.ac.cn/#/login'
-				//#endif
-				//#ifdef MP-WEIXIN
 				path: {
+					//#ifdef APP-PLUS
+					appId: 'gh_0ed5d82fd775'
+					//#endif
+					//#ifdef MP-WEIXIN
 					appId: 'wx8f446acf8c4a85f5'
+					//#endif
 				}
-				//#endif
 			},
 			//#ifndef MP-WEIXIN
 			{
@@ -231,11 +241,18 @@ const store = new Vuex.Store({
 				text: '信息反馈',
 				path: '/pages/feedback/index'
 			},
-			// {
-			// 	url: `${prefixUrl}/img/menu_32.png`,
-			// 	text: '12123',
-			// 	path: ''
-			// },
+			{
+				url: `${prefixUrl}/img/menu_32.png`,
+				text: '12123',
+				path: {
+					//#ifdef APP-PLUS
+					appId: 'gh_79770c4ab856',
+					//#endif
+					//#ifdef MP-WEIXIN
+					appId: 'wx49a80525eebd2583',
+					//#endif
+				}
+			},
 			// {
 			// 	url: `${prefixUrl}/img/menu_33.png`,
 			// 	text: '低保',

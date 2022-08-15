@@ -292,7 +292,6 @@
 				})
 			},
 			clickMenuItem (e) {
-				console.log(this.menuList[e.detail.index].path)
 				navHandler(this.menuList[e.detail.index].path)
 			},
 			clickLeftNavBarButton () {

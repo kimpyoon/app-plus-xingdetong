@@ -1,6 +1,14 @@
 <script>
 	export default {
-		onLaunch: function() {
+		onLaunch: function(options) {
+			// #ifdef MP-WEIXIN
+			if (options && options.query) {
+				uni.navigateToMiniProgram({
+					appId: options.query.appId,
+					path: options.query.path
+				})
+			}
+			// #endif
 			// #ifdef APP-PLUS
 			this.$store.dispatch('app/checkUpdate');
 			// #endif

@@ -94,6 +94,7 @@
 					</view>
 				</view>
 			</view>
+			<!-- #ifndef MP-WEIXIN -->
 			<view class="section">
 				<view class="s-title xa-flex xa-col-center">
 					<image :src="`${prefixUrl}/img/icon/hot_icon.png`" class="icon"></image>
@@ -117,6 +118,7 @@
 					</view>
 				</view>
 			</view>
+			<!-- #endif -->
 		</view>
 		<template v-else>
 			<page-loading></page-loading>

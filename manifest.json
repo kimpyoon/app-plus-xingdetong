@@ -1,9 +1,9 @@
 {
     "name" : "兴得通",
-    "appid" : "__UNI__B68CE5E",
+    "appid" : "__UNI__8E8C01C",
     "description" : "",
-    "versionName" : "1.1.1",
-    "versionCode" : 111,
+    "versionName" : "1.1.5",
+    "versionCode" : 115,
     "transformPx" : false,
     /* 5+App特有相关 */
     "app-plus" : {
@@ -26,6 +26,12 @@
             "Share" : {},
             "Geolocation" : {},
             "Maps" : {}
+        },
+        "compatible" : {
+            //可选，JSON对象，uni-app兼容模式
+            "ignoreVersion" : true, //可选，Boolean类型，是否忽略版本兼容检查提示
+            "runtimeVersion" : "", //可选，字符串类型，兼容的uni-app运行环境版本号，多个版本使用,分割
+            "compilerVersion" : "" //可选，字符串类型，兼容的编译器版本号
         },
         /* 应用发布信息 */
         "distribute" : {

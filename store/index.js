@@ -65,7 +65,7 @@ const store = new Vuex.Store({
 				url: `${prefixUrl}/img/menu_25.png`,
 				text: '健康兴安',
 				//#ifdef APP-PLUS
-				path: 'https://s.pdb2.com/l/DnmBkLes5cH67Rq'
+				path: 'https://s.pdb2.com/l/CMLopdf5cmgNp8r'
 				//#endif
 				//#ifdef MP-WEIXIN
 				path: {
@@ -77,7 +77,7 @@ const store = new Vuex.Store({
 				url: `${prefixUrl}/img/menu_26.png`,
 				text: '指尖兴安盟',
 				//#ifdef APP-PLUS
-				path: 'https://s.pdb2.com/l/DnmBkLes5cH67Rq'
+				path: 'https://s.pdb2.com/l/D6K7cR8kOO36OQR'
 				//#endif
 				//#ifdef MP-WEIXIN
 				path: {
@@ -88,7 +88,14 @@ const store = new Vuex.Store({
 			{
 				url: `${prefixUrl}/img/menu_6.png`,
 				text: '快递查询',
-				path: '/pages/logistics/search'
+				//#ifdef APP-PLUS
+				path: 'https://s.pdb2.com/l/DnmBkLes5cH67Rq',
+				//#endif
+				//#ifdef MP-WEIXIN
+				path: {
+					appId: 'wx6885acbedba59c14'
+				}
+				//#endif
 			},
 			{
 				url: `${prefixUrl}/img/menu_27.png`,
@@ -119,12 +126,20 @@ const store = new Vuex.Store({
 			{
 				url: `${prefixUrl}/img/menu_24.png`,
 				text: '公交车',
+				//#ifdef APP-PLUS
+				path: 'https://s.pdb2.com/l/DnmBkLes5cH67Rq',
+				//#endif
+				//#ifdef MP-WEIXIN
+				path: {
+					appId: 'wx71d589ea01ce3321'
+				}
+				//#endif
 			},
 			{
 				url: `${prefixUrl}/img/menu_23.png`,
 				text: '出租车',
 				//#ifdef APP-PLUS
-				path: 'https://s.pdb2.com/l/DnmBkLes5cH67Rq'
+				path: 'https://s.pdb2.com/l/CNL8e8Fr6fHNp8R'
 				//#endif
 				//#ifdef MP-WEIXIN
 				path: {
@@ -139,16 +154,17 @@ const store = new Vuex.Store({
 				path: 'http://www.xamzfgjj.cn/wt-web-gr/grlogin'
 			},
 			//#endif
-			// {
-			// 	url: `${prefixUrl}/img/menu_9.png`,
-			// 	text: '疫情防控',
-			// 	path: '/pages/health/health'
-			// },
+			// #ifdef APP-PLUS
+			{
+				url: `${prefixUrl}/img/menu_9.png`,
+				text: '疫情防控',
+				path: '/pages/health/health'
+			},
 			{
 				url: `${prefixUrl}/img/menu_19.png`,
 				text: '行程卡',
 				//#ifdef APP-PLUS
-				path: 'https://s.pdb2.com/l/DnmBkLes5cH67Rq'
+				path: 'https://xc.caict.ac.cn/#/login'
 				//#endif
 				//#ifdef MP-WEIXIN
 				path: {
@@ -156,19 +172,18 @@ const store = new Vuex.Store({
 				}
 				//#endif
 			},
+			// #endif
 			//#ifndef MP-WEIXIN
 			{
 				url: `${prefixUrl}/img/menu_22.png`,
 				text: '学历查询',
 				path: 'https://www.chsi.com.cn/xlcx/lscx/query.do?response_type=code&code=001PK9ll2fbfk846Y1ml2GZ2A40PK9l7&state=wxsub&NaVTFDV4CDYx=1656511037469'
 			},
-			//#endif
 			{
 				url: `${prefixUrl}/img/menu_11.png`,
 				text: '天气预报',
 				path: '/pages/weather/index'
 			},
-			//#ifndef MP-WEIXIN
 			{
 				url: `${prefixUrl}/img/menu_21.png`,
 				text: '兴安人事',
@@ -179,18 +194,18 @@ const store = new Vuex.Store({
 				text: '公共资源',
 				path: 'http://www.xamggzyjyzx.org.cn/'
 			},
-			//#endif
 			{
 				url: `${prefixUrl}/img/menu_2.png`,
 				text: '兴安家政',
 				path: '/pages/housekeeping/list'
 			},
+			//#endif
 			//#ifndef MP-WEIXIN
-			{
-				url: `${prefixUrl}/img/menu_3.png`,
-				text: '交通违章',
-				path: 'https://m.weizhang8.cn/'
-			},
+			// {
+			// 	url: `${prefixUrl}/img/menu_3.png`,
+			// 	text: '交通违章',
+			// 	path: 'https://m.weizhang8.cn/'
+			// },
 			{
 				url: `${prefixUrl}/img/menu_20.png`,
 				text: '政务动态',
@@ -209,11 +224,6 @@ const store = new Vuex.Store({
 			// {
 			// 	url: '${prefixUrl}/img/menu_8.png',
 			// 	text: '爱兴安'
-			// },
-			// {
-			// 	url: `${prefixUrl}/img/menu_10.png`,
-			// 	text: '社保查询',
-			// 	path: ''
 			// },
 			// {
 			// 	url: '${prefixUrl}/img/menu_14.png',
@@ -235,15 +245,27 @@ const store = new Vuex.Store({
 				text: '市政一体化',
 				path: 'https://app.zwfw.nmg.gov.cn/icity/apps/areas/neimenggu/xam-zone/index.html'
 			},
-			//#endif
 			{
 				url: `${prefixUrl}/img/menu_12.png`,
 				text: '信息反馈',
 				path: '/pages/feedback/index'
 			},
+			//#endif
+			{
+				url: `${prefixUrl}/img/menu_10.png`,
+				text: '社保查询',
+				// #ifdef APP-PLUS
+				path: 'https://s.pdb2.com/l/DnmBkLes5cH67Rq',
+				// #endif
+				//#ifdef MP-WEIXIN
+				path: {
+					appId: 'wxbba597308945ce35',
+				}
+				//#endif
+			},
 			{
 				url: `${prefixUrl}/img/menu_32.png`,
-				text: '12123',
+				text: '交通违章',
 				//#ifdef APP-PLUS
 				path: 'https://s.pdb2.com/l/DnmBkLes5cH67Rq',
 				//#endif

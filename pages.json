@@ -316,15 +316,14 @@
 		{
 			"path": "pages/comm/update",
 			"style": {
-				"navigationBarTitleText": "升级应用",
-				//#ifdef APP-PLUS
-				"backgroundColor": "rgba(255,255,255,0)",
-				//#endif
-				"navigationBarBackgroundColor": "#f8f8f8",
-				"enablePullDownRefresh": false,
-				"navigationStyle":"custom",
+				"navigationStyle": "custom",
+				"backgroundColor": "transparent",
+				"disableScroll": true,
 				"app-plus": {
-					"bounce": "none"
+					"animationType": "fade-in",
+					"background": "transparent",
+					"popGesture": "none",
+					"softinputMode": "adjustResize"
 				}
 			}
 		}

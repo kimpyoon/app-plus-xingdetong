@@ -23,6 +23,7 @@
 				}
 			}
 		},
+		// #ifndef MP-WEIXIN
 		{
 			"path": "pages/tabbar/news",
 			"style": {
@@ -34,6 +35,7 @@
 				}
 			}
 		},
+		// #endif
 		{
 			"path": "pages/tabbar/mine",
 			"style": {
@@ -317,7 +319,6 @@
 			"path": "pages/comm/update",
 			"style": {
 				"navigationStyle": "custom",
-				"backgroundColor": "transparent",
 				"disableScroll": true,
 				"app-plus": {
 					"animationType": "fade-in",
@@ -346,12 +347,14 @@
 				"selectedIconPath": "./static/img/tabbar/work_active.png",
 				"text": "线上办事"
 			},
+			// #ifndef MP-WEIXIN
 			{
 				"pagePath": "pages/tabbar/news",
 				"iconPath": "./static/img/tabbar/work_normal.png",
 				"selectedIconPath": "./static/img/tabbar/work_active.png",
 				"text": "兴安资讯"
 			},
+			// #endif
 			{
 				"pagePath": "pages/tabbar/mine",
 				"iconPath": "./static/img/tabbar/mine_normal.png",

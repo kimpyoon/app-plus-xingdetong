@@ -82,6 +82,7 @@
 			return
 			uni.getLocation({
 				type: 'gcj02',
+				isHighAccuracy: false,
 				success: (res) => {
 					const params = {
 						location: `${res.longitude},${res.latitude}`

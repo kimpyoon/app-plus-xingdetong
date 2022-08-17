@@ -101,6 +101,7 @@
 				uni.getLocation({
 					type: 'gcj02',
 					geocode: true,
+					isHighAccuracy: false,
 					success: function (res) {
 						uni.$g.vuex('vuex_location', res)
 						that.currentItem = res

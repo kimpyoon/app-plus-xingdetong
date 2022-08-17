@@ -58,6 +58,7 @@
 				width: '710rpx',
 				margin: '32rpx auto 0'
 			}"></notice-bar>
+			<!-- #ifndef MP-WEIXIN -->
 			<view class="section">
 				<view class="s-title xa-flex xa-col-center">
 					<image :src="`${prefixUrl}/img/icon/love_icon.png`" class="icon"></image>
@@ -94,7 +95,7 @@
 					</view>
 				</view>
 			</view>
-			<!-- #ifndef MP-WEIXIN -->
+			
 			<view class="section">
 				<view class="s-title xa-flex xa-col-center">
 					<image :src="`${prefixUrl}/img/icon/hot_icon.png`" class="icon"></image>
@@ -211,6 +212,7 @@
 			uni.getLocation({
 				type: 'gcj02',
 				geocode: true,
+				isHighAccuracy: false,
 				success: (res) => {
 					this.locationInfo = res
 					uni.$g.vuex('vuex_location', res)

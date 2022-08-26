@@ -327,6 +327,52 @@
 					"softinputMode": "adjustResize"
 				}
 			}
+		},
+		{
+			"path": "pages/enjoy/hotel/list",
+			"style": {
+				"navigationBarTitleText": "酒店民宿",
+				"navigationBarBackgroundColor": "#ffffff",
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/enjoy/hotel/detail",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "酒店民宿详情",
+				"navigationBarBackgroundColor": "#ffffff",
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/enjoy/restaurant/list",
+			"style": {
+				"navigationBarTitleText": "特色餐饮",
+				"navigationBarBackgroundColor": "#ffffff",
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/enjoy/restaurant/detail",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "酒店民宿详情",
+				"navigationBarBackgroundColor": "#ffffff",
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
 		}
 	],
 	"tabBar": {

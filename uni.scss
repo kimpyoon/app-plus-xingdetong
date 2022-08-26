@@ -104,3 +104,68 @@ $uni-font-size-paragraph:15px;
 		align-items: baseline;
 	}
 }
+//垂直弹性盒子
+@mixin fc($j:s,$a:h) {
+  @include fr($j,$a);
+	flex-direction: column;
+}
+//字体
+@mixin font($size,$color,$weight:normal) {
+	color: $color !important;
+	font-size: $size !important;
+	font-weight: $weight !important;
+} 
+//尺寸
+@mixin size($width,$height:$width) {
+	width: $width !important;
+	height: $height !important;
+} 
+//阴影
+@mixin shadow($shuiping:0,$chuizhi:5upx,$mohu:10upx,$pianyi:0,$color:rgba(0,0,0,.2)) {
+	box-shadow: $shuiping $chuizhi $mohu $pianyi $color;
+}
+//文本省略
+@mixin ell($line:1) {
+	@if $line == 1 {
+    overflow: hidden;
+    /* #ifndef APP-NVUE */
+    white-space: nowrap;
+    /* #endif */
+    text-overflow: ellipsis;
+	} @else {
+    display: -webkit-box !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: $line;
+	}
+}
+//像素边框
+@mixin line($top:1,$right:1,$bottom:1,$left:1,$color:#ddd) {
+	position: relative;
+	&:after {
+		content: " ";
+		width: 200%;
+		height: 200%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		border-radius: inherit;
+		transform: scale(0.5);
+		transform-origin: 0 0;
+		pointer-events: none;
+		box-sizing: border-box;
+		border: 0 $color solid;
+		border-top-width: #{$top}px;
+		border-right-width: #{$right}px;
+		border-bottom-width: #{$bottom}px;
+		border-left-width: #{$left}px;
+	}
+}
+@mixin cvh { //水平垂直居中
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%)
+}

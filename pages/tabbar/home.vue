@@ -1,6 +1,6 @@
 <template>
 	<view class="safe-area-inset-bottom page">
-		<uni-nav-bar statusBar leftWidth="140rpx" :border="false" @clickRight="clickRightNavBarButton" @clickLeft="clickLeftNavBarButton" :backgroundColor="navBarBgColor" rightWidth="auto" fixed>
+		<uni-nav-bar statusBar leftWidth="140rpx" :border="false" @clickRight="toUserInfo" @clickLeft="clickLeftNavBarButton" :backgroundColor="navBarBgColor" rightWidth="auto" fixed>
 			<block slot="left">
 				<view class="nav-city xa-flex">
 					<view class="inner">
@@ -15,17 +15,18 @@
 					<uni-icons type="arrowdown" color="#fff" size="16" />
 				</view>
 			</block>
-			<view class="nav-content xa-flex xa-col-center">
+			<!-- <view class="nav-content xa-flex xa-col-center">
 				<view class="nav-input-view xa-flex xa-col-center">
 					<uni-icons type="search" color="#BBBBBB" size="16" />
 					<view class="nav-bar-input" @click="toSearch">
 						搜索内容
 					</view>
 				</view>
-			</view>
+			</view> -->
 			<block slot="right">
 				<view class="nav-right-icon xa-flex xa-col-center">
-					<uni-icons type="scan" color="#fff" size="28" />
+					<!-- <uni-icons type="scan" color="#fff" size="28" /> -->
+					<image class="avatar" :src="`${prefixUrl}/img/logo.png`"></image>
 				</view>
 			</block>
 		</uni-nav-bar>
@@ -310,6 +311,13 @@
 						console.log('条码内容：' + res.result);
 					}
 				});
+			},
+			toUserInfo() {
+				if(this.vuex_user.username) {
+					this.navHandler('/pages/user/info')
+				}else{
+					this.navHandler('/pages/public/login')
+				}
 			}
 		}
 	}
@@ -569,5 +577,9 @@
 .nav-right-icon {
 	width: 100%;
 	height: 100%;
+}
+.avatar{
+	@include size(68rpx);
+	border-radius: 68rpx;
 }
 </style>

@@ -44,20 +44,20 @@ export const tabbars = [
 	 	"middle": false
 	 },
 	//#endif
-	{
-		"iconPath": require('@/static/img/tabbar/mine_normal.png'),
-		"selectIconPath": require('@/static/img/tabbar/mine_active.png'),
-		"color": "#8A8E99",
-		"selectColor": "#000000",
-		"fontSize": "22rpx",
-		"text": "我的",
-		"path": "pages/tabbar/mine",
-		"showDot": false,
-		"dot": 0,
-		"showTag": false,
-		"tag": "",
-		"middle": false
-	}
+	// {
+	// 	"iconPath": require('@/static/img/tabbar/mine_normal.png'),
+	// 	"selectIconPath": require('@/static/img/tabbar/mine_active.png'),
+	// 	"color": "#8A8E99",
+	// 	"selectColor": "#000000",
+	// 	"fontSize": "22rpx",
+	// 	"text": "我的",
+	// 	"path": "pages/tabbar/mine",
+	// 	"showDot": false,
+	// 	"dot": 0,
+	// 	"showTag": false,
+	// 	"tag": "",
+	// 	"middle": false
+	// }
 ]
 // 轻提示
 export function toast(title, duration = 1500, icon = 'none', mask = true) {

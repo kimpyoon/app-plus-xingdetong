@@ -2,7 +2,7 @@
 	<view class="page">
 		<view class="page-wrap" v-if="pageLoad">
 			<image :src="`${prefixUrl}/img/work/bg.png`" class="bg"></image>
-			<uni-nav-bar statusBar title="兴安咨询" color="#ffffff" :border="false" :backgroundColor="navBarBgColor" fixed></uni-nav-bar>
+			<uni-nav-bar statusBar title="兴安咨讯" color="#ffffff" :border="false" :backgroundColor="navBarBgColor" fixed></uni-nav-bar>
 			<uni-nav-bar backgroundColor="transparent" :border="false"></uni-nav-bar>
 			<view class="container">
 				<z-paging ref="paging" refresher-theme-style="white" v-model="articles" :use-page-scroll="true" @query="queryList">

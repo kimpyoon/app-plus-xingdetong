@@ -309,7 +309,7 @@
 							})
 						} else {
 							uni.reLaunch({
-								url: goPage || '/pages/tabbar/home'
+								url: '/pages/tabbar/home'
 							})
 						}
 					}

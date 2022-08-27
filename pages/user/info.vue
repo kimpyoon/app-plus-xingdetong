@@ -13,10 +13,10 @@
 					<text class="label">手机号</text>
 					<view class="right xa-flex xa-col-center">
 						<text class="value">{{vuex_user.username}}</text>
-						<text class="a" @click="navHandler('/pages/user/resetphone')">变更</text>
+						<!-- <text class="a" @click="navHandler('/pages/user/resetphone')">变更</text> -->
 					</view>
 				</view>
-				<view class="cell xa-flex xa-col-center xa-row-between" @click="navHandler('/pages/user/authentication')">
+				<!-- <view class="cell xa-flex xa-col-center xa-row-between" @click="navHandler('/pages/user/authentication')">
 					<text class="label">实名认证</text>
 					<view class="right xa-flex xa-col-center">
 						<text class="value">未实名</text>
@@ -27,22 +27,21 @@
 					<text class="label">微信</text>
 					<view class="right xa-flex xa-col-center">
 						<text class="value">已绑定</text>
-						<!-- <uni-icons type="right" color="#6f788d" size="14" /> -->
 					</view>
-				</view>
+				</view> -->
 				<view class="cell xa-flex xa-col-center xa-row-between" @click="navHandler('/pages/public/reset', '修改密码')">
 					<text class="label">修改密码</text>
 					<view class="right xa-flex xa-col-center">
 						<uni-icons type="right" color="#6f788d" size="14" />
 					</view>
 				</view>
-				<view class="cell xa-flex xa-col-center xa-row-between">
+				<!-- <view class="cell xa-flex xa-col-center xa-row-between">
 					<text class="label">收货地址</text>
 					<view class="right xa-flex xa-col-center">
 						<text class="value">未设置</text>
 						<uni-icons type="right" color="#6f788d" size="14" />
 					</view>
-				</view>
+				</view> -->
 			</view>
 			<view class="submit">
 				<button class="button xa-flex xa-col-center xa-row-center" @click="submitHandle">退出登录</button>

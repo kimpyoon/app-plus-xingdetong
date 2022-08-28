@@ -8,11 +8,11 @@
 			<view class="h1">欢迎登录兴得通</view>
 			<!-- <view class="h4">我是一局APP宣传语</view> -->
 			<view class="form-wrap">
-				<view class="tabs xa-flex xa-row-between">
+				<!-- <view class="tabs xa-flex xa-row-between">
 					<view @click="selectLoginMethod(item.value)" :class="['tab', {
 						active: item.value === curTab
 					}]" v-for="item in tabs" :key="item.value">{{item.text}}</view>
-				</view>
+				</view> -->
 				<view class="form">
 					<view v-show="curTab === 1">
 						<view class="cell">
@@ -87,14 +87,14 @@
 						<view class="icon"><image :src="`${prefixUrl}/img/icon/valid-code.png`" class="img"></image></view>
 						<view class="text">验证码登录</view>
 					</view>
-					<view class="item" v-else @click="codeLogin = false">
+					<!-- <view class="item" v-else @click="codeLogin = false">
 						<view class="icon"><image :src="`${prefixUrl}/img/icon/valid-code.png`" class="img"></image></view>
 						<view class="text">密码登录</view>
 					</view>
 					<view class="item" @click="getOpenId(item)" v-for="item in loginList" :key="item.appcode">
 						<view class="icon xa-flex xa-col-center xa-row-center"><uni-icons :type="item.icon" :color="item.color" size="32"></uni-icons></view>
 						<view class="text">{{item.title}}登录</view>
-					</view>
+					</view> -->
 				</view>
 			</view>
 			<image :src="`${prefixUrl}/img/login_foot_bg.png`" mode="" class="foot-bg"></image>

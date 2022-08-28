@@ -1,6 +1,6 @@
 <template>
 	<view class="page">
-		<view class="cell-group">
+		<!-- <view class="cell-group">
 			<view class="cell xa-flex xa-col-center xa-row-between">
 				<text class="label">选择反馈的意见类型</text>
 				<view class="right xa-flex xa-col-center">
@@ -8,7 +8,7 @@
 					<uni-icons type="right" color="#B1B1B1" size="14" />
 				</view>
 			</view>
-		</view>
+		</view> -->
 		<view class="title">反馈内容</view>
 		<view class="textarea">
 			<uni-easyinput :inputBorder="false" :clearable="false" maxlength="100" type="textarea" v-model="content" placeholder="请输入您要反馈的意见内容 0/100"></uni-easyinput>
@@ -21,7 +21,7 @@
 			</view>
 		</view>
 		<view class="submit">
-			<button class="button xa-flex xa-col-center xa-row-center">确定提交</button>
+			<button class="button xa-flex xa-col-center xa-row-center" @click="submit">确定提交</button>
 		</view>
 	</view>
 </template>
@@ -44,6 +44,11 @@
 					success: (res) => {
 						this.fileList = res.tempFilePaths
 					}
+				})
+			},
+			submit() {
+				uni.showToast({
+					title: '提交成功'
 				})
 			}
 		}

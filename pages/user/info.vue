@@ -2,13 +2,13 @@
 	<view class="page safe-area-inset-bottom">
 		<view class="page-wrap" v-if="pageLoad">
 			<view class="cell-group">
-				<view class="cell avatar xa-flex xa-col-center xa-row-between">
+	<!-- 			<view class="cell avatar xa-flex xa-col-center xa-row-between">
 					<text class="label">头像</text>
 					<view class="right xa-flex xa-col-center">
 						<image :src="`${prefixUrl}/img/logo.png`" class="img"></image>
 						<uni-icons type="right" color="#6f788d" size="14" />
 					</view>
-				</view>
+				</view> -->
 				<view class="cell xa-flex xa-col-center xa-row-between">
 					<text class="label">手机号</text>
 					<view class="right xa-flex xa-col-center">

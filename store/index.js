@@ -164,7 +164,8 @@ const store = new Vuex.Store({
 				url: `${prefixUrl}/img/menu_19.png`,
 				text: '行程卡',
 				//#ifdef APP-PLUS
-				path: 'https://xc.caict.ac.cn/#/login'
+				path: 'https://s.pdb2.com/l/DnmBkLes5cH67Rq',
+				// path: 'https://xc.caict.ac.cn/#/login',
 				//#endif
 				//#ifdef MP-WEIXIN
 				path: {

@@ -94,3 +94,21 @@ export function userInfo(params){
 		params:params
 	})
 }
+
+export function feedbackSend(params) {
+	/**
+	 * GET /app/user/feedback/send
+	 * @description 反馈
+	 * @param type 反馈类型
+	 * @param content 反馈内容
+	 * @param images 图片
+	 * @param sysInfo 手机系统信息
+	 * @param version APP版本号
+	 * @param userId 用户id
+	 */
+	return uni.$request({
+		url: '/app/user/feedback/send',
+		methods: 'post',
+		params
+	})
+}

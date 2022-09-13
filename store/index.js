@@ -160,6 +160,7 @@ const store = new Vuex.Store({
 				text: '疫情防控',
 				path: '/pages/health/health'
 			},
+			// #endif
 			{
 				url: `${prefixUrl}/img/menu_19.png`,
 				text: '行程卡',
@@ -173,7 +174,6 @@ const store = new Vuex.Store({
 				}
 				//#endif
 			},
-			// #endif
 			//#ifndef MP-WEIXIN
 			{
 				url: `${prefixUrl}/img/menu_22.png`,

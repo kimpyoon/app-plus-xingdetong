@@ -27,11 +27,13 @@
 </template>
 
 <script>
+	import config from '@/config/index.js'
 	export default {
 		data () {
 			return {
 				content: '',
-				fileList: []
+				fileList: [],
+				imgs: []
 			}
 		},
 		onLoad(options) {
@@ -43,10 +45,22 @@
 					count: 1,
 					success: (res) => {
 						this.fileList = res.tempFilePaths
+						uni.uploadFile({
+							filePath: this.fileList[0],
+							name: 'file',
+							url: `${config.baseUrl}/comm/upload`,
+							success: function(res) {
+								const result = JSON.parse(res.data);
+								if(result.code==100) {
+									console.log(result.data)
+								}
+							},
+						})
 					}
 				})
 			},
 			submit() {
+				this.$api.user.feedbackSend()
 				uni.showToast({
 					title: '提交成功'
 				})

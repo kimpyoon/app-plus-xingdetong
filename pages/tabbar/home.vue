@@ -285,7 +285,6 @@
 				this.$api.weather.getWeatherNow(params).then(weather => {
 					this.nowWeatherData = weather
 					this.pageLoad = true
-					console.log(res)
 				})
 			},
 			changeBanner (e) {

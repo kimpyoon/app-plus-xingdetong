@@ -70,9 +70,6 @@ const ZPScroller = {
 		},
 		usePageScroll: {
 			handler(newVal) {
-				this.$nextTick(() => {
-					this.renderPropUsePageScroll = newVal;
-				})
 				if (this.loaded && this.autoHeight) {
 					this._setAutoHeight(!newVal);
 				}
@@ -202,6 +199,12 @@ const ZPScroller = {
 		//当使用页面滚动并且设置了slot="bottom"时，默认初次加载会自动获取其高度，并使内部容器下移，当slot="bottom"的view高度动态改变时，在其高度需要更新时调用此方法
 		updatePageScrollBottomHeight() {
 			this._updatePageScrollTopOrBottomHeight('bottom');
+		},
+		//更新slot="left"和slot="right"宽度，当slot="left"或slot="right"宽度动态改变时调用
+		updateLeftAndRightWidth() {
+			this.$nextTick(() => {
+				this._updateLeftAndRightWidth();
+			})
 		},
 		//更新z-paging内置scroll-view的scrollTop
 		updateScrollViewScrollTop(scrollTop, animate = true) {
@@ -415,15 +418,10 @@ const ZPScroller = {
 			const node = `.zp-page-${type}`;
 			const marginText = `margin${type.slice(0,1).toUpperCase() + type.slice(1)}`;
 			let safeAreaInsetBottomAdd = this.safeAreaInsetBottom;
-			// #ifdef APP-NVUE
-			if (!this.usePageScroll) {
-				safeAreaInsetBottomAdd = false;
-			}
-			// #endif
 			this.$nextTick(() => {
 				let delayTime = 0;
 				// #ifdef MP-BAIDU || APP-NVUE
-				delayTime = 10;
+				delayTime = 50;
 				// #endif
 				setTimeout(() => {
 					this._getNodeClientRect(node).then((res) => {
@@ -455,22 +453,13 @@ const ZPScroller = {
 				// #endif
 				setTimeout(() => {
 					this._getNodeClientRect('.zp-page-left').then((res) => {
-						this.scrollViewContainerStyle['left'] = res ? res[0].width + 'px' : 0;
+						this.$set(this.scrollViewContainerStyle,'left',res ? res[0].width + 'px' : '0px');
 					});
 					this._getNodeClientRect('.zp-page-right').then((res) => {
-						this.scrollViewContainerStyle['right'] = res ? res[0].width + 'px' : 0;
+						this.$set(this.scrollViewContainerStyle,'right',res ? res[0].width + 'px' : '0px');
 					});
 				}, delayTime)
 			})
-		},
-		//更新renderJs数据
-		_updateRenderJsData(){
-			this.renderPropUsePageScroll = -1;
-			this.renderPropUsePageScroll = this.usePageScroll;
-			if (!this.useChatRecordMode) {
-				this.renderPropScrollTop = -1;
-				this.renderPropScrollTop = this.finalScrollTop < 6 ? 0 : 10;
-			}
 		}
 	}
 }

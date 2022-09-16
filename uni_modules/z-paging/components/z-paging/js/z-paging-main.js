@@ -15,6 +15,7 @@ import nvueModule from './modules/nvue'
 import emptyModule from './modules/empty'
 import refresherModule from './modules/refresher'
 import loadMoreModule from './modules/load-more'
+import loadingModule from './modules/loading'
 import scrollerModule from './modules/scroller'
 import backToTopModule from './modules/back-to-top'
 import virtualListModule from './modules/virtual-list'
@@ -41,6 +42,7 @@ export default {
 		emptyModule,
 		refresherModule,
 		loadMoreModule,
+		loadingModule,
 		scrollerModule,
 		backToTopModule,
 		virtualListModule
@@ -59,16 +61,13 @@ export default {
 			chatRecordLoadingMoreText: '',
 			wxsPropType: '',
 			renderPropScrollTop: -1,
-			renderPropUsePageScroll: -1,
 			checkScrolledToBottomTimeOut: null,
 			systemInfo: null,
 			cssSafeAreaInsetBottom: -1,
-			cacheTopHeight: 0,
+			cacheTopHeight: -1,
 
 			//--------------状态&判断---------------
 			insideOfPaging: -1,
-			loading: false,
-			loadingForNow: false,
 			isLoadFailed: false,
 			isIos: systemInfo.platform === 'ios',
 			disabledBounce: false,
@@ -154,16 +153,6 @@ export default {
 			type: Boolean,
 			default: u.gc('useSafeAreaPlaceholder', false)
 		},
-		//第一次加载后自动隐藏loading slot，默认为是
-		autoHideLoadingAfterFirstLoaded: {
-			type: Boolean,
-			default: u.gc('autoHideLoadingAfterFirstLoaded', true)
-		},
-		//loading slot是否铺满屏幕并固定，默认为否
-		loadingFullFixed: {
-			type: Boolean,
-			default: u.gc('loadingFullFixed', false)
-		},
 		//slot="top"的view的z-index，默认为99，仅使用页面滚动时有效
 		topZIndex: {
 			type: Number,
@@ -209,6 +198,7 @@ export default {
 				this._preReload();
 			})
 		}
+		this.finalUseCache && this._setListByLocalCache();
 		let delay = 0;
 		// #ifdef H5 || MP
 		delay = 100;
@@ -255,26 +245,6 @@ export default {
 	},
 	// #endif
 	watch: {
-		loadingStatus(newVal, oldVal) {
-			this.$emit('loadingStatusChange', newVal);
-			this.$nextTick(()=>{
-				this.loadingStatusAfterRender = newVal;
-			})
-			// #ifdef APP-NVUE
-			if (this.useChatRecordMode) {
-				if (this.pageNo === this.defaultPageNo && newVal === Enum.More.NoMore) {
-					this.nIsFirstPageAndNoMore = true;
-					return;
-				}
-			}
-			this.nIsFirstPageAndNoMore = false;
-			//  #endif
-		},
-		loading(newVal){
-			if(newVal){
-				this.loadingForNow = newVal;
-			}
-		},
 		defaultThemeStyle: {
 			handler(newVal) {
 				if (newVal.length) {
@@ -295,9 +265,6 @@ export default {
 		},
 	},
 	computed: {
-		zScopedSlots() {
-			return this.$scopedSlots;
-		},
 		finalPagingStyle() {
 			const pagingStyle = this.pagingStyle;
 			if (!this.systemInfo) return pagingStyle;
@@ -331,14 +298,6 @@ export default {
 				this.pagingContentStyle['position'] = 'relative';
 			}
 			return this.pagingContentStyle;
-		},
-		showLoading() {
-			if (this.firstPageLoaded || !this.loading || !this.loadingForNow) return false;
-			if (this.autoHideLoadingAfterFirstLoaded) {
-				return this.fromEmptyViewReload ? true : !this.pagingLoaded;
-			} else{
-				return this.loadingType === Enum.LoadingType.Refresher;
-			}
 		},
 		safeAreaBottom() {
 			if (!this.systemInfo) return 0;
@@ -380,7 +339,7 @@ export default {
 			return windowBottom;
 		},
 		isOldWebView() {
-			// #ifndef APP-NVUE
+			// #ifndef APP-NVUE || MP-KUAISHOU
 			try {
 				const systemInfos = systemInfo.system.split(' ');
 				const deviceType = systemInfos[0];
@@ -393,6 +352,12 @@ export default {
 			}
 			// #endif
 			return false;
+		},
+		isIosAndH5(){
+			// #ifndef H5
+			return false;
+			// #endif
+			return this.isIos;
 		}
 	},
 	methods: {
@@ -413,13 +378,6 @@ export default {
 			if (!this.usePageScroll) {
 				this.$refs['zp-n-list'].setSpecialEffects(args);
 			}
-		},
-		//处理开始加载更多状态
-		_startLoading(isReload = false) {
-			if ((this.showLoadingMoreWhenReload && !this.isUserPullDown) || !isReload) {
-				this.loadingStatus = Enum.More.Loading;
-			}
-			this.loading = true;
 		},
 		//检测scrollView是否要铺满屏幕
 		_doCheckScrollViewShouldFullHeight(totalData){

@@ -54,12 +54,12 @@
 					</uni-grid>
 				</view>
 			</view>
+			<!-- #ifndef MP-WEIXIN -->
 			<notice-bar :list="noticeList" :custom-style="{
 				borderRadius: '44rpx',
 				width: '710rpx',
 				margin: '32rpx auto 0'
 			}"></notice-bar>
-			<!-- #ifndef MP-WEIXIN -->
 			<view class="section">
 				<view class="s-title xa-flex xa-col-center">
 					<image :src="`${prefixUrl}/img/icon/love_icon.png`" class="icon"></image>
@@ -96,8 +96,7 @@
 					</view>
 				</view>
 			</view>
-			
-			<view class="section">
+			<!-- <view class="section">
 				<view class="s-title xa-flex xa-col-center">
 					<image :src="`${prefixUrl}/img/icon/hot_icon.png`" class="icon"></image>
 					<text class="text">兴安要闻</text>
@@ -119,13 +118,16 @@
 						</view>
 					</view>
 				</view>
-			</view>
+			</view> -->
 			<!-- #endif -->
+			<view style="margin-top: 40rpx;">
+				<work-cell></work-cell>
+			</view>
 		</view>
 		<template v-else>
 			<page-loading></page-loading>
 		</template>
-		<tab-bar></tab-bar>
+		<!-- <tab-bar></tab-bar> -->
 	</view>
 </template>
 
@@ -133,6 +135,7 @@
 	import PageLoading from '../../lib/components/page-loading.vue'
 	import NoticeBar from '../../lib/components/notice-bar.vue'
 	import TabBar from '../../lib/components/tab-bar.vue'
+	import WorkCell from '../../lib/components/work-cell.vue'
 	import debounce from '../../utils/debounce.js'
 	import { navHandler, tranNumber } from '../../utils/index.js'
 	import { articles } from '../../utils/common.js'
@@ -186,6 +189,7 @@
 		components: {
 			PageLoading,
 			NoticeBar,
+			WorkCell,
 			TabBar
 		},
 		computed: {
@@ -204,6 +208,7 @@
 			}, 1000)
 		},
 		onShow() {
+			uni.hideTabBar()
 			if (!uni.$g.test.isEmpty(this.locationInfo)) {
 				this.initPage()
 			}

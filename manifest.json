@@ -2,8 +2,8 @@
     "name" : "兴得通",
     "appid" : "__UNI__8E8C01C",
     "description" : "",
-    "versionName" : "1.2.5",
-    "versionCode" : 125,
+    "versionName" : "1.2.6",
+    "versionCode" : 126,
     "transformPx" : false,
     /* 5+App特有相关 */
     "app-plus" : {

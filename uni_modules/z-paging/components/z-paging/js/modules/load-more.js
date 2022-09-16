@@ -107,6 +107,11 @@ const ZPLoadMore = {
 				return u.gc('loadingMoreNoMoreLineCustomStyle', {});
 			},
 		},
+		//当分页未满一屏时，是否自动加载更多，默认为否(nvue无效)
+		insideMore: {
+			type: Boolean,
+			default: u.gc('insideMore', false)
+		},
 		//距底部/右边多远时（单位px），触发 scrolltolower 事件，默认为100rpx
 		lowerThreshold: {
 			type: [Number, String],
@@ -115,6 +120,7 @@ const ZPLoadMore = {
 	},
 	data() {
 		return {
+			M: Enum.More,
 			//底部加载更多状态
 			loadingStatus: Enum.More.Default,
 			loadingStatusAfterRender: Enum.More.Default,
@@ -142,7 +148,7 @@ const ZPLoadMore = {
 				loadingText: this.finalLoadingMoreLoadingText,
 				noMoreText: this.finalLoadingMoreNoMoreText,
 				failText: this.finalLoadingMoreFailText,
-				hideContent: !this.loadingMoreDefaultAsLoading && this.listRendering
+				hideContent: !this.loadingMoreDefaultAsLoading && this.listRendering,
 			};
 		},
 		finalLoadingMoreThemeStyle() {
@@ -165,6 +171,10 @@ const ZPLoadMore = {
 		}
 	},
 	methods: {
+		//页面滚动到底部时通知z-paging进行进一步处理
+		pageReachBottom() {
+			!this.useChatRecordMode && this._onLoadingMore('toBottom');
+		},
 		//手动触发上拉加载更多(非必须，可依据具体需求使用)
 		doLoadMore(type) {
 			this._onLoadingMore(type);
@@ -210,14 +220,6 @@ const ZPLoadMore = {
 						})
 					}
 				}
-				//#ifdef APP-VUE || H5
-				if (this.isIos) {
-					this.renderPropUsePageScroll = -1;
-					this.$nextTick(() => {
-						this.renderPropUsePageScroll = this.usePageScroll;
-					})
-				}
-				//#endif
 			}
 			this.$emit('scrolltolower', from);
 			if (from === 'toBottom' && (!this.toBottomLoadingMoreEnabled || this.useChatRecordMode)) return;

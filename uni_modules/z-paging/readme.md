@@ -1,6 +1,6 @@
 # z-paging
 
-[![version](https://img.shields.io/badge/version-2.3.2-blue)](https://github.com/SmileZXLee/uni-z-paging)
+[![version](https://img.shields.io/badge/version-2.3.9-blue)](https://github.com/SmileZXLee/uni-z-paging)
 [![license](https://img.shields.io/github/license/SmileZXLee/uni-z-paging)](https://en.wikipedia.org/wiki/MIT_License)
 
 ### API文档地址：[https://z-paging.zxlee.cn](https://z-paging.zxlee.cn)
@@ -25,16 +25,16 @@
 
 |                 自定义下拉刷新效果+分页演示                  |                      吸顶效果+分页演示                       |
 | :----------------------------------------------------------: | :----------------------------------------------------------: |
-| ![](http://www.zxlee.cn/github/uni-z-paging/uni-z-paging.gif) | ![](http://www.zxlee.cn/github/uni-z-paging/uni-z-paging2.gif) |
+| ![](https://z-paging.zxlee.cn/public/img/uni-z-paging.gif) | ![](https://z-paging.zxlee.cn/public/img/uni-z-paging2.gif) |
 
 |                   滑动切换选项卡+分页演示                    |                    聊天记录模式+分页演示                     |
 | :----------------------------------------------------------: | :----------------------------------------------------------: |
-| ![](http://www.zxlee.cn/github/uni-z-paging/z-paging-demo3.gif) | ![](http://www.zxlee.cn/github/uni-z-paging/z-paging-demo4.gif) |
+| ![](https://z-paging.zxlee.cn/public/img/z-paging-demo3.gif) | ![](https://z-paging.zxlee.cn/public/img/z-paging-demo4.gif) |
 
 ### 在线demo体验地址：
 
-* [http://www.zxlee.cn/github/uni-z-paging/demo/index.html](http://www.zxlee.cn/github/uni-z-paging/demo/index.html)
+* [https://demo.z-paging.zxlee.cn](https://demo.z-paging.zxlee.cn)
 
 | 扫码体验                                                     |
 | ------------------------------------------------------------ |
-| ![](http://www.zxlee.cn/github/uni-z-paging/z-paging-demo.png) |
+| ![](https://z-paging.zxlee.cn/public/img/code.png) |

@@ -110,6 +110,26 @@ const ZPRefresher = {
 			type: [String, Object],
 			default: u.gc('refresherCompleteText', null)
 		},
+		//自定义下拉刷新默认状态下的图片
+		refresherDefaultImg: {
+			type: String,
+			default: u.gc('refresherDefaultImg', null)
+		},
+		//自定义下拉刷新松手立即刷新状态下的图片，默认与refresherDefaultImg一致
+		refresherPullingImg: {
+			type: String,
+			default: u.gc('refresherPullingImg', null)
+		},
+		//自定义下拉刷新刷新中状态下的图片
+		refresherRefreshingImg: {
+			type: String,
+			default: u.gc('refresherRefreshingImg', null)
+		},
+		//自定义下拉刷新刷新结束状态下的图片
+		refresherCompleteImg: {
+			type: String,
+			default: u.gc('refresherCompleteImg', null)
+		},
 		//是否开启自定义下拉刷新刷新结束回弹效果，默认为是
 		refresherEndBounceEnabled: {
 			type: Boolean,
@@ -145,10 +165,15 @@ const ZPRefresher = {
 			type: [Number, String],
 			default: u.gc('refresherFixedBacHeight', 0)
 		},
-		//设置自定义下拉刷新下拉超出阈值后继续下拉位移衰减的比例，范围0-1，值越大代表衰减越多。默认为0.7(nvue无效)
+		//设置自定义下拉刷新下拉超出阈值后继续下拉位移衰减的比例，范围0-1，值越大代表衰减越多。默认为0.65(nvue无效)
 		refresherOutRate: {
 			type: Number,
-			default: u.gc('refresherOutRate', 0.7)
+			default: u.gc('refresherOutRate', 0.65)
+		},
+		//设置自定义下拉刷新下拉时实际下拉位移与用户下拉距离的比值，默认为0.75，即代表若用户下拉10px，则实际位移为7.5px(nvue无效)
+		refresherPullRate: {
+			type: Number,
+			default: u.gc('refresherPullRate', 0.75)
 		},
 		//是否显示最后更新时间，默认为否
 		showRefresherUpdateTime: {
@@ -163,6 +188,7 @@ const ZPRefresher = {
 	},
 	data() {
 		return {
+			R: Enum.Refresher,
 			//下拉刷新状态
 			refresherStatus: Enum.Refresher.Default,
 			refresherTouchstartY: 0,
@@ -248,6 +274,11 @@ const ZPRefresher = {
 			rate = Math.min(1,rate);
 			return rate;
 		},
+		finalRefresherPullRate() {
+			let rate = this.refresherPullRate;
+			rate = Math.max(0,rate);
+			return rate;
+		},
 		finalRefresherTransform() {
 			if (this.refresherTransform === 'translateY(0px)') return 'none';
 			return this.refresherTransform;
@@ -288,7 +319,9 @@ const ZPRefresher = {
 	methods: {
 		//终止下拉刷新状态
 		endRefresh(){
-		   this._refresherEnd();
+			this.totalData = this.realTotalData;
+			this._refresherEnd();
+			this._endSystemLoadingAndRefresh();
 		},
 		handleRefresherStatusChanged(func) {
 			this.refresherStatusChangedFunc = func;
@@ -330,6 +363,7 @@ const ZPRefresher = {
 		// #ifndef APP-VUE || MP-WEIXIN || MP-QQ || H5
 		//拖拽开始
 		_refresherTouchstart(e) {
+			this._handleListTouchstart();
 			if (this._touchDisabled()) return;
 			const touch = u.getTouch(e);
 			this._handleRefresherTouchstart(touch);
@@ -340,6 +374,7 @@ const ZPRefresher = {
 			if (!this.loading && this.isTouchEnded) {
 				this.isTouchmoving = false;
 			}
+			this.loadingType = Enum.LoadingType.Refresher;
 			this.isTouchmovingTimeout && clearTimeout(this.isTouchmovingTimeout);
 			this.isTouchEnded = false;
 			this.refresherTransition = '';
@@ -453,6 +488,13 @@ const ZPRefresher = {
 			}
 			this.scrollEnable = true;
 			this.$emit('refresherTouchend', moveDis);
+		},
+		//处理列表触摸开始事件
+		_handleListTouchstart() {
+			if (this.useChatRecordMode && this.autoHideKeyboardWhenChat) {
+				uni.hideKeyboard();
+				this.$emit('hidedKeyboard');
+			}
 		},
 		//处理scroll-view bounce是否生效
 		_handleScrollViewDisableBounce(e) {
@@ -575,7 +617,7 @@ const ZPRefresher = {
 		},
 		//获取处理后的moveDis
 		_getFinalRefresherMoveDis(moveDis) {
-			moveDis = moveDis * 0.85;
+			moveDis = moveDis * this.finalRefresherPullRate;
 			if (moveDis >= this.finalRefresherThreshold) {
 				moveDis = this.finalRefresherThreshold + (moveDis - this.finalRefresherThreshold) * (1 - this.finalRefresherOutRate);
 			}

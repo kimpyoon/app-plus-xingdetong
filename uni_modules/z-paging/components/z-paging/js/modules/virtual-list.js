@@ -51,7 +51,7 @@ const ZPVirtualList = {
 		//虚拟列表cell高度模式，默认为fixed，也就是每个cell高度完全相同，将以第一个cell高度为准进行计算。可选值【dynamic】，即代表高度是动态非固定的，【dynamic】性能低于【fixed】。
 		cellHeightMode: {
 			type: String,
-			default: u.gc('cellHeightMode', 'fixed')
+			default: u.gc('cellHeightMode', Enum.CacheMode.Fixed)
 		},
 		//虚拟列表列数，默认为1。常用于每行有多列的情况，例如每行有2列数据，需要将此值设置为2
 		virtualListCol: {
@@ -152,19 +152,18 @@ const ZPVirtualList = {
 							this.virtualPageHeight = node[0].height;
 						}
 					});
-				}, 100);
+				}, c.delayTime);
 			})
 		},
 		//cellHeightMode为fixed时获取第一个cell高度
 		_updateFixedCellHeight() {
 			this.$nextTick(() => {
 				const updateFixedCellHeightTimeout = setTimeout(() => {
-					this._getNodeClientRect(`#zp-${0}`,this.finalUseInnerList).then(cellNode => {
+					this._getNodeClientRect(`#zp-id-${0}`,this.finalUseInnerList).then(cellNode => {
 						const hasCellNode = cellNode && cellNode.length;
 						if (!hasCellNode) {
 							clearTimeout(updateFixedCellHeightTimeout);
 							if (this.getCellHeightRetryCount.fixed > 10) {
-								u.consoleErr('获取虚拟列表cell高度失败，可能是for循环cell处没有写:id="`zp-${item.zp_index}`"，请检查您的代码！')
 								return;
 							}
 							this.getCellHeightRetryCount.fixed++;
@@ -174,7 +173,7 @@ const ZPVirtualList = {
 							this._updateVirtualScroll(this.oldScrollTop);
 						}
 					});
-				}, 100);
+				}, c.delayTime);
 			})
 		},
 		//cellHeightMode为dynamic时获取每个cell高度
@@ -183,14 +182,13 @@ const ZPVirtualList = {
 				const updateDynamicCellHeightTimeout = setTimeout(async () => {
 					for (let i = 0; i < list.length; i++) {
 						let item = list[i];
-						const cellNode = await this._getNodeClientRect(`#zp-${item[c.listCellIndexKey]}`,this.finalUseInnerList);
+						const cellNode = await this._getNodeClientRect(`#zp-id-${item[c.listCellIndexKey]}`,this.finalUseInnerList);
 						const hasCellNode = cellNode && cellNode.length;
 						const currentHeight = hasCellNode ? cellNode[0].height : 0;
 						if (!hasCellNode) {
 							clearTimeout(updateDynamicCellHeightTimeout);
 							this.virtualHeightCacheList = this.virtualHeightCacheList.slice(-i);
 							if (this.getCellHeightRetryCount.dynamic > 10) {
-								u.consoleErr('获取虚拟列表cell高度失败，可能是for循环cell处没有写:id="`zp-${item.zp_index}`"，请检查您的代码！')
 								return;
 							}
 							this.getCellHeightRetryCount.dynamic++;
@@ -209,7 +207,7 @@ const ZPVirtualList = {
 						});
 					}
 					this._updateVirtualScroll(this.oldScrollTop);
-				}, 100)
+				}, c.delayTime)
 			})
 		},
 		//设置cellItem的index

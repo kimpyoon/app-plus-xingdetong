@@ -30,6 +30,21 @@ const ZPData = {
 				return u.gc('dataKey', null);
 			},
 		},
+		//使用缓存，若开启将自动缓存第一页的数据，默认为否。请注意，因考虑到切换tab时不同tab数据不同的情况，默认仅会缓存组件首次加载时第一次请求到的数据，后续的下拉刷新操作不会更新缓存。
+		useCache: {
+			type: Boolean,
+			default: u.gc('useCache', false)
+		},
+		//使用缓存时缓存的key，用于区分不同列表的缓存数据，useCache为true时必须设置，否则缓存无效
+		cacheKey: {
+			type: String,
+			default: u.gc('cacheKey', null)
+		},
+		//缓存模式，默认仅会缓存组件首次加载时第一次请求到的数据，可设置为always，即代表总是缓存，每次列表刷新(下拉刷新、调用reload等)都会更新缓存
+		cacheMode: {
+			type: String,
+			default: u.gc('cacheMode', Enum.CacheMode.Default)
+		},
 		//自动注入的list名，可自动修改父view(包含ref="paging")中对应name的list值
 		autowireListName: {
 			type: String,
@@ -89,15 +104,15 @@ const ZPData = {
 			type: [Number, String],
 			default: u.gc('localPagingLoadingTime', 200)
 		},
-		//当分页未满一屏时，是否自动加载更多，默认为否(nvue无效)
-		insideMore: {
-			type: Boolean,
-			default: u.gc('insideMore', false)
-		},
 		//使用聊天记录模式，默认为否
 		useChatRecordMode: {
 			type: Boolean,
 			default: u.gc('useChatRecordMode', false)
+		},
+		//使用聊天记录模式时是否自动隐藏键盘：在用户触摸列表时候自动隐藏键盘，默认为是
+		autoHideKeyboardWhenChat: {
+			type: Boolean,
+			default: u.gc('autoHideKeyboardWhenChat', true)
 		},
 		//自动拼接complete中传过来的数组(使用聊天记录模式时无效)
 		concat: {
@@ -126,7 +141,9 @@ const ZPData = {
 			totalData: [],
 			realTotalData: [],
 			totalLocalPagingList: [],
+			isSettingCacheList: false,
 			pageNo: 1,
+			currentRefreshPageSize: 0,
 			isLocalPaging: false,
 			isAddedData: false,
 			isTotalChangeFromAddData: false,
@@ -137,7 +154,9 @@ const ZPData = {
 			loaded: false,
 			isUserReload: true,
 			fromEmptyViewReload: false,
-			listRendering: false
+			queryFrom: '',
+			listRendering: false,
+			listRenderingTimeout: null
 		}
 	},
 	computed: {
@@ -146,6 +165,16 @@ const ZPData = {
 		},
 		finalConcat() {
 			return this.concat && this.privateConcat;
+		},
+		finalUseCache() {
+			if (this.useCache && !this.cacheKey) {
+				u.consoleErr('use-cache为true时，必须设置cache-key，否则缓存无效！');
+			}
+			return this.useCache && !!this.cacheKey;
+		},
+		finalCacheKey() {
+			if (!this.cacheKey) return null;
+			return `${c.cachePrefixKey}-${this.cacheKey}`; 
 		},
 		isFirstPage() {
 			return this.pageNo === this.defaultPageNo;
@@ -213,20 +242,21 @@ const ZPData = {
 				success = dataTypeRes.success;
 				if (totalCount >= 0 && success) {
 					this.$nextTick(() => {
-						let nomore = true;
+						let hasMore = true;
 						let realTotalDataCount = this.realTotalData.length;
 						if (this.pageNo == this.defaultPageNo) {
 							realTotalDataCount = 0;
 						}
-						let exceedCount = realTotalDataCount + data.length - totalCount;
+						const dataLength = this.privateConcat ? data.length : 0;
+						let exceedCount = realTotalDataCount + dataLength - totalCount;
 						if (exceedCount >= 0) {
-							nomore = false;
+							hasMore = false;
 							exceedCount = this.defaultPageSize - exceedCount;
-							if (exceedCount > 0 && exceedCount < data.length) {
+							if (exceedCount > 0 && exceedCount < data.length && this.privateConcat) {
 								data = data.splice(0, exceedCount);
 							}
 						}
-						this.completeByNoMore(data, nomore, success);
+						this.completeByNoMore(data, hasMore, success);
 					})
 					return;
 				}
@@ -362,8 +392,15 @@ const ZPData = {
 				this.loading = true;
 				this.privateConcat = false;
 				const totalPageSize = disPageNo * this.pageSize;
+				this.currentRefreshPageSize = totalPageSize;
 				this._emitQuery(this.defaultPageNo, totalPageSize, Enum.QueryFrom.Refresh);
 				this._callMyParentQuery(this.defaultPageNo, totalPageSize);
+			}
+		},
+		//手动更新列表缓存数据，将自动截取v-model绑定的list中的前pageSize条覆盖缓存，请确保在list数据更新到预期结果后再调用此方法
+		updateCache() {
+			if (this.finalUseCache && this.totalData.length) {
+				this._saveLocalCache(this.totalData.slice(0, Math.min(this.totalData.length, this.pageSize)));
 			}
 		},
 		//清空分页数据
@@ -411,7 +448,7 @@ const ZPData = {
 						this._reload(false, isFromMounted);
 						this._doRefresherLoad(false);
 					});
-				}, 10)
+				}, this.pagingLoaded ? 10 : 100)
 				return;
 				// #endif
 			} else {
@@ -429,7 +466,9 @@ const ZPData = {
 			!this.privateShowRefresherWhenReload && !isClean && this._startLoading(true);
 			this.firstPageLoaded = true;
 			this.isTotalChangeFromAddData = false;
-			this.totalData = [];
+			if (!this.isSettingCacheList) {
+				this.totalData = [];
+			}
 			if (!isClean) {
 				this._emitQuery(this.pageNo, this.defaultPageSize, isUserPullDown ? Enum.QueryFrom.UserPullDown : Enum.QueryFrom.Reload);
 				let delay = 0;
@@ -468,10 +507,7 @@ const ZPData = {
 			this.fromEmptyViewReload = false;
 			this.isTotalChangeFromAddData = true;
 			this.refresherTriggered = false;
-			!this.useCustomRefresher && uni.stopPullDownRefresh();
-			// #ifdef APP-NVUE
-			this.usePageScroll && uni.stopPullDownRefresh();
-			// #endif
+			this._endSystemLoadingAndRefresh();
 			const tempIsUserPullDown = this.isUserPullDown;
 			if (this.showRefresherUpdateTime && this.isFirstPage) {
 				u.setRefesrherTime(u.getTime(), this.refresherUpdateTimeKey);
@@ -497,14 +533,20 @@ const ZPData = {
 			}, delayTime)
 			if (this.isFirstPage) {
 				this.isLoadFailed = !success;
+				if (this.finalUseCache && success && (this.cacheMode === Enum.CacheMode.Always ? true : this.isSettingCacheList)) {
+					this._saveLocalCache(data);
+				}
 			}
+			this.isSettingCacheList = false;
 			if (success) {
 				if (!(this.privateConcat === false && this.loadingStatus === Enum.More.NoMore)) {
 					this.loadingStatus = Enum.More.Default;
 				}
 				if (isLocal) {
 					this.totalLocalPagingList = data;
-					this._localPagingQueryList(this.defaultPageNo, this.defaultPageSize, 0, (res) => {
+					const localPageNo = this.defaultPageNo;
+					const localPageSize = this.queryFrom !== Enum.QueryFrom.Refresh ? this.defaultPageSize : this.currentRefreshPageSize;
+					this._localPagingQueryList(localPageNo, localPageSize, 0, (res) => {
 						this.complete(res);
 					})
 				} else {
@@ -567,10 +609,11 @@ const ZPData = {
 		_currentDataChange(newVal, oldVal) {
 			newVal = [...newVal];
 			this.listRendering = true;
+			this.listRenderingTimeout && clearTimeout(this.listRenderingTimeout);
 			this.$nextTick(() => {
-				setTimeout(() => {
+				this.listRenderingTimeout = setTimeout(() => {
 					this.listRendering = false;
-				},50)
+				},100)
 			})
 			// #ifndef APP-NVUE
 			if (this.finalUseVirtualList) {
@@ -619,10 +662,10 @@ const ZPData = {
 						this.privateScrollWithAnimation = 0;
 						this.$emit('update:chatIndex', idIndex);
 						setTimeout(() => {
-							this._scrollIntoView(idIndexStr, 30 + this.cacheTopHeight, false, () => {
+							this._scrollIntoView(idIndexStr, 30 + Math.max(0, this.cacheTopHeight), false, () => {
 								this.$emit('update:chatIndex', 0);
 							});
-						}, this.usePageScroll ? 50 : 200)
+						}, this.usePageScroll ? this.isIos ? 50 : 100 : 200)
 					} else {
 						this.$nextTick(() => {
 							this._scrollToBottom(false);
@@ -674,6 +717,15 @@ const ZPData = {
 				callback(arg);
 			}, localPagingLoadingTime)
 		},
+		//存储列表缓存数据
+		_saveLocalCache(data) {
+			uni.setStorageSync(this.finalCacheKey, data);
+		},
+		//通过缓存数据填充列表数据
+		_setListByLocalCache() {
+			this.totalData = uni.getStorageSync(this.finalCacheKey) || [];
+			this.isSettingCacheList = true;
+		},
 		//修改父view的list
 		_callMyParentList(newVal) {
 			if (this.autowireListName.length) {
@@ -701,8 +753,9 @@ const ZPData = {
 				}
 			}
 		},
-		//发射query事件
+		//emit query事件
 		_emitQuery(pageNo, pageSize, from){
+			this.queryFrom = from;
 			this.requestTimeStamp = u.getTime();
 			this.$emit('query', ...interceptor._handleQuery(pageNo, pageSize, from));
 		},

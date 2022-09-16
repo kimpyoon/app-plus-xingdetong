@@ -25,6 +25,7 @@ function touchstart(e, ownerIns) {
 	var ins = _getIns(ownerIns);
 	var state = {};
 	var dataset = {};
+	ownerIns.callMethod('_handleListTouchstart');
 	if (ins) {
 		state = ins.getState();
 		dataset = ins.getDataset();
@@ -145,6 +146,7 @@ function touchend(e, ownerIns) {
 
 // #ifdef H5
 function isPC() {
+	if (!navigator) return false;
 	if (isPCFlag != -1) return isPCFlag;
 	var userAgentInfo = navigator.userAgent;
 	var Agents = ["Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod"];
@@ -213,6 +215,7 @@ function _getMoveDis(e, ins) {
 	var state = ins.getState();
 	var refresherThreshold = parseFloat(ins.getDataset().refresherthreshold);
 	var refresherOutRate = parseFloat(ins.getDataset().refresheroutrate);
+	var refresherPullRate = parseFloat(ins.getDataset().refresherpullrate);
 	var touch = _getTouch(e);
 	var currentStartY = !state.startY || state.startY == 'NaN' ? startY : state.startY;
 	var moveDis = touch.touchY - currentStartY;
@@ -220,7 +223,7 @@ function _getMoveDis(e, ins) {
 	state.oldMoveDis = moveDis;
 	var diffDis = moveDis - oldMoveDis;
 	if (diffDis > 0) {
-		diffDis = diffDis * 0.85;
+		diffDis = diffDis * refresherPullRate;
 		if (currentDis > refresherThreshold) {
 			diffDis = diffDis * (1 - refresherOutRate);
 		}

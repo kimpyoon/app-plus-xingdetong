@@ -251,6 +251,11 @@ const store = new Vuex.Store({
 				text: '信息反馈',
 				path: '/pages/feedback/index'
 			},
+			{
+				url: `${prefixUrl}/img/menu_40.png`,
+				text: '兴安日报',
+				path: 'https://m.weibo.cn/u/1959883385?jumpfrom=weibocom'
+			},
 			//#endif
 			{
 				url: `${prefixUrl}/img/menu_10.png`,

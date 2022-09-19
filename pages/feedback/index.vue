@@ -15,7 +15,7 @@
 		</view>
 		<view class="upload-title">图片（选填，提供问题截图）</view>
 		<view class="upload-wrap xa-flex xa-flex-wrap">
-			<image :src="item" class="preview-img" v-for="(item,index) in fileList" :key="index"></image>
+			<image :src="item" class="preview-img" v-for="(item,index) in imgs" :key="index"></image>
 			<view class="add xa-flex xa-col-center xa-row-center" @click="uploadHandle">
 				<uni-icons type="plusempty" color="#ACACAC" size="52" />
 			</view>
@@ -32,7 +32,6 @@
 		data () {
 			return {
 				content: '',
-				fileList: [],
 				imgs: []
 			}
 		},
@@ -41,28 +40,43 @@
 		},
 		methods: {
 			uploadHandle() {
+				if(this.imgs.length>=5) {
+					uni.showToast({
+						title: '最多只能上传5张~',
+						icon: 'none'
+					})
+					return
+				}
 				uni.chooseImage({
 					count: 1,
 					success: (res) => {
-						this.fileList = res.tempFilePaths
-						uni.uploadFile({
-							filePath: this.fileList[0],
-							name: 'file',
-							url: `${config.baseUrl}/comm/upload`,
-							success: function(res) {
-								const result = JSON.parse(res.data);
-								if(result.code==100) {
-									console.log(result.data)
-								}
-							},
+						console.log(res);
+						this.$upload({
+							filePath: res.tempFilePaths[0]
+						}).then(url=>{
+							this.imgs.push(url)
+						}).catch(err=>{
+							console.log(err);
+							uni.showToast({
+								title: err.msg,
+								icon: 'none'
+							})
 						})
 					}
 				})
 			},
 			submit() {
-				this.$api.user.feedbackSend()
-				uni.showToast({
-					title: '提交成功'
+				this.$api.user.feedbackSend({
+					type: '0',
+					content: this.content,
+					images: this.imgs.join(',')
+				}).then(res=>{
+					uni.showToast({
+						title: '提交成功'
+					})
+					setTimeout(()=>{
+						uni.navigateBack();
+					},2000)
 				})
 			}
 		}

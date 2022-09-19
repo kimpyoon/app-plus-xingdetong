@@ -97,7 +97,7 @@ export function userInfo(params){
 
 export function feedbackSend(params) {
 	/**
-	 * GET /app/user/feedback/send
+	 * GET /user/feedback/send
 	 * @description 反馈
 	 * @param type 反馈类型
 	 * @param content 反馈内容
@@ -107,7 +107,7 @@ export function feedbackSend(params) {
 	 * @param userId 用户id
 	 */
 	return uni.$request({
-		url: '/app/user/feedback/send',
+		url: '/user/feedback/send',
 		methods: 'post',
 		params
 	})

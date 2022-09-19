@@ -255,6 +255,22 @@ export function saveImages(images) {
 		})
 	})
 }
+// 获取设备信息
+export const getDeviceInfo = () => {
+	// #ifndef APP-PLUS
+	return '{"h5":true}'
+	// #endif
+	return new Promise((resolve, reject) => {
+		plus.device.getInfo({
+			success: (res) => {
+				resolve(res)
+			},
+			fail: (err) => {
+				resolve({})
+			},
+		})
+	})
+}
 
 // 客户端类型
 // #ifdef APP-PLUS

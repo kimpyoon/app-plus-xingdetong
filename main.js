@@ -8,6 +8,7 @@ import timeFormat from './utils/timeFormat.js'
 import throttle from './utils/throttle.js'
 import debounce from './utils/debounce.js'
 import queryParams from './utils/queryParams.js'
+import { upload } from './utils/upload.js'
 uni.$g = {
 	test,
 	timeFormat,
@@ -15,7 +16,7 @@ uni.$g = {
 	debounce,
 	queryParams
 } // 用于储存uni级别的全局方法
-
+Vue.prototype.$upload = upload;
 Vue.prototype.$toast = toast;
 Vue.prototype.$timeFormat = timeFormat;
 Vue.prototype.$navBack = function (delta = 1) {

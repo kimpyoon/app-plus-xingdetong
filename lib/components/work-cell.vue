@@ -1,7 +1,7 @@
 <template>
 	<view class="section">
 		<view class="title xa-flex xa-col-center border-bottom">
-			<image :src="`${prefixUrl}/img/work/ic_love.png`" class="icon"></image>
+			<image src="../../static/icon/ico_xsbs.png" class="icon"></image>
 			<text class="text">线上办事</text>
 		</view>
 		<view class="cell-group">

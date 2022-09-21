@@ -54,46 +54,18 @@
 				</view>
 			</view>
 			<view class="sku-list">
-				<view class="sku-item">
-					<image class="sku-cover" :src="`${prefixUrl}/img/sku-a.png`"></image>
+				<view class="sku-item" v-for="item in sku">
+					<image class="sku-cover" :src="item.cover"></image>
 					<view class="sku-info">
 						<view class="sku-title">
-							静享软塌大床房
+							{{ item.title }}
 						</view>
 						<view class="sku-desc">
-							一张1.5米双人床  2人入住
+							{{ item.desc }}
 						</view>
 					</view>
 					<view class="sku-price">
-						￥150
-					</view>
-				</view>
-				<view class="sku-item">
-					<image class="sku-cover" :src="`${prefixUrl}/img/sku-b.png`"></image>
-					<view class="sku-info">
-						<view class="sku-title">
-							榻榻米轻奢大床房
-						</view>
-						<view class="sku-desc">
-							一张1.5米双人床  2人入住
-						</view>
-					</view>
-					<view class="sku-price">
-						￥150
-					</view>
-				</view>
-				<view class="sku-item">
-					<image class="sku-cover" :src="`${prefixUrl}/img/sku-c.png`"></image>
-					<view class="sku-info">
-						<view class="sku-title">
-							庭院水景家庭房
-						</view>
-						<view class="sku-desc">
-							一张1.5米双人床  2人入住
-						</view>
-					</view>
-					<view class="sku-price">
-						￥150
+						￥{{ item.price }}
 					</view>
 				</view>
 			</view>
@@ -125,6 +97,7 @@
 				id: 0,
 				ready: false,
 				info: {},
+				sku: [],
 				colors: [
 					{
 						color: '#FD4F5F',
@@ -155,6 +128,7 @@
 					id
 				}).then(res => {
 					this.info = res;
+					this.sku = res.sku ? JSON.parse(res.sku) : [];
 					this.ready = true;
 				})
 			},
@@ -350,6 +324,7 @@
 			@include fr(s,s);
 			.sku-cover{
 				@include size(146rpx);
+				border-radius: 16rpx;
 			}
 			.sku-info{
 				margin-left: 24rpx;

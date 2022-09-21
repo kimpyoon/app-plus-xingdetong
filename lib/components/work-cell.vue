@@ -1,9 +1,9 @@
 <template>
 	<view class="section">
-		<view class="title xa-flex xa-col-center border-bottom">
+		<!-- <view class="title xa-flex xa-col-center border-bottom">
 			<image src="../../static/icon/ico_xsbs.png" class="icon"></image>
 			<text class="text">线上办事</text>
-		</view>
+		</view> -->
 		<view class="cell-group">
 			<view @click="nav(item.url, item.name)" class="cell xa-flex xa-col-center xa-row-between border-bottom" v-for="(item,index) in cells" :key="index">
 				<text class="text">{{item.name}}</text>
@@ -72,7 +72,7 @@
 		.cell-group {
 			background-color: #FFFFFF;
 			.cell {
-				padding: 0 30rpx 0 112rpx;
+				padding: 0 30rpx 0 30rpx;
 				height: 100rpx;
 				.text {
 					font-size: 28rpx;

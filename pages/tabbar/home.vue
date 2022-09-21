@@ -120,8 +120,14 @@
 				</view>
 			</view> -->
 			<!-- #endif -->
-			<view style="margin-top: 40rpx;">
-				<work-cell></work-cell>
+			<view class="section">
+				<view class="s-title xa-flex xa-col-center">
+					<image src="../../static/icon/ico_xsbs.png" class="icon"></image>
+					<text class="text">线上办事</text>
+				</view>
+				<view style="margin-top: 40rpx;">
+					<work-cell></work-cell>
+				</view>
 			</view>
 		</view>
 		<template v-else>

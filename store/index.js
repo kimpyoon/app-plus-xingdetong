@@ -296,11 +296,11 @@ const store = new Vuex.Store({
 			// 	text: '景区景点',
 			// 	path: ''
 			// },
-			// {
-			// 	url: `${prefixUrl}/img/menu_36.png`,
-			// 	text: '民宿酒店',
-			// 	path: '/pages/enjoy/hotel/list'
-			// },
+			{
+				url: `${prefixUrl}/img/menu_36.png`,
+				text: '民宿酒店',
+				path: '/pages/enjoy/hotel/list'
+			},
 			// {
 			// 	url: `${prefixUrl}/img/menu_37.png`,
 			// 	text: '特色餐饮',

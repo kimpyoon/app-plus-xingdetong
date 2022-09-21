@@ -41,8 +41,8 @@
 						<image class="score-number-icon" src="../../../static/icon/ico_right.png"></image>
 					</view>
 				</view>
-				<view class="address">
-					<view class="address-title">西城区培英胡同18号</view>
+				<view class="address" @click="openLocation">
+					<view class="address-title">{{ info.address }}</view>
 					<view class="address-juli">
 						<image src="../../../static/icon/ico_loc.png"></image>
 						<text>912m</text>
@@ -156,6 +156,13 @@
 				}).then(res => {
 					this.info = res;
 					this.ready = true;
+				})
+			},
+			openLocation() {
+				uni.openLocation({
+					address: this.info.address,
+					latitude: this.info.lat,
+					longitude: this.info.lng
 				})
 			},
 			call() {
